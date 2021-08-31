@@ -42,8 +42,9 @@
 .loaderdisabled {
     animation: fadeout 1.5s;
     animation-fill-mode: forwards;
+
 }
 @keyframes fadeout {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% { opacity: 1; display: block;  }
+    100% { opacity: 0; display: none; }
 }
