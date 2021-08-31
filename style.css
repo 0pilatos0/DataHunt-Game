@@ -1,7 +1,11 @@
-body{
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+* {
     margin: 0;
+    padding: 0;
     overflow: hidden;
 }
+
 
 #game{
     image-rendering: pixelated;
@@ -9,4 +13,57 @@ body{
     image-rendering: -moz-crisp-edges;
     width: 100vw;
     height: 100vh;
+}
+
+/* Menu */
+#menu{
+    background-color: #232930;
+    height: 100vh;
+}
+.menu{
+    color: rgb(194, 194, 194);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Odibee Sans', cursive;
+    padding-top: 20vh;
+    
+}
+.menu h1{
+    font-size: 10.5rem;
+}
+.menu h2{
+    font-size: 3.5rem;  
+}
+.menu h1:hover{
+    color: rgb(255, 255, 255);
+}
+.menu h2:hover{
+    color: rgb(255, 255, 255);
+}
+.menu #title{ 
+    font-size: 7rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: -10vh;
+    position: fixed;
+    top: 20vh;
+
+    left: 50%;
+    transform: translatex(-50%);
+
+    animation: tilt 2.5s ease-in-out infinite;
+
+
+}
+
+@keyframes tilt{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(10deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
 }
