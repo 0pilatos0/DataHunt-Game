@@ -2,9 +2,3 @@ body{
     margin: 0;
     overflow: hidden;
 }
-
-#game{
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    image-rendering: -moz-crisp-edges;
-}
