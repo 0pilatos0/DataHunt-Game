@@ -16,7 +16,7 @@ export default class Triangle extends Transformable {
         this.path.lineTo(0 - this.size.X * this.scale.X / 2, 0 + this.size.Y * this.scale.Y / 2);
         ctx.save();
         ctx.fillStyle = this.color;
-        ctx.translate(this.position.X, this.position.Y)
+        ctx.translate(this.position.X + this.size.X * this.scale.X / 2, this.position.Y + this.size.Y * this.scale.Y / 2)
         ctx.rotate(this.rotation * Math.PI / 180)
         ctx.fill(this.path);
         ctx.restore();
@@ -24,7 +24,7 @@ export default class Triangle extends Transformable {
 
     IsPointColliding(point){
         let ctx = document.createElement('canvas').getContext('2d')
-        ctx.translate(this.position.X, this.position.Y)
+        ctx.translate(this.position.X + this.size.X * this.scale.X / 2, this.position.Y + this.size.Y * this.scale.Y / 2)
         ctx.rotate(this.rotation * Math.PI / 180)
         ctx.moveTo(0, 0 - this.size.Y * this.scale.Y / 2);
         ctx.lineTo(0 + this.size.X * this.scale.X / 2, 0 + this.size.Y * this.scale.Y / 2);

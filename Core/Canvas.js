@@ -7,10 +7,10 @@ import Vector2 from "./Vector2.js";
 export default class Canvas{
     canvas = document.createElement('canvas');
     ctx = this.canvas.getContext('2d');
-    rectangle = new Rectangle(new Vector2(500, 500), new Vector2(100, 100))
-    line = new Line(new Vector2(500, 500), new Vector2(650, 650))
-    triangle = new Triangle(new Vector2(500, 500), new Vector2(100, 100))
-    ellipse = new Ellipse(new Vector2(500, 500), new Vector2(100, 100))
+    rectangle = new Rectangle(new Vector2(0, 0), new Vector2(100, 100))
+    line = new Line(new Vector2(0, 0), new Vector2(100, 100))
+    triangle = new Triangle(new Vector2(0, 0), new Vector2(100, 100))
+    ellipse = new Ellipse(new Vector2(0, 0), new Vector2(100, 100))
 
     constructor(){
         this.canvas.width = `${window.innerWidth}`;
@@ -31,16 +31,15 @@ export default class Canvas{
                 this.rectangle.color = '#f00'
             }
         })
-
-        this.rectangle.rotation = 45
     }
 
     Draw(){
         this.Clear()
         this.rectangle.Draw(this.ctx)
-        this.line.Draw(this.ctx)
+        
         this.triangle.Draw(this.ctx)
         this.ellipse.Draw(this.ctx)
+        this.line.Draw(this.ctx)
     }
 
     Update(){
