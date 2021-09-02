@@ -1,5 +1,4 @@
 import Event from "./Event.js";
-//import Event from "./Event.js";
 import Vector2 from "./Vector2.js";
 
 export default class Tileset extends Event {
@@ -24,11 +23,11 @@ export default class Tileset extends Event {
                         ctx.drawImage(img, imgPos.X, imgPos.Y, imgSize.X, imgSize.Y, 0, 0, imgSize.X, imgSize.Y)
                         let tile = document.createElement('img')
                         tile.src = canvas.toDataURL('base64')
-                        tiles.push(tile)
+                        tiles.push({tile, index:tilesetData.offset + tiles.length - 1})
                     }
                 }
+                return resolve(tiles)
             }
-            return resolve(tiles)
         })
     }
 }
