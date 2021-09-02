@@ -7,6 +7,13 @@ let htmlLoader = new HtmlLoader();
 let menu = document.getElementById('menu');
 let menucontext = htmlLoader.load('./assets/elements/MainMenu.html');
 
+
+let play = document.getElementById('play');
+//onclick on play set display of menu to none
+play.onclick = () => {
+    menu.style.display = 'none';
+}
+
 //get value of promise object menucontext
 menucontext.then(function(value){
     menu.innerHTML = value;
