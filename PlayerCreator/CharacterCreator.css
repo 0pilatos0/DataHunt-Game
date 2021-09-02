@@ -3,6 +3,7 @@ body {
     font-family: "Baloo 2", sans-serif;
     color: white;
     font-size: 26px;
+    overflow: hidden;
 }
 
 #background {
@@ -42,6 +43,7 @@ body {
 
 #classConfirmationImg {
     width: 100%;
+    max-height: 80vh;
     border: 3px solid #45ff35;
     margin-top: 5vh;
 }

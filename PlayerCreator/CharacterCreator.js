@@ -1,5 +1,6 @@
 let CharacterData = new Object();
 let images = document.getElementById("class").children;
+import JsonLoader from "../Core/Loaders/JsonLoader.js";
 
 for (let i = 0; i < images.length; i++) {
     images[i].onclick = () => {
@@ -9,10 +10,9 @@ for (let i = 0; i < images.length; i++) {
 
 document.getElementById("inputName").addEventListener('keypress', (e) => {
     if (e.code === "Enter") {
-        CharacterData.name = document.getElementById("inputName").value;
+        CharacterData.username = document.getElementById("inputName").value;
 
-        document.getElementById("background").removeChild(document.getElementById("background").firstChild);
-        document.getElementById("background").removeChild(document.getElementById("background").firstChild);
+        document.getElementsByClassName("input")[0].style.display = "None";
 
         pickClass();
     }
@@ -27,6 +27,9 @@ function confirmClass(id) {
     document.getElementById("class").style.display = "None";
     document.getElementById("classConfirmation").style.display = "Block";
 
+    document.getElementById("classConfirmationDecline").onclick = ()=>{declineCharacter()};
+    document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter()};
+
     checkIfImageExists('./class' + id + '.png', (exists) => {
         if (exists) {
             document.getElementById("classConfirmationImg").src = "./class" + id + ".png";
@@ -35,7 +38,19 @@ function confirmClass(id) {
         }
     });
 
-    document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData.name;
+    document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData.username;
+}
+
+function declineCharacter() {
+    document.getElementById("classConfirmation").style.display = "None";
+    document.getElementsByClassName("input")[0].style.display = "Block";
+}
+
+function acceptCharacter() {
+    JsonLoader.Load("./ClassData.json").then(d => {
+        CharacterData.class = d;
+        console.log(d);
+    });
 }
 
 function checkIfImageExists(url, callback) {
@@ -49,7 +64,7 @@ function checkIfImageExists(url, callback) {
         img.onload = () => {
             callback(true);
         };
-        img.onerror = () => {
+        img.onerror = (e) => {
             callback(false);
         };
     }
