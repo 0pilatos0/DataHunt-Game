@@ -7,8 +7,13 @@
     <title>DataHunt Game</title>
     <script type="module" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/loadingscreen/style.css">
 </head>
 <body>
-    <canvas id="game"></canvas>
+    <div class="loader-wrapper" id="loading" style="display: none;">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div id="menu"></div>
+    <script src="./assets/loadingscreen/script.js"></script>
 </body>
 </html>
