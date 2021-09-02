@@ -1,9 +1,9 @@
 {
-  "wizard": {
-    "Attack": 10,
-    "Defense": 3,
-    "HealthPoints": 25,
-    "Magicka": 10,
+  "Wizard": {
+    "attack": 10,
+    "defense": 3,
+    "healthPoints": 25,
+    "magicka": 10,
     "activeSkills": [],
     "skillLimit": "4",
     "magickSkills": [
@@ -18,6 +18,29 @@
       {
         "name": "Old Mages Stick",
         "damage": 2,
+        "special": null
+      }
+    ]
+  },
+  "Knight": {
+    "attack": 8,
+    "defense": 5,
+    "healthPoints": 30,
+    "magicka": 10,
+    "activeSkills": [],
+    "skillLimit": "4",
+    "magickSkills": [
+      {
+        "name": "Barrier Field",
+        "damage": "0",
+        "cost": 5,
+        "special": "Increases your defense for one turn by 10"
+      }
+    ],
+    "weapon": [
+      {
+        "name": "Rusted Sword",
+        "damage": 3,
         "special": null
       }
     ]

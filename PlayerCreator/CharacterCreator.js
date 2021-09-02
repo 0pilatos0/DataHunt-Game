@@ -50,6 +50,7 @@ function acceptCharacter() {
     JsonLoader.Load("./ClassData.json").then(d => {
         CharacterData.class = d;
         console.log(d);
+        console.log(CharacterData.username + " heeft gekozen voor " + CharacterData.class[0].name)
     });
 }
 
