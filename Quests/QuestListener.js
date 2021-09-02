@@ -4,9 +4,14 @@
  * Copyright © EpicGodLight
  */
 
-function killListener(playerKillEvent){
+export default class ActiveQuest {
 
-}
-function talkToNPC(playerTalkToNPCEvent){
+    static killListener(playerKillEvent){
 
+    }
+
+    static talkToNPC(playerTalkToNPCEvent){
+
+    }
 }
+

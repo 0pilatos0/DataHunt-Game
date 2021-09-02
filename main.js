@@ -1,6 +1,11 @@
 import Canvas from './Core/Canvas.js';
 import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 
+import LoadQuest from './Quests/LoadQuests.js';
+import Quest from "./Quests/Quest.js";
+import ActiveQuest from "./Quests/ActiveQuest.js";
+
+
 let canvas = new Canvas();
 let htmlLoader = new HtmlLoader();
 
@@ -18,6 +23,9 @@ menucontext.then(function(value){
 
 });
 
+
+let pauper = LoadQuest.loadQuests("player", testQuest);
+console.log(pauper);
 
 let deltaTime = 1 / 60;
 let startTime = Date.now();

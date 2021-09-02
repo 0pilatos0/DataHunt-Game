@@ -4,18 +4,26 @@
  * Copyright © EpicGodLight
  */
 
-testPlayer = [];
 
-function LoadQuests(player){
-    activeQuest = quest.Quests;
+import Quest from "./Quest.js";
+import ActiveQuest from "./ActiveQuest.js";
 
-    for(let i = 0; i < activeQuest.length; i++){
-        let quest = new Quest(
-            activeQuest[i].Progress,
-            activeQuest[i].QuestID,
-            activeQuest[i].Amount,
-            activeQuest[i].QuestListener,
-            activeQuest[i].QuestDescription.replace("{Amount}", activeQuest[i].Amount));
-        testPlayer.push(new ActiveQuest(quest, player));
+export default class LoadQuests{
+
+
+    static loadQuests(player, quest){
+        let activeQuest = quest.Quests;
+        let QuestList = [];
+        for(let i = 0; i < activeQuest.length; i++){
+            let newQuest = new Quest(
+                activeQuest[i].Progress,
+                activeQuest[i].QuestID,
+                activeQuest[i].Amount,
+                activeQuest[i].QuestListener,
+                activeQuest[i].QuestDescription.replace("{Amount}", activeQuest[i].Amount));
+            QuestList.push(new ActiveQuest(newQuest, player));
+        }
+        return QuestList;
     }
 }
+

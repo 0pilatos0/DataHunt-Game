@@ -4,7 +4,7 @@
  * Copyright © EpicGodLight
  */
 
-class ActiveQuest {
+export default class ActiveQuest {
 
     quest;
     player;

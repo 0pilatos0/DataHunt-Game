@@ -4,7 +4,7 @@
  * Copyright © EpicGodLight
  */
 
-class Quest {
+export default class Quest {
 
     progress;
     questID;
