@@ -19,22 +19,22 @@ menucontext.then(function(value){
 });
 
 
-let deltaTime = 1 / 60;
+window.deltaTime = 1 / 60;
 let startTime = Date.now();
-let fps = 60;
+window.fps = 60;
 
 let loop = () => {
     canvas.Update();
     
     canvas.Draw();
     
-    deltaTime = (Date.now() - startTime) / 1000;
-    fps = 1 / deltaTime;
+    window.deltaTime = (Date.now() - startTime) / 1000;
+    window.fps = 1 / window.deltaTime;
     startTime = Date.now();
 
     canvas.ctx.font = '48px serif';
     canvas.ctx.fillStyle = '#fff';
-    canvas.ctx.fillText(fps.toFixed(0), 10, 50);
+    canvas.ctx.fillText(window.fps.toFixed(0), 10, 50);
 
     window.requestAnimationFrame(loop);
 }

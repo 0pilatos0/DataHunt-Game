@@ -13,7 +13,7 @@ export default class Event {
      * @param {string} event 
      * @param {Function} callback 
      */
-    on(event, callback){
+    On(event, callback){
         if(!this.events[event]) this.events[event] = [];
         this.events[event].push(callback);
     }
@@ -24,7 +24,7 @@ export default class Event {
      * @param {any} callbackData 
      * @param {boolean} keepFiringTillReceived 
      */
-    trigger(event, callbackData, keepFiringTillReceived = false){
+    Trigger(event, callbackData, keepFiringTillReceived = false){
         if(!this.events[event] && keepFiringTillReceived){
             setTimeout(() => {
                 this.trigger(event, callbackData);
