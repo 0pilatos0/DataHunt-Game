@@ -25,6 +25,6 @@ export default class Line extends Drawable {
         let ctx = document.createElement('canvas').getContext('2d')
         ctx.moveTo(this.position.X, this.position.Y);
         ctx.lineTo(this.end.X, this.end.Y);
-        return ctx.isPointInStroke(point.X, point.Y)
+        return ctx.isPointInStroke(point.X, point.Y);
     }
 }

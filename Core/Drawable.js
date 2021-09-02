@@ -1,8 +1,8 @@
-import Transformable from "./Transformable.js"
+import Transformable from "./Transformable.js";
 
 export default class Drawable extends Transformable{
     constructor() {
-        super()
+        super();
     }
 
     Draw(ctx){
