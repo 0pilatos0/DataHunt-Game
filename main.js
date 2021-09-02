@@ -10,13 +10,14 @@ let menucontext = htmlLoader.load('./assets/elements/MainMenu.html');
 //get value of promise object menucontext
 menucontext.then(function(value){
     menu.innerHTML = value;
+    let play = document.getElementById('play');
+    //onclick on play set display of menu to none
+    play.onclick = () => {
+        menu.style.display = 'none';
+    }   
+
 });
 
-let play = document.getElementById('play');
-//onclick on play set display of menu to none
-play.onclick = () => {
-    menu.style.display = 'none';
-}   
 
 let deltaTime = 1 / 60;
 let startTime = Date.now();
