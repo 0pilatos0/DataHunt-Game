@@ -30,15 +30,6 @@ export default class Canvas{
         })
         
         this.scenes.push(new Scene())
-
-        // window.addEventListener('mousemove', (e) => {
-        //     if(this.rectangle.IsPointColliding(new Vector2(e.clientX, e.clientY))){
-        //         this.rectangle.color = '#f0f';
-        //     }
-        //     else{
-        //         this.rectangle.color = '#f00';
-        //     }
-        // })
     }
 
     Draw(){
