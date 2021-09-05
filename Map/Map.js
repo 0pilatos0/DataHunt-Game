@@ -3,6 +3,8 @@ import Tileset from "../Core/Tileset.js";
 import Event from "../Core/Event.js";
 import Sprite from "../Core/Drawables/Sprite.js";
 import Vector2 from "../Core/Vector2.js";
+import GameObject from "../Core/GameObject.js";
+import Rectangle from "../Core/Drawables/Rectangle.js";
 
 export default class Map {
     constructor() {
@@ -25,18 +27,24 @@ export default class Map {
                 tilesetData.offset = t.firstgid
                 let tiles = await Tileset.Load(tilesetData)
                 allTiles = tiles.concat(allTiles)
-                //Check required, so all it continues when all the tiles are loaded
+                //Check required, so it continues when all the tiles are loaded
                 if(totalTiles == allTiles.length){
                     event.Trigger('loaded tilesets')
                 }
             });
             event.On('loaded tilesets', () => {
                 let map = []
+                let gameObjects = []
                 jsonData.layers.map(async l => {
                     switch (l.type) {
                         case "objectgroup":
-                            console.log(l.objects)
-                            //TODO register gameobjects
+                            l.objects.forEach(object => {
+                                let gameObject = new GameObject(new Rectangle(new Vector2(object.x * window.spriteScaleFactor, object.y * window.spriteScaleFactor), new Vector2(object.width * window.spriteScaleFactor, object.height * window.spriteScaleFactor)));
+                                gameObject.rotation = object.rotation
+                                gameObject.type = object.type
+                                gameObjects.push(gameObject)
+                            });
+                            //TODO add gameobjects to return data
                             break;
                         case "tilelayer":
                             for (let y = 0; y < l.height; y++) {
@@ -45,10 +53,15 @@ export default class Map {
                                     if(tileIndex - 1 > -1){
                                         let tile = allTiles.find(t => {
                                             return t.index == tileIndex - 1
-                                        }).tile
-                                        let tilePos = new Vector2(x * tile.width, y * tile.height)
-                                        let tileSize = new Vector2(tile.width, tile.height)
-                                        map.push(new Sprite(tilePos, tileSize, tile.src))
+                                        })
+                                        let img = tile.tile
+                                        let tilePos = new Vector2(x * img.width * window.spriteScaleFactor, y * img.height * window.spriteScaleFactor)
+                                        let tileSize = new Vector2(img.width * window.spriteScaleFactor, img.height * window.spriteScaleFactor)
+                                        let sprite = new Sprite(tilePos, tileSize, img.src)
+                                        sprite.animation = tile.animation
+                                        let gameObject = new GameObject(sprite)
+                                        gameObject.type = tile.type
+                                        map.push(gameObject)
                                     }
                                 }
                             }

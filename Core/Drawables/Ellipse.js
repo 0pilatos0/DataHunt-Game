@@ -11,6 +11,7 @@ export default class Ellipse extends Drawable {
     }
 
     Draw(ctx, offset = Vector2.Zero()){
+        super.Draw(ctx)
         this.offset = offset
         this.path = new Path2D();
         this.path.ellipse(this.position.X + offset.X + this.size.X * this.scale.X / 2, this.position.Y + offset.Y + this.size.Y * this.scale.Y / 2, this.size.X * this.scale.X / 2, this.size.Y * this.scale.Y / 2, this.rotation * Math.PI / 180, 0, 360);

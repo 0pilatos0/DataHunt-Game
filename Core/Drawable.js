@@ -1,19 +1,21 @@
 import Transformable from "./Transformable.js";
+import Vector2 from "./Vector2.js";
 
 export default class Drawable extends Transformable{
     offset = Vector2.Zero();
     points = []
+    visible = true
 
     constructor() {
         super();
     }
 
     Draw(ctx){
-        
+        if(!this.visible) return
     }
 
     Update(){
-
+        if(!this.visible) return
     }
 
     IsColliding(drawable){

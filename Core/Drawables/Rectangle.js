@@ -12,6 +12,7 @@ export default class Rectangle extends Drawable{
     }
 
     Draw(ctx, offset = Vector2.Zero()){
+        super.Draw(ctx)
         this.offset = offset
         this.points = [
             new Vector2(0 + offset.X - this.size.X * this.scale.X / 2, 0 + offset.Y - this.size.Y * this.scale.Y / 2),

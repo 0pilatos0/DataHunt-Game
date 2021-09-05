@@ -19,17 +19,20 @@ export default class Canvas{
     scenes = []
 
     constructor(){
-        this.canvas.width = `${window.innerWidth}`;
-        this.canvas.height = `${window.innerHeight}`;
-        this.canvas.style.imageRendering = "pixelated";
-        this.canvas.style.imageRendering = "-moz-crisp-edges";
         document.body.appendChild(this.canvas);
+        this.#Init()
         window.addEventListener('resize', () => {
-            this.canvas.width = `${window.innerWidth}`;
-            this.canvas.height = `${window.innerHeight}`;
+            this.#Init()
         })
         
         this.scenes.push(new Scene())
+    }
+
+    #Init(){
+        this.canvas.width = `${window.innerWidth}`;
+        this.canvas.height = `${window.innerHeight}`;
+        this.ctx.font = '48px serif';
+        this.ctx.imageSmoothingEnabled = false;
     }
 
     Draw(){

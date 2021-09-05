@@ -5,7 +5,7 @@ export default class HtmlLoader{
 
     }
 
-    load(path){
+    static Load(path){
         return new Promise((resolve, reject) => {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', path, true);

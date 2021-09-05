@@ -14,6 +14,7 @@ export default class Line extends Drawable {
     }
 
     Draw(ctx, offset = Vector2.Zero()){
+        super.Draw(ctx)
         this.offset = offset
         this.path = new Path2D();
         this.path.moveTo(this.position.X + offset.X, this.position.Y + offset.Y);

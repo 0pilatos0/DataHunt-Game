@@ -1,6 +1,6 @@
-import Transformable from "../Transformable.js";
+import Drawable from "../Drawable.js";
 
-export default class Triangle extends Transformable {
+export default class Triangle extends Drawable {
     color = '#0f0';
 
     constructor(position, size) {
@@ -10,6 +10,7 @@ export default class Triangle extends Transformable {
     }
 
     Draw(ctx){
+        super.Draw(ctx)
         this.points = [
             new Vector2(0, 0 - this.size.Y * this.scale.Y / 2),
             new Vector2(0 + this.size.X * this.scale.X / 2, 0 + this.size.Y * this.scale.Y / 2),
