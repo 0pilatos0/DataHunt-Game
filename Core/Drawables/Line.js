@@ -13,18 +13,20 @@ export default class Line extends Drawable {
         this.end = end;
     }
 
-    Draw(ctx){
+    Draw(ctx, offset = Vector2.Zero()){
+        super.Draw(ctx)
+        this.offset = offset
         this.path = new Path2D();
-        this.path.moveTo(this.position.X, this.position.Y);
-        this.path.lineTo(this.end.X, this.end.Y);
+        this.path.moveTo(this.position.X + offset.X, this.position.Y + offset.Y);
+        this.path.lineTo(this.end.X + offset.X, this.end.Y + offset.Y);
         ctx.strokeStyle = this.color;
         ctx.stroke(this.path);
     }
 
     IsPointColliding(point){
         let ctx = document.createElement('canvas').getContext('2d')
-        ctx.moveTo(this.position.X, this.position.Y);
-        ctx.lineTo(this.end.X, this.end.Y);
+        ctx.moveTo(this.position.X + this.offset.X, this.position.Y + this.offset.Y);
+        ctx.lineTo(this.end.X + this.offset.X, this.end.Y + this.offset.Y);
         return ctx.isPointInStroke(point.X, point.Y);
     }
 }
