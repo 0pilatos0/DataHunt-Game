@@ -1,6 +1,6 @@
-//html loader class
+//json loader class
 
-export default class HtmlLoader{
+export default class JsonLoader{
     constructor(){
 
     }
@@ -8,11 +8,12 @@ export default class HtmlLoader{
     static Load(path){
         return new Promise((resolve, reject) => {
             var xhr = new XMLHttpRequest();
+            xhr.responseType = "json"
             xhr.open('GET', path, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        resolve(xhr.responseText);
+                        resolve(xhr.response);
                     } else {
                         reject(xhr.statusText);
                     }
@@ -21,4 +22,4 @@ export default class HtmlLoader{
             xhr.send();
         });
     }
-}
+} 
