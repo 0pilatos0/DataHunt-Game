@@ -2,7 +2,7 @@ import Event from "../Core/Event.js";
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
 
 
-export default class Menu extends Event{
+export default class MainMenu extends Event{
 
 
     constructor(){

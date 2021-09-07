@@ -1,11 +1,10 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
-import HtmlLoader from './Core/Loaders/HtmlLoader.js';
-import Menu from './menus/menu.js';
+import MainMenu from './menus/MainMenu.js';
 
 let canvas = new Canvas();
 
-let MainMenu = new Menu();
+let MainMenu = new MainMenu();
 
 
 window.deltaTime = 1 / 60;
