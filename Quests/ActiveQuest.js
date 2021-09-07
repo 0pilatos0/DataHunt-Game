@@ -7,11 +7,11 @@
 export default class ActiveQuest {
 
     quest;
-    player;
+    progress;
 
-    constructor(quest, player) {
+    constructor(quest, progress = 0) {
         this.quest = quest;
-        this.player = player;
+        this.progress = progress;
     }
 
 

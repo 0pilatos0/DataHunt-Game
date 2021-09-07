@@ -1,10 +1,7 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
 import MainMenu from './menus/MainMenu.js';
-
-import LoadQuest from './Quests/LoadQuests.js';
-import Quest from "./Quests/Quest.js";
-import ActiveQuest from "./Quests/ActiveQuest.js";
+import Player from './Player/Player.js';
 
 
 let canvas = new Canvas();
@@ -12,9 +9,11 @@ let canvas = new Canvas();
 let mainmenu = new MainMenu();
 
 
+
+
 window.deltaTime = 1 / 60;
-let pauper = LoadQuest.loadQuests("player", testQuest);
-console.log(pauper);
+
+window.player = new Player();
 
 let deltaTime = 1 / 60;
 let startTime = Date.now();
