@@ -24,6 +24,12 @@ export default class MainMenu extends Event{
             this.play.addEventListener('click', () =>{
                 this.menu.style.display = 'none';
             });
+            
+            //onclick on this.settings button
+            this.settings.addEventListener('click', () =>{
+                this.menu.style.display = 'none';
+                window.SettingsMenu.Show();
+            });
 
             //onclick quit button
             this.quit.addEventListener('click', () =>{

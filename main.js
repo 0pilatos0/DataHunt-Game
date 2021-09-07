@@ -1,10 +1,12 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
 import MainMenu from './menus/MainMenu.js';
+import SettingsMenu from './menus/SettingsMenu.js';
 
 let canvas = new Canvas();
 
-let mainmenu = new MainMenu();
+window.MainMenu = new MainMenu();
+window.SettingsMenu = new SettingsMenu();
 
 
 window.deltaTime = 1 / 60;
@@ -45,5 +47,6 @@ let loop = () => {
 
     window.requestAnimationFrame(loop);
 }
+
 
 window.requestAnimationFrame(loop);
