@@ -15,7 +15,7 @@ let menucontext = HtmlLoader.Load('./assets/elements/MainMenu.html');
 //get value of promise object menucontext
 menucontext.then(function(value){
     menu.innerHTML = value;
-    menu.style.position = "fixed"
+    menu.style.position = "fixed";
     let play = document.getElementById('play');
     //onclick on play set display of menu to none
     play.onclick = () => {
@@ -32,12 +32,12 @@ console.log(pauper);
 let deltaTime = 1 / 60;
 let startTime = Date.now();
 window.fps = 60;
-window.spriteScaleFactor = 4
+window.spriteScaleFactor = 4;
 
 let loop = () => {
     Clock.clocks.forEach(clock => {
         if(!clock.paused){
-            clock.passedMiliseconds += window.deltaTime * 1000
+            clock.passedMiliseconds += window.deltaTime * 1000;
             if(clock.passedMiliseconds >= 1000){
                 //clock.passedMiliseconds -= 1000
                 clock.passedSeconds += 1
@@ -52,7 +52,7 @@ let loop = () => {
             }
         }
 
-    })
+    });
 
     canvas.Update();
     
@@ -66,6 +66,6 @@ let loop = () => {
     canvas.ctx.fillText(window.fps.toFixed(0), 10, 50);
 
     window.requestAnimationFrame(loop);
-}
+};
 
 window.requestAnimationFrame(loop);
