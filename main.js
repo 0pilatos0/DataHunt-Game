@@ -1,23 +1,10 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
-import HtmlLoader from './Core/Loaders/HtmlLoader.js';
+import MainMenu from './menus/MainMenu.js';
 
 let canvas = new Canvas();
 
-let menu = document.getElementById('menu');
-let menucontext = HtmlLoader.Load('./assets/elements/MainMenu.html');
-
-//get value of promise object menucontext
-menucontext.then(function(value){
-    menu.innerHTML = value;
-    menu.style.position = "fixed"
-    let play = document.getElementById('play');
-    //onclick on play set display of menu to none
-    play.onclick = () => {
-        menu.style.display = 'none';
-    }   
-
-});
+let mainmenu = new MainMenu();
 
 
 window.deltaTime = 1 / 60;
