@@ -4,7 +4,7 @@ import MainMenu from './menus/MainMenu.js';
 
 let canvas = new Canvas();
 
-let MainMenu = new MainMenu();
+let mainmenu = new MainMenu();
 
 
 window.deltaTime = 1 / 60;
