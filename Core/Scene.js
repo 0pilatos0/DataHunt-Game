@@ -1,4 +1,3 @@
-import Animation from "../Animations/Animation.js";
 import Map from "../Map/Map.js";
 import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
@@ -9,10 +8,8 @@ export default class Scene{
     input = []
     rectangle1 = new Rectangle(new Vector2(100, 100), new Vector2(25, 25))
 
-    rectangle2 = new Rectangle(new Vector2(200, 200), new Vector2(50, 50))
+    rectangle2 = new Rectangle(new Vector2(200, 500), new Vector2(50, 50))
 
-    //animation = new Animation()
-    
     constructor() {
         Map.Load('../Map/Map.json').then(m => {
             this.map = m
@@ -82,14 +79,14 @@ export default class Scene{
             //this.camera.position.X += speed * window.deltaTime;
             this.rectangle1.position.X += speed * window.deltaTime;
         }
-        if(this.input.indexOf('e') > -1){
-            //this.camera.position.Y += speed * window.deltaTime;
-            this.rectangle1.rotation += speed * window.deltaTime;
-        }
-        if(this.input.indexOf('q') > -1){
-            //this.camera.position.X += speed * window.deltaTime;
-            this.rectangle1.rotation -= speed * window.deltaTime;
-        }
+        // if(this.input.indexOf('e') > -1){
+        //     //this.camera.position.Y += speed * window.deltaTime;
+        //     this.rectangle1.rotation += speed * window.deltaTime;
+        // }
+        // if(this.input.indexOf('q') > -1){
+        //     //this.camera.position.X += speed * window.deltaTime;
+        //     this.rectangle1.rotation -= speed * window.deltaTime;
+        // }
 
         this.rectangle1.color = '#f00'
 
@@ -120,8 +117,6 @@ export default class Scene{
         else{
             this.camera.position.Y = 0
         }
-
-        //console.log(this.animation.clock.PassedSeconds())
     }
 
     IsInRange(transformable){
