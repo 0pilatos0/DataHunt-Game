@@ -33,7 +33,6 @@ window.fps = 60;
 window.spriteScaleFactor = 4
 
 let loop = () => {
-    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     Clock.clocks.forEach(clock => {
         if(!clock.paused){
             clock.passedMiliseconds += window.deltaTime * 1000
