@@ -7,17 +7,15 @@ let canvas = new Canvas();
 
 window.MainMenu = new MainMenu();
 window.SettingsMenu = new SettingsMenu();
-
-//prevent page refresh on f5
+    
 window.addEventListener('keydown', (e) => {
-    if (e.keyCode === 116) {
+    if (e.keyCode === 82 && e.ctrlKey) {
+        e.preventDefault();
+    } 
+    if (e.keyCode === 82 && e.ctrlKey && e.shiftKey) {
         e.preventDefault();
     }
-});
-
-//prevent default cntrl+shift+r
-window.addEventListener('keydown', (e) => {
-    if (e.keyCode === 82 && e.ctrlKey && e.shiftKey) {
+    if (e.keyCode === 116) {
         e.preventDefault();
     }
 });
