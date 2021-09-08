@@ -1,0 +1,78 @@
+<div class="login-register">
+    <div class="switch-login-register">
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="loginBut">Login</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="RegisterButs">Register</a>
+    </div>
+    <div class="login">
+        <div class="login-body">
+            <a class="login-brand" href="index.html">
+                <img class="img-responsive" src="assets/images/logo.png" alt="logo">
+            </a>
+            <div class="login-form">
+                <form data-toggle="validator" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" class="form-control" type="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="register" style="display: none;">
+        <div class="register-body">
+            <a class="login-brand" href="index.html">
+                <img class="img-responsive" src="assets/images/logo.png" alt="logo">
+            </a>
+            <div class="register-form">
+                <form data-toggle="validator" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" class="form-control" type="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Confirm Password</label>
+                        <input id="password" class="form-control" type="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //get the button
+    var loginBut = document.getElementById('loginBut');
+    var registerBut = document.getElementById('RegisterButs');
+
+    //get lgin and register divs
+    var login = document.getElementsByClassName('login')[0];
+    var register = document.getElementsByClassName('register')[0];
+
+    //onclick loginbut show login div and hide register div
+    loginBut.onclick = function() {
+        login.style.display = 'block';
+        register.style.display = 'none';
+    }
+
+    //onclick registerbut show register div and hide login div
+    registerBut.onclick = function() {
+        login.style.display = 'none';
+        register.style.display = 'block';
+    }
+    
+</script>
