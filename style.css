@@ -154,7 +154,7 @@ canvas{
     font-size: 1.5rem;
     border: none;
     border-bottom: 1px solid #39434e;
-    background: rgba(255, 255, 255, 0.123);
+    background: rgba(255, 255, 255, 0.336);
     color: inherit;
 }
 .login-register h2{
@@ -166,7 +166,7 @@ canvas{
     text-decoration: none;
     color: rgb(194, 194, 194);
     font-size: 2.5rem;
-    background-color: #04AA6D;
+    background-color: rgba(255, 255, 255, 0.336);
     padding: 10px 10px;
     border-radius: 8px;
     color: white;
@@ -175,7 +175,7 @@ canvas{
     padding-bottom: 20px;
 }
 .submitlogin{
-    background-color: #04AA6D;
+    background-color: rgba(255, 255, 255, 0.123);
     color: white;
     font-size: 2rem;
     padding: 10px 10px;
