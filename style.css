@@ -17,6 +17,7 @@ canvas{
     background-color: #232930;
     height: 100vh;
     width: 100vw;
+    position: fixed;
 }
 .menu{
     color: rgb(194, 194, 194);

@@ -28,17 +28,6 @@ export default class SettingsMenu extends Event{
                 this.Hide();
                 window.MainMenu.Show();
             });
-
-            //onclick settings button
-            this.menu.querySelector('#settings').addEventListener('click', () => {
-                this.Show();
-            });
-
-            //onclick save button
-            this.menu.querySelector('#save').addEventListener('click', () => {
-                this.Hide();
-            });
-
         });
     }
     Show(){
@@ -51,7 +40,4 @@ export default class SettingsMenu extends Event{
     get Volume(){
         return this.menu.querySelector('#volumeS').value;
     }
-
-    
-
 }
