@@ -1,39 +1,43 @@
+<link rel="stylesheet" href="../../style.css">
+
+
+
+<!-- path moet aangepast worden zodra merge terug naar dev -->
+<img src="../images/clipart-sword-soldier-3.png" alt="" id="guard">
+
 <div class="login-register">
+
     <div class="switch-login-register">
         <a href="javascript:void(0)" class="btn btn-primary btn-block" id="loginBut">Login</a>
         <a href="javascript:void(0)" class="btn btn-primary btn-block" id="RegisterButs">Register</a>
     </div>
-    <div class="login">
+    <div class="login loginbox">
         <div class="login-body">
-            <a class="login-brand" href="index.html">
-                <img class="img-responsive" src="assets/images/logo.png" alt="logo">
-            </a>
+            <h2>Datahunt Gate</h2>
             <div class="login-form">
                 <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email</label><br>
                         <input id="email" class="form-control" type="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Password</label><br>
                         <input id="password" class="form-control" type="password" name="password" required>
                     </div>
-                    <p> remember me</p>
+                    <label>remember me</label>
                     <div class="checkbox">
-                        <label>
-                            <input type="checkbox">
-                        </label>
+                        <input type="checkbox">
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                        <button type="submit" class="submitlogin">Sign in</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     
-    <div class="register" style="display: none;">
+    <div class="register loginbox" style="display: none;">
         <div class="register-body">
             <a class="login-brand" href="index.html">
                 <img class="img-responsive" src="assets/images/logo.png" alt="logo">
@@ -41,27 +45,27 @@
             <div class="register-form">
                 <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
-                        <label for="username">Name</label>
+                        <label for="username">Name</label><br>
                         <input id="username" class="form-control" type="text" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Username</label><br>
                         <input id="username" class="form-control" type="text" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email</label><br>
                         <input id="email" class="form-control" type="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">Password</label><br>
                         <input id="password" class="form-control" type="password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
+                        <label for="confirmPassword">Confirm Password</label><br>
                         <input id="password" class="form-control" type="password" name="confirmPassword" required>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                        <button type="submit" class="submitlogin">Sign up</button>
                     </div>
                 </form>
             </div>

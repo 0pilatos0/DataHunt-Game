@@ -130,3 +130,92 @@ canvas{
     width: 100vw;
     position: fixed;
 }
+
+.loginbox{
+    background: #39434e;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #39434e73;
+    
+}
+
+.login-register{
+    margin: 0 auto;
+    width: 600px;
+    padding: 30px 10px;
+    color: rgba(255, 255, 255, 0.815);
+}
+.login-register label{
+    font-size: 2.5rem;
+}
+.login-register input{
+    width: 100%;
+    padding: 10px;
+    font-size: 1.5rem;
+    border: none;
+    border-bottom: 1px solid #39434e;
+    background: rgba(255, 255, 255, 0.123);
+    color: inherit;
+}
+.login-register h2{
+    font-size: 3.5rem;
+}
+
+.switch-login-register a{
+    margin-left: 10px;
+    text-decoration: none;
+    color: rgb(194, 194, 194);
+    font-size: 2.5rem;
+    background-color: #04AA6D;
+    padding: 10px 10px;
+    border-radius: 8px;
+    color: white;
+}
+.switch-login-register{
+    padding-bottom: 20px;
+}
+.submitlogin{
+    background-color: #04AA6D;
+    color: white;
+    font-size: 2rem;
+    padding: 10px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+#guard{
+    position: absolute;
+    width: 30vw;
+    /* position to the right */
+    left: 70%;
+    /* position to the bottom */
+    top: 70%;
+    animation: guardanimation 10s infinite;
+
+}
+
+@keyframes guardanimation{ 
+    0%{
+        top: 90%;
+    }
+    30%{
+        top: 70%;
+        rotate: 10deg;
+    }
+    40%{
+        top: 50%;
+        rotate: -10deg;
+        transform: skewY(2deg);
+
+    }
+    50%{
+        top: 45%;
+    }
+    100%{
+        top: 90%;
+    }
+
+
+}
+
