@@ -29,8 +29,8 @@ export default class Canvas{
     }
 
     #Init(){
-        this.canvas.width = `${window.innerWidth}`;
-        this.canvas.height = `${window.innerHeight}`;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         this.ctx.font = '48px serif';
         this.ctx.imageSmoothingEnabled = false;
     }
