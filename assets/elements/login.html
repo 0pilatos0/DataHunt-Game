@@ -9,7 +9,7 @@
                 <img class="img-responsive" src="assets/images/logo.png" alt="logo">
             </a>
             <div class="login-form">
-                <form data-toggle="validator" method="post">
+                <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input id="email" class="form-control" type="email" name="email" required>
@@ -39,7 +39,7 @@
                 <img class="img-responsive" src="assets/images/logo.png" alt="logo">
             </a>
             <div class="register-form">
-                <form data-toggle="validator" method="post">
+                <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
                         <label for="username">Name</label>
                         <input id="username" class="form-control" type="text" name="name" required>
@@ -88,6 +88,18 @@
     registerBut.onclick = function() {
         login.style.display = 'none';
         register.style.display = 'block';
+    }
+
+    loginForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries()) 
+        console.log(data)
+    }
+
+    registerForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries())
+        console.log(data)
     }
 
 </script>
