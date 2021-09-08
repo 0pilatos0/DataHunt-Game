@@ -1,6 +1,8 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
+import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import MainMenu from './menus/MainMenu.js';
+import SettingsMenu from './menus/SettingsMenu.js';
 import Player from './Player/Player.js';
 
 
@@ -25,14 +27,19 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+HtmlLoader.Load("./assets/elements/login.html").then(data => {
+    let script = data.split('<script>')[1].split('</script>')[0];
+    let html = data.split('<script>')[0];
 
+    login.innerHTML = html;
+
+    //execute script
+    eval(script);
+})
 
 
 window.deltaTime = 1 / 60;
-
 window.player = new Player();
-
-let deltaTime = 1 / 60;
 let startTime = Date.now();
 window.fps = 60;
 window.spriteScaleFactor = 4;
