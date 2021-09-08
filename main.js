@@ -60,3 +60,13 @@ let loop = () => {
 }
 
 window.requestAnimationFrame(loop);
+
+let client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+
+client.on('connect', () => {
+    console.log("connected to server")
+})
+
+client.on('disconnect', () => {
+    console.log('disconnected from server')
+})
