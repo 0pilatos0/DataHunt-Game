@@ -1,7 +1,8 @@
 import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
 import MainMenu from './menus/MainMenu.js';
-import SettingsMenu from './menus/SettingsMenu.js';
+import Player from './Player/Player.js';
+
 
 let canvas = new Canvas();
 
@@ -15,7 +16,7 @@ window.SettingsMenu = new SettingsMenu();
 window.addEventListener('keydown', (e) => {
     if (e.keyCode === 82 && e.ctrlKey) {
         e.preventDefault();
-    } 
+    }
     if (e.keyCode === 82 && e.ctrlKey && e.shiftKey) {
         e.preventDefault();
     }
@@ -28,14 +29,18 @@ window.addEventListener('keydown', (e) => {
 
 
 window.deltaTime = 1 / 60;
+
+window.player = new Player();
+
+let deltaTime = 1 / 60;
 let startTime = Date.now();
 window.fps = 60;
-window.spriteScaleFactor = 4
+window.spriteScaleFactor = 4;
 
 let loop = () => {
     Clock.clocks.forEach(clock => {
         if(!clock.paused){
-            clock.passedMiliseconds += window.deltaTime * 1000
+            clock.passedMiliseconds += window.deltaTime * 1000;
             if(clock.passedMiliseconds >= 1000){
                 //clock.passedMiliseconds -= 1000
                 clock.passedSeconds += 1
@@ -49,8 +54,8 @@ let loop = () => {
                 clock.passedHours += 1
             }
         }
-        
-    })
+
+    });
 
     canvas.Update();
     
@@ -59,12 +64,12 @@ let loop = () => {
     window.deltaTime = (Date.now() - startTime) / 1000;
     window.fps = 1 / window.deltaTime;
     startTime = Date.now();
-   
+
     canvas.ctx.fillStyle = '#fff';
     canvas.ctx.fillText(window.fps.toFixed(0), 10, 50);
 
     window.requestAnimationFrame(loop);
-}
+};
 
 
 window.requestAnimationFrame(loop);
