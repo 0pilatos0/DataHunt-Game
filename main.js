@@ -15,6 +15,13 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+//prevent default cntrl+shift+r
+window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 82 && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+    }
+});
+
 
 window.deltaTime = 1 / 60;
 let startTime = Date.now();
