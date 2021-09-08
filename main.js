@@ -9,8 +9,6 @@ let canvas = new Canvas();
 let mainmenu = new MainMenu();
 
 
-
-
 window.deltaTime = 1 / 60;
 
 window.player = new Player();
