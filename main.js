@@ -6,7 +6,26 @@ import Player from './Player/Player.js';
 
 let canvas = new Canvas();
 
-let mainmenu = new MainMenu();
+window.MainMenu = new MainMenu();
+window.SettingsMenu = new SettingsMenu();
+
+//redirect user to new tab
+
+
+
+window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 82 && e.ctrlKey) {
+        e.preventDefault();
+    }
+    if (e.keyCode === 82 && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+    }
+    if (e.keyCode === 116) {
+        e.preventDefault();
+    }
+});
+
+
 
 
 window.deltaTime = 1 / 60;
@@ -52,4 +71,16 @@ let loop = () => {
     window.requestAnimationFrame(loop);
 };
 
+
 window.requestAnimationFrame(loop);
+
+// let client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+
+// client.on('connect', () => {
+//     console.log("connected to server")
+// })
+
+// client.on('disconnect', () => {
+//     console.log('disconnected from server')
+// })
+

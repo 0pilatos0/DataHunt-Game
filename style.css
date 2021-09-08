@@ -10,8 +10,6 @@ canvas{
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;
-    width: 100vw;
-    height: 100vh;
 }
 
 /* Menu */
@@ -19,6 +17,7 @@ canvas{
     background-color: #232930;
     height: 100vh;
     width: 100vw;
+    position: fixed;
 }
 .menu{
     color: rgb(194, 194, 194);
@@ -52,10 +51,7 @@ canvas{
     transform: translatex(-50%);
 
     animation: tilt 2.5s ease-in-out infinite;
-
-
 }
-
 @keyframes tilt{
     0%{
         transform: rotate(0deg);
@@ -66,4 +62,63 @@ canvas{
     100%{
         transform: rotate(0deg);
     }
+}
+
+/* Settings */
+#settingsM{
+    background-color: #232930;
+    height: 100vh;
+    width: 100vw;
+}
+.settings{
+    color: rgb(194, 194, 194);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Odibee Sans', cursive;
+    padding-top: 10vh;
+}
+.settings h1{
+    font-size: 10.5rem;
+}
+.settings h2{
+    font-size: 4.5rem;
+}
+.settings h1:hover{
+    color: rgb(255, 255, 255);
+}
+.settings h2:hover{
+    color: rgb(255, 255, 255);
+}
+.settings p{
+    font-size: 2.5rem;  
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
 }
