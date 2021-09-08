@@ -122,3 +122,11 @@ canvas{
     background: #04AA6D;
     cursor: pointer;
 }
+
+/*login*/
+#login{
+    background-color: #232930;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
