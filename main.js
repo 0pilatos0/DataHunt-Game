@@ -8,6 +8,13 @@ let canvas = new Canvas();
 window.MainMenu = new MainMenu();
 window.SettingsMenu = new SettingsMenu();
 
+//prevent page refresh on f5
+window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 116) {
+        e.preventDefault();
+    }
+});
+
 
 window.deltaTime = 1 / 60;
 let startTime = Date.now();
