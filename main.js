@@ -7,7 +7,11 @@ let canvas = new Canvas();
 
 window.MainMenu = new MainMenu();
 window.SettingsMenu = new SettingsMenu();
-    
+
+//redirect user to new tab
+
+
+
 window.addEventListener('keydown', (e) => {
     if (e.keyCode === 82 && e.ctrlKey) {
         e.preventDefault();
@@ -21,12 +25,15 @@ window.addEventListener('keydown', (e) => {
 });
 
 
+
+
 window.deltaTime = 1 / 60;
 let startTime = Date.now();
 window.fps = 60;
 window.spriteScaleFactor = 4
 
 let loop = () => {
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     Clock.clocks.forEach(clock => {
         if(!clock.paused){
             clock.passedMiliseconds += window.deltaTime * 1000
@@ -72,3 +79,4 @@ window.requestAnimationFrame(loop);
 // client.on('disconnect', () => {
 //     console.log('disconnected from server')
 // })
+
