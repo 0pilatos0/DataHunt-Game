@@ -1,5 +1,6 @@
-let CharacterData = new Object();
+let CharacterData = [];
 let images = document.getElementById("class").children;
+let classes = ['wizard', 'knight', null, null, null, null];
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 
 for (let i = 0; i < images.length; i++) {
@@ -10,7 +11,7 @@ for (let i = 0; i < images.length; i++) {
 
 document.getElementById("inputName").addEventListener('keypress', (e) => {
     if (e.code === "Enter") {
-        CharacterData.username = document.getElementById("inputName").value;
+        CharacterData.push({"name": document.getElementById("inputName").value})
 
         document.getElementsByClassName("input")[0].style.display = "None";
 
@@ -28,7 +29,7 @@ function confirmClass(id) {
     document.getElementById("classConfirmation").style.display = "Block";
 
     document.getElementById("classConfirmationDecline").onclick = ()=>{declineCharacter()};
-    document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter()};
+    document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter(classes[id])};
 
     checkIfImageExists('./class' + id + '.png', (exists) => {
         if (exists) {
@@ -46,12 +47,13 @@ function declineCharacter() {
     document.getElementsByClassName("input")[0].style.display = "Block";
 }
 
-function acceptCharacter() {
-    JsonLoader.Load("./ClassData.json").then(d => {
-        CharacterData.class = d;
-        console.log(d);
-        console.log(CharacterData.username + " heeft gekozen voor " + CharacterData.class[0].name)
-    });
+function acceptCharacter(ClassName) {
+    if(ClassName !== null) {
+        JsonLoader.Load("./class_" + ClassName + ".json").then(d => {
+            CharacterData.push({"class": d});
+            console.log(CharacterData);
+        });
+    }
 }
 
 function checkIfImageExists(url, callback) {

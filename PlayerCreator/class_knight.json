@@ -1,27 +1,4 @@
 {
-  "Wizard": {
-    "attack": 10,
-    "defense": 3,
-    "healthPoints": 25,
-    "magicka": 10,
-    "activeSkills": [],
-    "skillLimit": "4",
-    "magickSkills": [
-      {
-        "name": "Fire Bolt",
-        "damage": "15",
-        "cost": 5,
-        "special": null
-      }
-    ],
-    "weapon": [
-      {
-        "name": "Old Mages Stick",
-        "damage": 2,
-        "special": null
-      }
-    ]
-  },
   "Knight": {
     "attack": 8,
     "defense": 5,
