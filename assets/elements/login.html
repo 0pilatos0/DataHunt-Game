@@ -1,0 +1,103 @@
+
+<img src="./assets/images/clipart-sword-soldier-3.png" alt="" id="guard">
+
+<div class="login-register">
+
+    <div class="switch-login-register">
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="loginBut">Login</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="RegisterButs">Register</a>
+    </div>
+    <div class="login loginbox">
+        <div class="login-body">
+            <h2>Datahunt Gate</h2>
+            <div class="login-form">
+                <form data-toggle="validator" method="post" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label><br>
+                        <input id="password" class="form-control" type="password" name="password" required>
+                    </div>
+                    <label>remember me</label>
+                    <div class="checkbox">
+                        <input type="checkbox">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="register loginbox" style="display: none;">
+        <div class="register-body">
+            <h2>Datahunt Gate</h2>  
+            <div class="register-form">
+                <form data-toggle="validator" method="post" id="registerForm">
+                    <div class="form-group">
+                        <label for="username">Name</label><br>
+                        <input id="username" class="form-control" type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label><br>
+                        <input id="username" class="form-control" type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label><br>
+                        <input id="password" class="form-control" type="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label><br>
+                        <input id="password" class="form-control" type="password" name="confirmPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //get the button
+    var loginBut = document.getElementById('loginBut');
+    var registerBut = document.getElementById('RegisterButs');
+
+    //get lgin and register divs
+    var login = document.getElementsByClassName('login')[0];
+    var register = document.getElementsByClassName('register')[0];
+
+    //onclick loginbut show login div and hide register div
+    loginBut.onclick = function() {
+        login.style.display = 'block';
+        register.style.display = 'none';
+    }
+
+    //onclick registerbut show register div and hide login div
+    registerBut.onclick = function() {
+        login.style.display = 'none';
+        register.style.display = 'block';
+    }
+
+    loginForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries()) 
+        console.log(data)
+    }
+
+    registerForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries())
+        console.log(data)
+    }
+
+</script>

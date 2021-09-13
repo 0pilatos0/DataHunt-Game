@@ -1,0 +1,25 @@
+<div class="settings">
+    <div class=""><h2>Settings</h2></div>
+    <p id="volumeC">Volume : </p>
+    <input type="range" min="0" max="100" value="50" class="slider" id="volumeS">
+    <br><br>
+    <div id="back"><h2>Back</h2></div>
+
+</div>
+<script>
+  var slider = document.getElementById("volumeS");
+  var output = document.getElementById("volumeC");
+  output.innerHTML = "Volume : " + slider.value;
+  
+  //check if volume is in local storage
+  if(localStorage.getItem("volume") != null){
+    slider.value = localStorage.getItem("volume");
+    output.innerHTML = "Volume : " + slider.value;
+  }
+
+  slider.oninput = () => {
+    output.innerHTML = "Volume : " + slider.value;
+    //store the value in the local storage
+    localStorage.setItem("volume", slider.value);
+  }
+</script>

@@ -5,10 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataHunt Game</title>
+
     <script type="module" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/loadingscreen/style.css">
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <canvas id="game"></canvas>
+    <div class="loader-wrapper" id="loading" style="display: none;">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+    <div id="menu"></div>
+    <div id="settingsM"></div>
+    <div id="login"></div>
+    
+    <script src="./assets/loadingscreen/script.js"></script>
 </body>
 </html>
