@@ -221,3 +221,46 @@ canvas{
 
 }
 
+
+
+/*feedback*/
+
+#feedback{
+    position: fixed;
+    z-index: 10000; 
+
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Odibee Sans', cursive;
+    font-size: 3.5rem;
+
+    padding: 20px 50px;
+    background-color: rgb(201, 63, 63);
+    min-width: 60vw;
+    text-align: center;
+    border-radius: 10px;
+
+    animation: apear-and-disapear 10s linear ;
+    top: -200px;
+
+
+}
+
+@keyframes apear-and-disapear{
+
+    0%{
+        top: -200px;
+    }
+    5%{
+        
+        top: -0px;
+    }
+    95%{
+        top: -0px;
+    }
+    100%{
+        top: -200px;
+    }
+
+
+}
