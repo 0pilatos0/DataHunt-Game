@@ -11,7 +11,6 @@
         <div class="login-body">
             <h2>Datahunt Gate</h2>
             <div class="login-form">
-                <p class="loginfeedback">Hallo ik ben een error</p>
                 <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label><br>
@@ -38,7 +37,6 @@
         <div class="register-body">
             <h2>Datahunt Gate</h2>  
             <div class="register-form">
-                <p class="loginfeedback">Hallo ik ben een error</p>
                 <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
                         <label for="username">Name</label><br>
@@ -102,6 +100,17 @@
     client.on('login', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("login-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            feedback.insertAdjacentHTML('afterbegin', `<p style="background-color:rgb(116 201 63)">${s}</p>`)
+            document.getElementById('login').style.display = "none"
+        })
     })
 
     registerForm.onsubmit = (e) => {
@@ -116,6 +125,26 @@
     client.on('register', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
+        console.log(data)
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+            })
+        })
     })
 
+    function removeAllFeedback(){
+        let elements = document.getElementsByClassName("loginfeedback")
+        Array.from(elements).forEach(element => {
+            element.remove()
+        })
+    }
 </script>
