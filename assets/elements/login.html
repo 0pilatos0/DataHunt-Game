@@ -108,7 +108,9 @@
             })
         })
         data.success.map(s => {
-            feedback.insertAdjacentHTML('afterbegin', `<p style="background-color:rgb(116 201 63)">${s}</p>`)
+            feedback.style.display = "block"
+            feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
+            feedback.style.backgroundColor = "rgb(116 201 63)"
             document.getElementById('login').style.display = "none"
         })
     })
