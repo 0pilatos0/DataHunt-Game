@@ -77,30 +77,52 @@ body {
 #characterPicker {
     display: none;
     width: 364px;
+    /* width: 50%; */
     margin: 0 auto;
 }
 
 #characterPicker p {
-    width: 200px;
-    margin: 0 1em;
-    display: inline-block;
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* margin: 0 1em; */
+    margin: 0;
+    padding: 0 1em;
+    /* display: inline; */
     text-align: center;
+    display: inline-block;
+    transform: translate(25px, 0);
+    width: 200px;
+    box-sizing: border-box;
 }
 
 .characterPart{
     image-rendering: pixelated;
-    position: absolute;
+    position:absolute;
     width: 256px;
-    height: 256px;
-    left: 15%;
-    top: 15%;
-    transform: translate(50%, 50%);
+    transform: translate(25%, 0);
 }
 
 .characterPickButton {
     padding: 10px 20px;
     border: 2px solid black;
     border-radius: 3px;
+}
+
+#characterPicker div{
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+}
+
+#characterDisplay img{
+    /* //position: relative; */
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+#characterPicker div button:last-of-type{
+    float: right;
 }
 
 .characterConfirmButton {
@@ -111,4 +133,17 @@ body {
     display: block;
     font-family: "Baloo 2", sans-serif;
     font-size: 0.8em;
+    width: 100%;
+}
+
+#characterDisplay{
+    position: relative;
+    display: inline-block;
+    height: 256px;
+    width: 100%;
+}
+
+#characterPicker input{
+    width: 100%;
+    box-sizing: border-box;
 }
