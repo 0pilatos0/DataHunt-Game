@@ -55,9 +55,9 @@
                         <input id="password" class="form-control" type="password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label><br>
+                        <label for="confirmPassword">Confirm Password</label>
                         <input id="password" class="form-control" type="password" name="confirmPassword" required>
-                    </div>
+                    </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign up</button>
                     </div>
@@ -92,12 +92,61 @@
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
         console.log(data)
+        client.emit('login', data)
+        loading.style.display = "block"
+        loading.classList.remove('loaderdisabled')
     }
+
+    client.on('login', (data) => {
+        loading.style.display = "none"
+        loading.classList.add('loaderdisabled')
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("login-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            feedback.style.display = "block"
+            feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
+            feedback.style.backgroundColor = "rgb(116 201 63)"
+            document.getElementById('login').style.display = "none"
+        })
+    })
 
     registerForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries())
         console.log(data)
+        client.emit('register', data)
+        loading.style.display = "block"
+        loading.classList.remove('loaderdisabled')
     }
 
+    client.on('register', (data) => {
+        loading.style.display = "none"
+        loading.classList.add('loaderdisabled')
+        console.log(data)
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+            })
+        })
+    })
+
+    function removeAllFeedback(){
+        let elements = document.getElementsByClassName("loginfeedback")
+        Array.from(elements).forEach(element => {
+            element.remove()
+        })
+    }
 </script>

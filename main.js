@@ -5,15 +5,10 @@ import MainMenu from './menus/MainMenu.js';
 import SettingsMenu from './menus/SettingsMenu.js';
 import Player from './Player/Player.js';
 
-
 let canvas = new Canvas();
 
 window.MainMenu = new MainMenu();
 window.SettingsMenu = new SettingsMenu();
-
-//redirect user to new tab
-
-
 
 window.addEventListener('keydown', (e) => {
     if (e.keyCode === 82 && e.ctrlKey) {
@@ -32,12 +27,12 @@ HtmlLoader.Load("./assets/elements/login.html").then(data => {
     let html = data.split('<script>')[0];
 
     login.innerHTML = html;
-
+    login.style.display = "none"
     //execute script
     eval(script);
 })
 
-
+//TODO makes this load after user logged in and pressed play and make it able to unload
 window.deltaTime = 1 / 60;
 window.player = new Player();
 let startTime = Date.now();
@@ -78,16 +73,16 @@ let loop = () => {
     window.requestAnimationFrame(loop);
 };
 
-
 window.requestAnimationFrame(loop);
 
-// let client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+let client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
-// client.on('connect', () => {
-//     console.log("connected to server")
-// })
+client.on('connect', () => {
+    console.log("connected to server")
+    login.style.display = "block"
+})
 
-// client.on('disconnect', () => {
-//     console.log('disconnected from server')
-// })
-
+client.on('disconnect', () => {
+    console.log('disconnected from server')
+    login.style.display = "none"
+})
