@@ -31,15 +31,8 @@ function confirmClass(id) {
     document.getElementById("classConfirmationDecline").onclick = ()=>{declineCharacter()};
     document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter(classes[id])};
 
-    checkIfImageExists('./class' + id + '.png', (exists) => {
-        if (exists) {
-            document.getElementById("classConfirmationImg").src = "./class" + id + ".png";
-        } else {
-            document.getElementById("classConfirmationImg").src = "./unreleased_class.png";
-        }
-    });
 
-    document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData.username;
+    document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData[0].name;
 }
 
 function declineCharacter() {
@@ -49,26 +42,16 @@ function declineCharacter() {
 
 function acceptCharacter(ClassName) {
     if(ClassName !== null) {
-        JsonLoader.Load("./class_" + ClassName + ".json").then(d => {
-            CharacterData.push({"class": d});
-            console.log(CharacterData);
+        JsonLoader.Load("./class_" + ClassName + ".json").then(e => {
+            CharacterData.push({"class": e});
+            console.log(CharacterData + "\r\n");
+            spritePicker();
         });
     }
 }
 
-function checkIfImageExists(url, callback) {
-    const img = new Image();
+function spritePicker() {
+    document.getElementById("classConfirmation").style.display = "none";
+    document.getElementById("spritePicker").style.display = "Block";
 
-    img.src = url;
-
-    if (img.complete) {
-        callback(true);
-    } else {
-        img.onload = () => {
-            callback(true);
-        };
-        img.onerror = (e) => {
-            callback(false);
-        };
-    }
 }
