@@ -7,7 +7,7 @@ body {
 }
 
 #background {
-    background-color: black;
+    background-color: rgb(92, 92, 92);
     width: 100vw;
     height: 100vh;
     display: block;
@@ -74,6 +74,41 @@ body {
     cursor: default;
 }
 
-#spritePicker {
+#characterPicker {
     display: none;
+    width: 364px;
+    margin: 0 auto;
+}
+
+#characterPicker p {
+    width: 200px;
+    margin: 0 1em;
+    display: inline-block;
+    text-align: center;
+}
+
+.characterPart{
+    image-rendering: pixelated;
+    position: absolute;
+    width: 256px;
+    height: 256px;
+    left: 15%;
+    top: 15%;
+    transform: translate(50%, 50%);
+}
+
+.characterPickButton {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.characterConfirmButton {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 3px;
+    margin: 0 auto;
+    display: block;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 0.8em;
 }
