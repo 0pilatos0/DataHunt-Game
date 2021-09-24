@@ -75,24 +75,19 @@ body {
 }
 
 #characterPicker {
-    display: none;
+    /* display: none; */
     width: 364px;
-    /* width: 50%; */
     margin: 0 auto;
 }
 
 #characterPicker p {
-    /* box-sizing: border-box; */
-    /* width: 100%; */
-    /* margin: 0 1em; */
     margin: 0;
     padding: 0 1em;
-    /* display: inline; */
     text-align: center;
     display: inline-block;
-    transform: translate(25px, 0);
+    /* transform: translate(25px, 0); */
     width: 200px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 .characterPart{
@@ -121,7 +116,7 @@ body {
     transform: translate(-50%, 0%);
 }
 
-#characterPicker div button:last-of-type{
+.characterPickButtonRight{
     float: right;
 }
 
