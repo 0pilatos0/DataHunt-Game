@@ -9,7 +9,7 @@
     </div>
     <div class="login loginbox">
         <div class="login-body">
-            <h2>Datahunt Gate</h2>
+            <h2>DataHunt Gate</h2>
             <div class="login-form">
                 <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
@@ -28,6 +28,9 @@
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign in</button>
                     </div>
+                    <div class="form-group">
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -35,7 +38,7 @@
     
     <div class="register loginbox" style="display: none;">
         <div class="register-body">
-            <h2>Datahunt Gate</h2>  
+            <h2>DataHunt Gate</h2>  
             <div class="register-form">
                 <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
@@ -60,6 +63,9 @@
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign up</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
                     </div>
                 </form>
             </div>
@@ -148,5 +154,13 @@
         Array.from(elements).forEach(element => {
             element.remove()
         })
+    }
+
+    let forgotPasswordButtons = document.getElementsByClassName('submitResetPassword')
+    for (let i = 0; i < forgotPasswordButtons.length; i++) {
+        let button = forgotPasswordButtons[i]
+        button.onclick = () => {
+            console.log("reset password")
+        }
     }
 </script>
