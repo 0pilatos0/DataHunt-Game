@@ -248,8 +248,18 @@ async function createPlayerPicker(){
         });
     }
 
-
     let confirmButton = createButton("Submit character")
+
+    confirmButton.button.onclick = () => {
+        let parsedCharacterData = {}
+        options.map(option => {
+            parsedCharacterData[option.displayName] = option.spriteIndex
+        })
+        parsedCharacterData["class"] = classIndex
+        parsedCharacterData["name"] = nameInput.value
+        console.log(parsedCharacterData)
+    }
+
     let randomButton = createButton("Randomize character")
     characterPicker.appendChild(classButtons.holder)
     characterPicker.appendChild(randomButton.button)
