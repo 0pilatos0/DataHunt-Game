@@ -22,7 +22,7 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-HtmlLoader.Load("./assets/elements/login.html").then(data => {
+HtmlLoader.Load("./assets/elements/Account.html").then(data => {
     let script = data.split('<script>')[1].split('</script>')[0];
     let html = data.split('<script>')[0];
 
