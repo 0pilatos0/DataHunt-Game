@@ -34,7 +34,7 @@ HtmlLoader.Load("./assets/elements/login.html").then(data => {
 
 //TODO makes this load after user logged in and pressed play and make it able to unload
 window.deltaTime = 1 / 60;
-window.player = new Player();
+// window.player = new Player();
 let startTime = Date.now();
 window.fps = 60;
 window.spriteScaleFactor = 4;

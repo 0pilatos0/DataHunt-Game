@@ -1,10 +1,15 @@
+import Hitbox from "./Hitbox.js";
+import Tileset from "./Tileset.js";
 import Transformable from "./Transformable.js";
 import Vector2 from "./Vector2.js";
 
-export default class GameObject{
+export default class GameObject extends Hitbox{
+    static gameObjects = []
     type = null
 
     constructor(drawable) {
+        super()
+        GameObject.gameObjects.push(this)
         this.drawable = drawable
     }
 
@@ -40,6 +45,14 @@ export default class GameObject{
         this.drawable.rotation = rotation
     }
 
+    set color(color){
+        this.drawable.color = color
+    }
+
+    get color(){
+        return this.drawable.color
+    }
+
     Draw(ctx, offset = Vector2.Zero()){
         if(!this.drawable.visible) return
         this.drawable.Draw(ctx, offset)
@@ -47,6 +60,7 @@ export default class GameObject{
 
     Update(){
         if(!this.drawable.visible) return
+        super.Update()
         this.drawable.Update()
     }
 
