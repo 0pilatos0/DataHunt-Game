@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 body {
     margin: 0;
     font-family: "Baloo 2", sans-serif;
@@ -77,23 +81,14 @@ body {
 #characterPicker {
     /* display: none; */
     width: 364px;
-    margin: 0 auto;
 }
 
-#characterPicker p {
-    margin: 0;
-    padding: 0 1em;
-    text-align: center;
-    display: inline-block;
-    /* transform: translate(25px, 0); */
-    width: 200px;
-    /* box-sizing: border-box; */
-}
+
 
 .characterPart{
     image-rendering: pixelated;
     position:absolute;
-    width: 256px;
+    width: 500px;
     transform: translate(25%, 0);
 }
 
@@ -104,7 +99,6 @@ body {
 }
 
 #characterPicker div{
-    width: 100%;
     position: relative;
     box-sizing: border-box;
     display: block;
@@ -116,9 +110,6 @@ body {
     transform: translate(-50%, 0%);
 }
 
-.characterPickButtonRight{
-    float: right;
-}
 
 .characterConfirmButton {
     padding: 10px 20px;
@@ -141,4 +132,92 @@ body {
 #characterPicker input{
     width: 100%;
     box-sizing: border-box;
+}
+
+#characterPicker {
+    width: 100vw;
+    display: flex;
+    height: 93vh;
+}
+
+#characterDisplay{
+    height: 500px;
+    display: relative;
+    width: 40vw;
+    margin : auto 0
+}
+
+#characterSelectors{
+    display: relative;
+    width: 60vw;
+    border-right: 10px solid white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#characterSelectors > div{
+    display: flex;
+}
+
+#topbar{
+    height: 7vh;
+    width: 100vw;
+    background-color: rgb(68, 68, 68);
+}
+#topbar a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: "Baloo 2", sans-serif;
+    display: inline-block;
+    margin: 0;
+    line-height: 7vh;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    transition: color 1s;
+    transition: background-color 1s;
+}
+
+#topbar a:hover{
+    color: #45ff35;
+    background-color: rgb(49, 49, 49);
+    
+}
+
+.characterPickButtonHolder{
+    display: inline-block;
+    width: 30%;
+    line-height: 60px;
+}
+
+.characterPickButtonHolder2{
+    display: inline-block;
+    width: 70%;
+    line-height: 60px;
+}
+
+.characterPickButtonHolder2 p{
+    top: 0;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+.characterPickButtonHolder2 img{
+    position: absolute;
+}
+
+#characterNamefield{
+    background-color: #00000026;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    color: white;
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+
+#characterName{
+    font-size: 2rem;
 }
