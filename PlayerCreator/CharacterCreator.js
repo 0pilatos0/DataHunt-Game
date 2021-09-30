@@ -1,6 +1,7 @@
 let CharacterData = [];
 // let images = document.getElementById("class").children;
 let classes = ['wizard', 'knight']; //, null, null, null, null
+let menuState = false;
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Vector2 from "../Core/Vector2.js"
 
@@ -352,3 +353,13 @@ function firstCharUpperCase(string){
     chars[0] = chars[0].toUpperCase()
     return chars.join("")
 }
+
+window.addEventListener('keydown', (e) =>{
+    if(e.keyCode == 77){
+        if(menuState){
+            this.menu.style.display = 'none';
+        }else{
+            this.menu.style.display = 'block';
+        }
+    }
+});
