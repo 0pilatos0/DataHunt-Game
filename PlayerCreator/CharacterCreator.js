@@ -141,15 +141,17 @@ async function createPlayerPicker(){
 
     await loadAllSprites()
 
-    let characterPicker = document.getElementById('characterPicker')
+    let characterPicker = document.getElementById('characterSelectors')
     let characterDisplay = document.getElementById('characterDisplay')
 
     let holder = document.createElement('div')
     let nameLabel = document.createElement('label')
     nameLabel.innerText = "Name: "
     nameLabel.for = "characterName"
+    nameLabel.id = 'characterName'
     let nameInput = document.createElement('input')
     nameInput.name = "characterName"
+    nameInput.id = "characterNamefield"
 
     let lockAll = document.createElement('button')
     lockAll.innerHTML = unlockIcon
@@ -292,13 +294,11 @@ function createButtons(text, tooltipText){
     let holder = document.createElement('div')
 
     let itemDisplay = document.createElement('img')
-    itemDisplay.style.position = "absolute"
-    //itemDisplay.style.left = "162.5px"
-    itemDisplay.style.left = "-55px"
+
     itemDisplay.style.translate = "transform(-50%, -50%)"
     itemDisplay.style.top = "0px"
-    itemDisplay.style.width = "40px"
-    itemDisplay.style.height = "40px"
+    itemDisplay.style.width = "60px"
+    itemDisplay.style.height = "60px"
     itemDisplay.style.imageRendering = "pixelated"
 
     let leftArrow = document.createElement('button')
@@ -320,8 +320,6 @@ function createButtons(text, tooltipText){
     
     let lock = document.createElement('button')
     lock.innerHTML = unlockIcon
-    lock.style.position = "absolute"
-    lock.style.right = "-55px"
     lock.classList.add("characterPickButton")
     lock.setAttribute("locked", false)
     lock.addEventListener('click', () => {
@@ -331,11 +329,20 @@ function createButtons(text, tooltipText){
     })
     lock.title = `Lock ${text}`
 
-    holder.appendChild(itemDisplay)
-    holder.appendChild(leftArrow)
-    holder.appendChild(textDisplay)
-    holder.appendChild(rightArrow)
-    holder.appendChild(lock)
+    let div2 = document.createElement('div')
+    div2.classList.add("characterPickButtonHolder2")
+    holder.appendChild(div2)
+
+    div2.appendChild(itemDisplay)
+    div2.appendChild(textDisplay)
+
+    let div = document.createElement('div')
+    div.classList.add("characterPickButtonHolder")
+    holder.appendChild(div)
+
+    div.appendChild(leftArrow)
+    div.appendChild(rightArrow)
+    div.appendChild(lock)
 
     return {leftArrow, rightArrow, holder, textDisplay, lock, itemDisplay}
 }
