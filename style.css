@@ -284,3 +284,26 @@ canvas{
         height: 100%;
     }
 }
+
+#eyeButton {
+    padding-bottom: 4px;
+    margin-left: -52px;
+    height: 35px;
+    width: 50px;
+    background: white;
+    color: black;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    align-content: center;
+    position: relative;
+    bottom: -4px;
+}
+
+#eyeButton i {
+    font-size: 22px;
+}
+
+#password {
+    width: 99.6%;
+}

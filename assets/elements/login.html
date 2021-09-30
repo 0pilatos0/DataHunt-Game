@@ -19,6 +19,7 @@
                     <div class="form-group">
                         <label for="password">Password</label><br>
                         <input id="password" class="form-control" type="password" name="password" required>
+                        <button id="eyeButton"><i id='toggleEye' class="far fa-eye"></i></button>
                     </div>
                     <label>remember me</label>
                     <div class="checkbox">
@@ -68,6 +69,23 @@
 </div>
 
 <script>
+    //this is for the reveal password
+    const input = document.getElementById('password')
+    const button = document.getElementById('eyeButton')
+    const eye = document.getElementById('toggleEye')
+
+    button.onclick = ()=>{
+        if(input.type === "password") {
+            input.type = 'text';
+            eye.classList.remove('fa-eye');
+            eye.classList.add('fa-eye-slash');
+        }else {
+            input.type = 'password';
+            eye.classList.add('fa-eye');
+            eye.classList.remove('fa-eye-slash');
+        }
+    }
+
     //get the button
     var loginBut = document.getElementById('loginBut');
     var registerBut = document.getElementById('RegisterButs');
