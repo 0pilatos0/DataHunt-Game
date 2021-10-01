@@ -9,12 +9,15 @@ export default class Scene{
     camera = new Camera(new Vector2(0, 0), new Vector2(window.innerWidth, window.innerHeight));
     input = []
 
-    rectangle1 = new GameObject(new Rectangle(new Vector2(100, 100), new Vector2(25, 25)))
+    rectangle1
 
-    rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+    rectangle2
 
     constructor() {
         Scene.activeScene = this
+        this.rectangle1 = new GameObject(new Rectangle(new Vector2(100, 100), new Vector2(25, 25)))
+        this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+
         Map.Load('../Map/Map.json').then(m => {
             this.map = m
         })
@@ -54,14 +57,26 @@ export default class Scene{
         //     console.log("?")
         // })
 
-        this.rectangle1.On('sC', () => {
-            this.rectangle1.color = '#00f'
-            console.log("?")
+        this.rectangle1.On('sC', (gameObject) => {
+            //this.rectangle1.color = '#00f'
+            gameObject.visible = false
+            // console.log("?")
         })
-        this.rectangle1.On('eC', () => {
-            this.rectangle1.color = '#f00'
+
+        this.rectangle1.On('C', (gameObject) => {
+            //this.rectangle1.color = '#00f'
+            gameObject.visible = false
+            // console.log("?")
+        })
+        this.rectangle1.On('eC', (gameObject) => {
+            //this.rectangle1.color = '#f00'
+            gameObject.visible = true
             // console.log("?stopped")
         })
+
+        // GameObject.gameObjects.map(gameObject => {
+            
+        // })
     }
 
     Draw(ctx){
@@ -71,17 +86,6 @@ export default class Scene{
             if(!this.IsInRange(gameObject)) return
             gameObject.Draw(ctx, offset)
         })
-
-        if(this.map != null){
-            this.map.forEach(tile => {
-                if(this.IsInRange(tile)){
-                    tile.Draw(ctx, offset)
-                }
-            });
-        }
-
-        // this.rectangle2.Draw(ctx, offset)
-        // this.rectangle1.Draw(ctx, offset)
 
         //ctx.fillStyle = '#fff';
         //ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
@@ -118,23 +122,6 @@ export default class Scene{
         //     //this.camera.position.X += speed * window.deltaTime;
         //     this.rectangle1.rotation -= speed * window.deltaTime;
         // }
-
-        //this.rectangle1.color = '#f00'
-
-        // if(this.rectangle1.IsColliding(this.rectangle2)){
-        //     this.rectangle1.color = '#00f'
-        // }
-        
-        if(this.map){
-            this.map.forEach(tile => {
-                if(this.IsInRange(tile)){
-                    tile.Update()
-                    // if(this.rectangle1.IsColliding(tile)){
-                    //     this.rectangle1.color = '#00f'
-                    // }
-                }
-            })
-        }
 
         if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
             this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2

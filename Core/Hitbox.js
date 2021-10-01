@@ -4,56 +4,100 @@ import GameObject from "./GameObject.js";
 
 export default class Hitbox extends Event {
     #states = ['STARTED', 'COLLIDING', 'ENDED']
-    #state = this.#states[2];
-    #oldState = this.#states[2];
+    #oldColliders = []
     constructor(){
         super()
     }
 
     Update() {
-        //TODO fix bug with overlapping states
-        // if(!this.position || !this.size) return
+        // GameObject.gameObjects.map(gameObject => {
+        //     if(gameObject == this) return
+        //     if(!this.#InCameraRange(gameObject)){
+        //         //if(this.startedCollisionBy === gameObject) this.startedCollisionBy = null
+        //         // gameObject.Trigger('eC')
+        //         return
+        //     }
+        //     else{
+        //         let colliding = this.#Colliding(gameObject)
+        //         if(colliding){ // && this.#state == this.#states[2] && this.startedCollisionBy == null
+        //             //this.startedCollisionBy = gameObject
+        //             //gameObject.startedCollisionBy = this
+        //             gameObject.Trigger('sC')
+        //         }
+        //         else{
+        //             gameObject.Trigger('eC')
+        //         }
+        //         //if(this.startedCollisionBy == gameObject){
+        //             // if (colliding) {
+        //             //     if(this.#oldState === this.#states[2]) 
+        //             //         this.#state = this.#states[0]
+        //             //     if(this.#oldState === this.#states[0]) 
+        //             //         this.#state = this.#states[1]
+        //             // }else {
+        //             //     //if(this.#oldState === this.#states[0] || this.#oldState === this.#states[1]){
+        //             //         this.#state = this.#states[2]
+        //             //         //console.log("?")
+        //             //         gameObject.Trigger('eC', this)
+        //             //         //this.startedCollisionBy = null
+        //             //     //}  
+        //             // }   
+        //         //}
+        //     }
+        // })
+        // switch (this.#state) {
+        //     case this.#states[0]:
+        //         this.Trigger('sC', this.startedCollisionBy)
+        //         break;
+        //     case this.#states[1]:
+        //         this.Trigger('C', this.startedCollisionBy)
+        //         break;
+        //     case this.#states[2]:
+        //         //this.#oldState !== this.#state
+        //             this.Trigger('eC', this.startedCollisionBy)
+        //         break;
+        //     default:
+        //         break;
+        // }
+        // if(this.#oldState !== this.#state)
+        //     this.#oldState = this.#state
+        
+        let colliders = []
         GameObject.gameObjects.map(gameObject => {
             if(gameObject == this) return
-            // if(!gameObject.position || !gameObject.size) return
-            if(!this.#InCameraRange(gameObject)) return
-            let colliding = this.#Colliding(gameObject)
-            if (colliding) {
-                if(this.#oldState === this.#states[2]) 
-                    this.#state = this.#states[0]
-                if(this.#oldState === this.#states[0]) 
-                    this.#state = this.#states[1]
-            }else {
-                if(this.#oldState === this.#states[0] || this.#oldState === this.#states[1])
-                    this.#state = this.#states[2]
+            if(!this.#InCameraRange(gameObject)){
+                if(this.#oldColliders.indexOf(gameObject) > -1)
+                    this.Trigger('eC', gameObject)
+                return
             }
-                //console.log(this.#state)
-                
-                // this.oldState = this.state;
-            // console.log(this.#state)
-            switch (this.#state) {
+            let colliding = this.#Colliding(gameObject)
+            if(colliding) colliders.push(gameObject)
+            else{
+                if(this.#oldColliders.indexOf(gameObject) > -1)
+                    this.Trigger('eC', gameObject)  
+            }
+        })
+        colliders.map(gameObject => {
+            gameObject.state = this.#oldColliders[this.#oldColliders.indexOf(gameObject)]?.state || this.#states[0]
+            gameObject.oldState = this.#oldColliders[this.#oldColliders.indexOf(gameObject)]?.oldState || this.#states[2]
+
+            if(gameObject.oldState == this.#states[0])
+                gameObject.state = this.#states[1]
+
+            switch (gameObject.state) {
                 case this.#states[0]:
-                    // console.log("?")
-                    // if(this.#state == this.#oldState) break
-                    this.Trigger('sC')
+                    this.Trigger('sC', gameObject)
                     break;
                 case this.#states[1]:
-                    //console.log("?")
-                    this.Trigger('C')
-                    break;
-                case this.#states[2]:
-                    if(this.#oldState !== this.#state)
-                        this.Trigger('eC')
-                    // if(this.#state == this.#oldState) break
-                    
-                    //console.log("?stopped")
+                    this.Trigger('C', gameObject)
                     break;
                 default:
                     break;
             }
-            if(this.#oldState !== this.#state)
-                this.#oldState = this.#state
+
+            gameObject.oldState = gameObject.state
         })
+        
+        this.#oldColliders = colliders
     }
 
     #Colliding (gameObject) {

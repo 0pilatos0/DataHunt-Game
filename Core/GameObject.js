@@ -11,6 +11,17 @@ export default class GameObject extends Hitbox{
         super()
         GameObject.gameObjects.push(this)
         this.drawable = drawable
+        // this.On('sC', (gameObject) => {
+        //     gameObject.visible = false
+        // })
+
+        // this.On('C', (gameObject) => {
+        //     gameObject.visible = false
+        // })
+
+        // this.On('eC', (gameObject) => {
+        //     gameObject.visible = true
+        // })
     }
 
     get position(){
@@ -53,18 +64,22 @@ export default class GameObject extends Hitbox{
         return this.drawable.color
     }
 
+    get visible(){
+        return this.drawable.visible
+    }
+
+    set visible(visible){
+        this.drawable.visible = visible
+    }
+
     Draw(ctx, offset = Vector2.Zero()){
         if(!this.drawable.visible) return
         this.drawable.Draw(ctx, offset)
     }
 
     Update(){
-        if(!this.drawable.visible) return
         super.Update()
+        if(!this.drawable.visible) return
         this.drawable.Update()
-    }
-
-    IsColliding(drawable){
-        return this.drawable.IsColliding(drawable)
     }
 }

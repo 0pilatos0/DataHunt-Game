@@ -8,7 +8,6 @@ export default class Rectangle extends Drawable{
         super();
         this.position = position;
         this.size = size;
-        
     }
 
     Draw(ctx, offset = Vector2.Zero()){
