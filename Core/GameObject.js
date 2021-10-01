@@ -1,3 +1,4 @@
+import Drawable from "./Drawable.js";
 import Hitbox from "./Hitbox.js";
 import Tileset from "./Tileset.js";
 import Transformable from "./Transformable.js";
@@ -7,8 +8,12 @@ export default class GameObject extends Hitbox{
     static gameObjects = []
     type = null
 
+    /**
+     * 
+     * @param {Drawable} drawable 
+     */
     constructor(drawable) {
-        super()
+        super(drawable.position, drawable.size)
         GameObject.gameObjects.push(this)
         this.drawable = drawable
         // this.On('sC', (gameObject) => {

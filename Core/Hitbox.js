@@ -1,12 +1,21 @@
 import Scene from "./Scene.js";
 import Event from "./Event.js";
 import GameObject from "./GameObject.js";
+import Vector2 from "./Vector2.js";
 
 export default class Hitbox extends Event {
     #states = ['STARTED', 'COLLIDING', 'ENDED']
     #oldColliders = []
-    constructor(){
+
+    /**
+     * 
+     * @param {Vector2} hitboxPosition 
+     * @param {Vector2} hitboxSize 
+     */
+    constructor(hitboxPosition, hitboxSize){
         super()
+        this.hitboxPosition = hitboxPosition
+        this.hitboxSize = hitboxSize
     }
 
     Update() {
@@ -96,15 +105,26 @@ export default class Hitbox extends Event {
 
             gameObject.oldState = gameObject.state
         })
-        
+
         this.#oldColliders = colliders
     }
 
     #Colliding (gameObject) {
-        return this.position.X < gameObject.position.X + gameObject.size.X * gameObject.scale.X &&
-        this.position.X + this.size.X * this.scale.X > gameObject.position.X &&
-        this.position.Y < gameObject.position.Y + gameObject.size.Y * gameObject.scale.Y &&
-        this.position.Y + this.size.Y * this.scale.Y > gameObject.position.Y
+        return this.hitboxPosition.X < gameObject.hitboxPosition.X + gameObject.hitboxSize.X &&
+        this.hitboxPosition.X + this.hitboxSize.X > gameObject.hitboxPosition.X &&
+        this.hitboxPosition.Y < gameObject.hitboxPosition.Y + gameObject.hitboxSize.Y &&
+        this.hitboxPosition.Y + this.hitboxSize.Y > gameObject.hitboxPosition.Y
+    }
+
+    Colliding(){
+        let colliding = false
+        GameObject.gameObjects.map(gameObject => {
+            if(gameObject == this) return
+            if(!this.#InCameraRange(gameObject)) return
+            if(this.#Colliding(gameObject)) colliding = true
+            return
+        })
+        return colliding
     }
 
     #InCameraRange(gameObject){
