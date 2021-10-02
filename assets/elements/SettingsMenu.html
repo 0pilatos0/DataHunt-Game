@@ -9,17 +9,19 @@
 <script>
   var slider = document.getElementById("volumeS");
   var output = document.getElementById("volumeC");
-  output.innerHTML = "Volume : " + slider.value;
+  setInnerHTMLVolume()
   
-  //check if volume is in local storage
   if(localStorage.getItem("volume") != null){
     slider.value = localStorage.getItem("volume");
-    output.innerHTML = "Volume : " + slider.value;
+    setInnerHTMLVolume()
   }
 
   slider.oninput = () => {
-    output.innerHTML = "Volume : " + slider.value;
-    //store the value in the local storage
+    setInnerHTMLVolume()
     localStorage.setItem("volume", slider.value);
+  }
+
+  function setInnerHTMLVolume(){
+    output.innerHTML = "Volume : " + slider.value;
   }
 </script>

@@ -61,8 +61,6 @@ const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
 
 // }
 
-window.spriteSize = new Vector2(16, 16);
-
 async function translateTilesetToTiles(path){
     return new Promise(async (resolve, reject) => {
         let sprites = []
@@ -225,7 +223,7 @@ async function createPlayerPicker(){
     //let classButtons = createButtons(`class: ${classes[classIndex]}`)
     let classButtons = createButtons(`class: ${firstCharUpperCase(classes[classIndex])}`, 'class')
     classButtons.textDisplay.title = `Class: ${firstCharUpperCase(classes[classIndex])}`
-    JsonLoader.Load(`./class_${classes[classIndex]}.json`).then(e => {
+    JsonLoader.Load(`./CharacterCreator/class_${classes[classIndex]}.json`).then(e => {
         console.log(e);
     });
 
@@ -235,7 +233,7 @@ async function createPlayerPicker(){
         if(classIndex < 0) classIndex = classes.length - 1
         classButtons.textDisplay.innerText = `class: ${classes[classIndex]}`
         classButtons.textDisplay.title = `Class: ${firstCharUpperCase(classes[classIndex])}`
-        JsonLoader.Load(`./class_${classes[classIndex]}.json`).then(e => {
+        JsonLoader.Load(`./CharacterCreator/class_${classes[classIndex]}.json`).then(e => {
             console.log(e);
         });
     }
@@ -246,7 +244,7 @@ async function createPlayerPicker(){
         if(classIndex >= classes.length) classIndex = 0
         classButtons.textDisplay.innerText = `class: ${firstCharUpperCase(classes[classIndex])}`
         classButtons.textDisplay.title = `Class: ${firstCharUpperCase(classes[classIndex])}`
-        JsonLoader.Load(`./class_${classes[classIndex]}.json`).then(e => {
+        JsonLoader.Load(`./CharacterCreator/class_${classes[classIndex]}.json`).then(e => {
             console.log(e);
         });
     }
@@ -284,7 +282,7 @@ async function createPlayerPicker(){
             classIndex = Math.floor(Math.random() * classes.length)
             classButtons.textDisplay.innerText = `class: ${firstCharUpperCase(classes[classIndex])}`
             classButtons.textDisplay.title = `Class: ${firstCharUpperCase(classes[classIndex])}`
-            JsonLoader.Load(`./class_${classes[classIndex]}.json`).then(e => {
+            JsonLoader.Load(`./CharacterCreator/class_${classes[classIndex]}.json`).then(e => {
                 console.log(e);
             });
         }
@@ -361,12 +359,12 @@ function firstCharUpperCase(string){
     return chars.join("")
 }
 
-window.addEventListener('keydown', (e) =>{
-    if(e.keyCode == 77){
-        if(menuState){
-            this.menu.style.display = 'none';
-        }else{
-            this.menu.style.display = 'block';
-        }
-    }
-});
+// window.addEventListener('keydown', (e) =>{
+//     if(e.key == 'm'){
+//         if(menuState){
+//             this.menu.style.display = 'none';
+//         }else{
+//             this.menu.style.display = 'block';
+//         }
+//     }
+// });

@@ -9,15 +9,11 @@
     display:flex;
     justify-content: center;
     align-items: center;
-
 }
 .loader {
     display: inline-block;
     width: 30px;
     height: 30px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     position: relative;
     border: 4px solid #Fff;
     animation: loader 2s infinite ease;
@@ -46,9 +42,16 @@
 .loaderdisabled {
     animation: fadeout 1.5s;
     animation-fill-mode: forwards;
-
+}
+.loaderenabled {
+    animation: fadein 1.5s;
+    animation-fill-mode: forwards;
 }
 @keyframes fadeout {
     0% { opacity: 1; display: block;  }
     100% { opacity: 0; display: none; }
+}
+@keyframes fadein {
+    0% { opacity: 0; display: none;  }
+    100% { opacity: 1; display: flex; }
 }
