@@ -64,8 +64,6 @@ async function start(){
             e.preventDefault();
         }
     });
-
-    
 }
 
 function runAfterLoad(){
@@ -74,7 +72,7 @@ function runAfterLoad(){
     console.log("Everything loaded")
     //TODO fix bug with account page which requires client
     //TODO load client at this point
-    window.CharacterMenu.Show()
+    window.MainMenu.Show()
     window.LoadingScreen.Hide()
 }
 

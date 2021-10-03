@@ -23,6 +23,12 @@ export default class CharacterMenu extends Menu{
             script.type="module"
 
             document.head.appendChild(script);
+
+            let back = document.querySelector('#characterBackButton')
+            back.onclick = () => {
+                window.CharacterMenu.Hide()
+                window.MainMenu.Show()
+            }
         });
     }
 }

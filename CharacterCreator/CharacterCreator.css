@@ -165,7 +165,9 @@ body {
     width: 100vw;
     background-color: rgb(68, 68, 68);
 }
-#topbar a{
+#topbar button{
+    border: none;
+    background: none;
     color: white;
     text-decoration: none;
     font-size: 1.5em;
@@ -179,7 +181,7 @@ body {
     transition: background-color 1s;
 }
 
-#topbar a:hover{
+#topbar button:hover{
     color: #45ff35;
     background-color: rgb(49, 49, 49);
     

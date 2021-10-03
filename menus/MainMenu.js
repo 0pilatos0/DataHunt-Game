@@ -18,6 +18,7 @@ export default class MainMenu extends Menu{
 
             this.play.addEventListener('click', () =>{
                 this.Hide()
+                window.CharacterMenu.Show()
             });
             
             this.settings.addEventListener('click', () =>{
