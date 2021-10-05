@@ -1,57 +1,42 @@
-import Event from "../Core/Event.js";
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
+import Menu from "../Core/Menu.js";
 
 
-export default class MainMenu extends Event{
-
-
+export default class MainMenu extends Menu{
     constructor(){
         super();
         this.menu = document.querySelector('#menu');
         this.menucontext = HtmlLoader.Load('./assets/elements/MainMenu.html');
 
-        this.menucontext.then((value) =>{
-            this.menu.innerHTML = value;
+        this.menucontext.then(data =>{
+            this.menu.innerHTML = data;
             this.play = document.querySelector('#play');
             this.settings = document.querySelector('#settings');
             this.quit = document.querySelector('#quit');
-            this.Trigger('loadedHtml')
-        });
 
+            this.Hide()
 
-        this.On('loadedHtml', () => {
-            //onclick on this.play button
             this.play.addEventListener('click', () =>{
-                this.menu.style.display = 'none';
+                this.Hide()
+                window.CharacterMenu.Show()
             });
             
-            //onclick on this.settings button
             this.settings.addEventListener('click', () =>{
-                this.menu.style.display = 'none';
+                this.Hide()
                 window.SettingsMenu.Show();
             });
 
-            //onclick quit button
             this.quit.addEventListener('click', () =>{
                 window.close();
             });
 
-            //on button press "m"
             window.addEventListener('keydown', (e) =>{
-                if(e.keyCode == 77){
-                    this.menu.style.display = 'block';
+                if(e.key == 'm'){
+                    this.Show()
                 }
             });
-        })
-    }
 
-    Show(){
-        this.menu.style.display = 'block';
+            this.Trigger('ready')
+        });
     }
-
-    Hide(){
-        this.menu.style.display = 'none';
-    }
-    
-
 }
