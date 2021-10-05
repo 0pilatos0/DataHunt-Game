@@ -13,27 +13,27 @@ window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
 
-window.LoadingScreen.On('ready', start)
+window.LoadingScreen.On('ready', start);
 
-let amountReady = 0
+let amountReady = 0;
 
 window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
-    console.log("connected to server")
-    window.LoadingScreen.Hide()
+    console.log("connected to server");
+    window.LoadingScreen.Hide();
     window.AccountMenu.Show()
 })
 
 window.client.on('disconnect', () => {
-    console.log('disconnected from server')
-    window.LoadingScreen.Show()
+    console.log('disconnected from server');
+    window.LoadingScreen.Show();
     window.AccountMenu.Hide()
 })
 
 async function start(){
     //TODO add feedback to loader
-    window.LoadingScreen.Show()
+    window.LoadingScreen.Show();
 
     window.MainMenu = new MainMenu();
     window.SettingsMenu = new SettingsMenu();
@@ -67,12 +67,12 @@ async function start(){
 }
 
 function runAfterLoad(){
-    amountReady++
-    if(amountReady != 4) return
-    console.log("Everything loaded")
+    amountReady++;
+    if(amountReady != 4) return;
+    console.log("Everything loaded");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
-    window.MainMenu.Show()
+    window.MainMenu.Show();
     window.LoadingScreen.Hide()
 }
 
