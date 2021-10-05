@@ -8,6 +8,8 @@ import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
 import Player from './Player/Player.js';
+import Feedback from "./Core/Feedback/Feedback.js";
+import FeedbackTypes from "./Core/Feedback/FeedbackTypes.js";
 
 window.spriteSize = new Vector2(16, 16);
 
@@ -66,10 +68,13 @@ async function start(){
     });
 }
 
+
+
 function runAfterLoad(){
     amountReady++;
     if(amountReady != 4) return;
     console.log("Everything loaded");
+    new Feedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     window.MainMenu.Show();

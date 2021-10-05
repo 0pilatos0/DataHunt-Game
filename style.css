@@ -237,17 +237,23 @@ canvas{
     transform: translateX(-50%);
     font-family: 'Odibee Sans', cursive;
     font-size: 3.5rem;
-
     padding: 20px 50px;
-    background-color: rgb(201, 63, 63);
+
     min-width: 60vw;
     text-align: center;
     border-radius: 10px;
 
-    animation: apear-and-disapear 10s linear ;
+    animation: apear-and-disapear 5s linear ;
     top: -200px;
 
 
+}
+.feedback-error{
+    background-color: rgb(201, 63, 63);
+}
+
+.feedback-success{
+    background-color: rgb(27, 201, 41);
 }
 
 @keyframes apear-and-disapear{
@@ -257,10 +263,10 @@ canvas{
     }
     5%{
         
-        top: -0px;
+        top: 10px;
     }
     95%{
-        top: -0px;
+        top: 10px;
     }
     100%{
         top: -200px;
