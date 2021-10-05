@@ -11,7 +11,7 @@ export default class Feedback{
     timeout;
 
 
-    constructor(enumType, message, timeout = enumType.DEFAULTTIMEOUT) {
+    constructor(enumType, message, timeout = enumType.DEFAULT_TIMEOUT) {
         this.enum = enumType;
         this.message = message;
         this.timeout = timeout;
