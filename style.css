@@ -5,6 +5,10 @@
     overflow: hidden;
 }
 
+body{
+    background-color: #242f3f;
+}
+
 
 canvas{
     image-rendering: pixelated;
@@ -124,7 +128,7 @@ canvas{
 }
 
 /*login*/
-#login{
+#accountMenu{
     background-color: #232930;
     height: 100vh;
     width: 100vw;
