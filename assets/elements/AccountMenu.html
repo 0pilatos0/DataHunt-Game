@@ -29,7 +29,7 @@
                         <button type="submit" class="submitlogin">Sign in</button>
                     </div>
                     <div class="form-group">
-                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
+                        <button type="" class="submitlogin submitResetPassword"id="forgetpassbutton">Forgot password</button>
                     </div>
                 </form>
             </div>
@@ -65,7 +65,23 @@
                         <button type="submit" class="submitlogin">Sign up</button>
                     </div>
                     <div class="form-group">
-                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
+                        <button type="" class="submitlogin submitResetPassword" id="forgetpassbutton">Forgot password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="forgetpass loginbox" style="display: none;">
+        <div class="register-body">
+            <h2>DataHunt Gate</h2>  
+            <div class="register-form">
+                <form data-toggle="validator" method="post" id="forgetpassform">
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div><br>
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Sign up</button>
                     </div>
                 </form>
             </div>
@@ -76,18 +92,27 @@
 <script>
     let loginBut = document.getElementById('loginBut');
     let registerBut = document.getElementById('RegisterButs');
+    let forgetpassbutton = document.getElementById('forgetpassbutton');
 
     let login = document.getElementsByClassName('login')[0];
     let register = document.getElementsByClassName('register')[0];
+    let passwordforget = document.getElementsByClassName('forgetpass')[0];
 
     loginBut.onclick = function() {
         login.style.display = 'block';
+        passwordforget.style.display = 'none';
         register.style.display = 'none';
     }
 
     registerBut.onclick = function() {
         login.style.display = 'none';
+        passwordforget.style.display = 'none';
         register.style.display = 'block';
+    }
+    forgetpassbutton.onclick = function() {
+        login.style.display = 'none';
+        register.style.display = 'none';
+        passwordforget.style.display = 'block';
     }
 
     loginForm.onsubmit = (e) => {
@@ -97,6 +122,12 @@
         window.client.emit('login', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
+    }
+    forgetpassform.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries()) 
+        console.log(data)
+        window.client.emit('forgotPass', data)
     }
 
     window.client.on('login', (data) => {
@@ -144,6 +175,16 @@
             })
         })
     })
+    window.client.on('forgotPass', (data) => {
+        console.log(data)
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+    })
 
     function removeAllFeedback(){
         let elements = document.getElementsByClassName("loginfeedback")
@@ -156,7 +197,9 @@
     for (let i = 0; i < forgotPasswordButtons.length; i++) {
         let button = forgotPasswordButtons[i]
         button.onclick = () => {
-            console.log("reset password")
+            login.style.display = 'none';
+            register.style.display = 'none';
+            passwordforget.style.display = 'block';
         }
     }
 </script>
