@@ -6,13 +6,13 @@
 
 export default class Feedback{
 
-    type;
+    enum;
     message;
     timeout;
 
 
-    constructor(errorType, message, timeout = errorType.DEFAULTTIMEOUT) {
-        this.type = errorType;
+    constructor(enumType, message, timeout = enumType.DEFAULTTIMEOUT) {
+        this.enum = enumType;
         this.message = message;
         this.timeout = timeout;
 
@@ -23,8 +23,8 @@ export default class Feedback{
 
     static showFeedback(feedback){
         let div = document.createElement("div");
-        div.id = "feedback";
-        div.classList.add(feedback.type.COLOR);
+        div.id = feedback.enum.TYPE;
+        div.classList.add(feedback.enum.COLOR);
         document.body.appendChild(div);
 
         let text = document.createElement("p");

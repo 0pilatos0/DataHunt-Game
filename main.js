@@ -74,6 +74,7 @@ function runAfterLoad(){
     amountReady++;
     if(amountReady != 4) return;
     console.log("Everything loaded");
+    new Feedback(FeedbackTypes.GAMESUCCESS, "test message");
     new Feedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
