@@ -18,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <label>remember me</label>
                     <div class="checkbox">
@@ -52,11 +53,13 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input id="password" class="form-control" type="password" name="confirmPassword" required>
+                        <label for="confirmPassword">Confirm Password</label><br>
+                        <input id="password" class="form-control inputs" type="password" name="confirmPassword" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign up</button>
@@ -68,6 +71,23 @@
 </div>
 
 <script>
+    const inputs = document.getElementsByClassName('inputs');
+    const buttons = document.getElementsByClassName('eyeButtons');
+    const eyes = document.getElementsByClassName('toggleEyes');
+    for(let i=0; i<buttons.length; i++){
+        buttons[i].onclick = ()=>{
+            if(inputs[i].type === "password") {
+                inputs[i].type = 'text';
+                eyes[i].classList.remove('fa-eye');
+                eyes[i].classList.add('fa-eye-slash');
+            }else {
+                inputs[i].type = 'password';
+                eyes[i].classList.add('fa-eye');
+                eyes[i].classList.remove('fa-eye-slash');
+            }
+        }
+    }
+
     let loginBut = document.getElementById('loginBut');
     let registerBut = document.getElementById('RegisterButs');
 
@@ -107,8 +127,10 @@
             feedback.style.display = "block"
             feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
             feedback.style.backgroundColor = "rgb(116 201 63)"
-            document.getElementById('login').style.display = "none"
         })
+        if(data.success){
+            window.AccountMenu.Hide()
+        }
     })
 
     registerForm.onsubmit = (e) => {

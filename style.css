@@ -300,8 +300,8 @@ canvas{
     box-sizing: border-box;
     background-color: transparent;
     align-content: center;
-    position: relative;
-    bottom: -4px;
+    position: absolute;
+    bottom: 4px;
 }
 
 .eyeButtons i {
@@ -310,4 +310,8 @@ canvas{
 
 #password {
     width: 99.6%;
+}
+
+.form-group {
+    position: relative;
 }
