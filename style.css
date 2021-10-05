@@ -285,7 +285,7 @@ canvas{
     }
 }
 
-#eyeButton {
+.eyeButtons {
     padding-bottom: 4px;
     margin-left: -52px;
     height: 35px;
@@ -300,7 +300,7 @@ canvas{
     bottom: -4px;
 }
 
-#eyeButton i {
+.eyeButtons i {
     font-size: 22px;
 }
 
