@@ -59,13 +59,13 @@ async function start(){
             e.preventDefault();
         }
         //TODO fix this m key listener to prevent it from being pressable during login or registration or something. Maybe by creating an input class
-        if(e.key == 'm'){
-            window.MainMenu.Show()
-            window.GameMenu.Hide()
-            window.CharacterMenu.Hide()
-            window.SettingsMenu.Hide()
-            window.AccountMenu.Hide()
-        }
+        // if(e.key == 'm'){
+        //     window.MainMenu.Show()
+        //     window.GameMenu.Hide()
+        //     window.CharacterMenu.Hide()
+        //     window.SettingsMenu.Hide()
+        //     window.AccountMenu.Hide()
+        // }
     });
 }
 

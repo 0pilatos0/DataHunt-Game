@@ -52,32 +52,21 @@ export default class GameMenu extends Menu{
 
         this.Hide()
 
+        window.addEventListener('keydown', this.#keydownCallback)
+
         this.Trigger('ready', null, true)
-        //this.menucontext = HtmlLoader.Load('./assets/elements/AccountMenu.html')
-
-        // this.menucontext.then(data =>{
-        //     let context = data;
-        //     let script = context.split('<script>')[1].split('</script>')[0];
-        //     let html = context.split('<script>')[0];
-
-        //     this.menu.innerHTML = html;
-
-        //     eval(script);
-
-        //     this.Hide()
-            
-        //     this.Trigger('ready')
-        // })
     }
 
     Hide(){
         this.#canvas.canvas.style.display = "none"
         this.Pause()
+        window.removeEventListener('keydown', this.#keydownCallback)
     }
 
     Show(){
         this.#canvas.canvas.style.display = "block"
         this.Resume()
+        window.addEventListener('keydown', this.#keydownCallback)
     }
 
     Pause(){
@@ -86,5 +75,20 @@ export default class GameMenu extends Menu{
 
     Resume(){
         this.#paused = false
+    }
+
+    #keydownCallback = (e) => {
+        switch (e.key) {
+            case "Escape":
+                window.MainMenu.Show()
+                this.Hide()
+                break;
+            case "m":
+                window.MainMenu.Show()
+                this.Hide()
+                break;
+            default:
+                break;
+        }
     }
 }
