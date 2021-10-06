@@ -155,8 +155,7 @@ async function createPlayerPicker(){
     let lockAll = document.createElement('button')
     lockAll.innerHTML = unlockIcon
     lockAll.style.position = "absolute"
-    lockAll.style.right = "-55px"
-    lockAll.style.top = "24px"
+    lockAll.style.right = "0px"
     lockAll.title = "Lock all"
     lockAll.classList.add("characterPickButton")
     lockAll.setAttribute("locked", false)
