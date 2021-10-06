@@ -1,0 +1,225 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    font-family: "Baloo 2", sans-serif;
+    color: white;
+    font-size: 26px;
+    overflow: hidden;
+}
+
+#background {
+    background-color: rgb(92, 92, 92);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+.input {
+    margin: auto;
+    width: 50%;
+    border: 3px solid #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+#class {
+    margin: auto;
+    width: 50%;
+    padding-top: 25vh;
+    display: none;
+    text-align: center;
+}
+
+.classImg {
+    width: 14vw;
+    margin: 10px;
+    border: 2px solid white;
+    display: inline-block;
+}
+
+#classConfirmation {
+    display: none;
+    margin: 0 auto;
+    width: 65vw;
+}
+
+#classConfirmationImg {
+    width: 100%;
+    max-height: 80vh;
+    border: 3px solid #45ff35;
+    margin-top: 5vh;
+}
+
+#classConfirmationName {
+    display: inline-block;
+    width: 50%;
+    padding-top: 45vh;
+    text-align: center;
+}
+
+.classConfirmationButton {
+    display: inline-block;
+    border: 2px solid white;
+    padding: 4px;
+    text-align: right;
+}
+
+#classConfirmationAccept, #classConfirmationAccept:hover {
+    background-color: #45ff35;
+    cursor: default;
+}
+
+#classConfirmationDecline, #classConfirmationDecline:hover {
+    background-color: #fe0026;
+    margin-right: 1vw;
+    cursor: default;
+}
+
+#characterPicker {
+    /* display: none; */
+    width: 364px;
+}
+
+
+
+.characterPart{
+    image-rendering: pixelated;
+    position:absolute;
+    width: 500px;
+    transform: translate(25%, 0);
+}
+
+.characterPickButton {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+#characterPicker div{
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+}
+
+#characterDisplay img{
+    /* //position: relative; */
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+
+.characterConfirmButton {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 3px;
+    margin: 0 auto;
+    display: block;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 0.8em;
+    width: 100%;
+}
+
+#characterDisplay{
+    position: relative;
+    display: inline-block;
+    height: 256px;
+    width: 100%;
+}
+
+#characterPicker input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#characterPicker {
+    width: 100vw;
+    display: flex;
+    height: 93vh;
+}
+
+#characterDisplay{
+    height: 500px;
+    display: relative;
+    width: 40vw;
+    margin : auto 0
+}
+
+#characterSelectors{
+    display: relative;
+    width: 60vw;
+    border-right: 10px solid white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#characterSelectors > div{
+    display: flex;
+}
+
+#topbar{
+    height: 7vh;
+    width: 100vw;
+    background-color: rgb(68, 68, 68);
+}
+#topbar button{
+    border: none;
+    background: none;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: "Baloo 2", sans-serif;
+    display: inline-block;
+    margin: 0;
+    line-height: 7vh;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    transition: color 1s;
+    transition: background-color 1s;
+}
+
+#topbar button:hover{
+    color: #45ff35;
+    background-color: rgb(49, 49, 49);
+    
+}
+
+.characterPickButtonHolder{
+    display: inline-block;
+    width: 30%;
+    line-height: 60px;
+}
+
+.characterPickButtonHolder2{
+    display: inline-block;
+    width: 70%;
+    line-height: 60px;
+}
+
+.characterPickButtonHolder2 p{
+    top: 0;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+.characterPickButtonHolder2 img{
+    position: absolute;
+}
+
+#characterNamefield{
+    background-color: #00000026;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+    color: white;
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+
+#characterName{
+    font-size: 2rem;
+}

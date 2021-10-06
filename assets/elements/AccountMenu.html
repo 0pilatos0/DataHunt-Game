@@ -18,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <label>remember me</label>
                     <div class="checkbox">
@@ -52,11 +53,13 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input id="password" class="form-control" type="password" name="confirmPassword" required>
+                        <label for="confirmPassword">Confirm Password</label><br>
+                        <input id="password" class="form-control inputs" type="password" name="confirmPassword" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign up</button>
@@ -68,21 +71,34 @@
 </div>
 
 <script>
-    //get the button
-    var loginBut = document.getElementById('loginBut');
-    var registerBut = document.getElementById('RegisterButs');
+    const inputs = document.getElementsByClassName('inputs');
+    const buttons = document.getElementsByClassName('eyeButtons');
+    const eyes = document.getElementsByClassName('toggleEyes');
+    for(let i=0; i<buttons.length; i++){
+        buttons[i].onclick = ()=>{
+            if(inputs[i].type === "password") {
+                inputs[i].type = 'text';
+                eyes[i].classList.remove('fa-eye');
+                eyes[i].classList.add('fa-eye-slash');
+            }else {
+                inputs[i].type = 'password';
+                eyes[i].classList.add('fa-eye');
+                eyes[i].classList.remove('fa-eye-slash');
+            }
+        }
+    }
 
-    //get lgin and register divs
-    var login = document.getElementsByClassName('login')[0];
-    var register = document.getElementsByClassName('register')[0];
+    let loginBut = document.getElementById('loginBut');
+    let registerBut = document.getElementById('RegisterButs');
 
-    //onclick loginbut show login div and hide register div
+    let login = document.getElementsByClassName('login')[0];
+    let register = document.getElementsByClassName('register')[0];
+
     loginBut.onclick = function() {
         login.style.display = 'block';
         register.style.display = 'none';
     }
 
-    //onclick registerbut show register div and hide login div
     registerBut.onclick = function() {
         login.style.display = 'none';
         register.style.display = 'block';
@@ -92,12 +108,12 @@
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
         console.log(data)
-        client.emit('login', data)
+        window.client.emit('login', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
     }
 
-    client.on('login', (data) => {
+    window.client.on('login', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
         removeAllFeedback()
@@ -111,20 +127,22 @@
             feedback.style.display = "block"
             feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
             feedback.style.backgroundColor = "rgb(116 201 63)"
-            document.getElementById('login').style.display = "none"
         })
+        if(data.success){
+            window.AccountMenu.Hide()
+        }
     })
 
     registerForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries())
         console.log(data)
-        client.emit('register', data)
+        window.client.emit('register', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
     }
 
-    client.on('register', (data) => {
+    window.client.on('register', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
         console.log(data)
