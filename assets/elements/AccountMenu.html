@@ -184,6 +184,12 @@
                 element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
             })
         })
+        data.success.map(s => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+            })
+        })
     })
 
     function removeAllFeedback(){
