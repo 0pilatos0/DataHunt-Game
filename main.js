@@ -4,6 +4,7 @@ import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
 import AccountMenu from './Menus/AccountMenu.js';
 import CharacterMenu from './menus/CharacterMenu.js';
+import InventoryMenu from './Menus/InventoryMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
@@ -39,19 +40,13 @@ async function start(){
     window.SettingsMenu = new SettingsMenu();
     window.AccountMenu = new AccountMenu();
     window.CharacterMenu = new CharacterMenu();
+    window.InventoryMenu = new InventoryMenu();
 
-    window.CharacterMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.MainMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.SettingsMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.AccountMenu.On('ready', () => {
-        runAfterLoad()
-    })
+    window.CharacterMenu.On('ready', runAfterLoad)
+    window.MainMenu.On('ready', runAfterLoad)
+    window.SettingsMenu.On('ready', runAfterLoad)
+    window.AccountMenu.On('ready', runAfterLoad)
+    window.InventoryMenu.On('ready', runAfterLoad)
     
     window.addEventListener('keydown', (e) => {
         if (e.key === 'r' && e.ctrlKey) {
@@ -68,12 +63,12 @@ async function start(){
 
 function runAfterLoad(){
     amountReady++
-    if(amountReady != 4) return
+    if(amountReady != 5) return
     console.log("Everything loaded")
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
-    window.AccountMenu.Show()
+    window.InventoryMenu.Show()
     window.LoadingScreen.Hide()
 }
 

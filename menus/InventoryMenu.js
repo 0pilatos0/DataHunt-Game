@@ -1,11 +1,11 @@
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
 import Menu from "../Core/Menu.js";
 
-export default class CharacterMenu extends Menu{
+export default class InventoryMenu extends Menu{
     constructor() {
         super()
-        this.menu = document.querySelector('#characterCreator');
-        this.menucontext = HtmlLoader.Load('./assets/elements/CharacterCreator.html');
+        this.menu = document.querySelector('#inventory');
+        this.menucontext = HtmlLoader.Load('./assets/elements/Inventory.html');
 
         this.menucontext.then(data =>{
             let context = data;
@@ -19,16 +19,10 @@ export default class CharacterMenu extends Menu{
             script.onload = () => {
                 this.Trigger('ready')
             }
-            script.src = "./CharacterCreator/CharacterCreator.js";
+            script.src = "./Inventory/inventory.js";
             script.type = "module"
 
             document.head.appendChild(script);
-
-            let back = document.querySelector('#characterBackButton')
-            back.onclick = () => {
-                window.CharacterMenu.Hide()
-                window.MainMenu.Show()
-            }
         });
     }
 }
