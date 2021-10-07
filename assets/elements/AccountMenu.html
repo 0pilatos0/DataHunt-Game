@@ -29,7 +29,7 @@
                         <button type="submit" class="submitlogin">Sign in</button>
                     </div>
                     <div class="form-group">
-                        <button type="" class="submitlogin submitResetPassword"id="forgetpassbutton">Forgot password</button>
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
                     </div>
                 </form>
             </div>
@@ -65,7 +65,7 @@
                         <button type="submit" class="submitlogin">Sign up</button>
                     </div>
                     <div class="form-group">
-                        <button type="" class="submitlogin submitResetPassword" id="forgetpassbutton">Forgot password</button>
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
                     </div>
                 </form>
             </div>
@@ -81,7 +81,7 @@
                         <input id="email" class="form-control" type="email" name="email" required>
                     </div><br>
                     <div class="form-group">
-                        <button type="submit" class="submitlogin">Sign up</button>
+                        <button type="submit" class="submitlogin">Reset password</button>
                     </div>
                 </form>
             </div>
@@ -92,7 +92,6 @@
 <script>
     let loginBut = document.getElementById('loginBut');
     let registerBut = document.getElementById('RegisterButs');
-    let forgetpassbutton = document.getElementById('forgetpassbutton');
 
     let login = document.getElementsByClassName('login')[0];
     let register = document.getElementsByClassName('register')[0];
@@ -108,11 +107,6 @@
         login.style.display = 'none';
         passwordforget.style.display = 'none';
         register.style.display = 'block';
-    }
-    forgetpassbutton.onclick = function() {
-        login.style.display = 'none';
-        register.style.display = 'none';
-        passwordforget.style.display = 'block';
     }
 
     loginForm.onsubmit = (e) => {
@@ -144,8 +138,11 @@
             feedback.style.display = "block"
             feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
             feedback.style.backgroundColor = "rgb(116 201 63)"
-            document.getElementById('login').style.display = "none"
         })
+        if(data.success.length > 0){
+            window.AccountMenu.Hide()
+            window.MainMenu.Show()
+        }
     })
 
     registerForm.onsubmit = (e) => {
@@ -202,7 +199,8 @@
     let forgotPasswordButtons = document.getElementsByClassName('submitResetPassword')
     for (let i = 0; i < forgotPasswordButtons.length; i++) {
         let button = forgotPasswordButtons[i]
-        button.onclick = () => {
+        button.onclick = (e) => {
+            e.preventDefault()
             login.style.display = 'none';
             register.style.display = 'none';
             passwordforget.style.display = 'block';
