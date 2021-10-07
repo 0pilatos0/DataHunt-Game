@@ -159,9 +159,9 @@
             feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
             feedback.style.backgroundColor = "rgb(116 201 63)"
         })
-        if(data.success){
+        if(data.success.length > 0){
             window.AccountMenu.Hide()
-          window.MainMenu.Show()
+            window.MainMenu.Show()
         }
     })
 
