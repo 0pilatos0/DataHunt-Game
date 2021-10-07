@@ -6,34 +6,23 @@
 
 export default class Feedback{
 
-    enum;
-    message;
-    timeout;
-
-
-    constructor(enumType, message, timeout = enumType.DEFAULT_TIMEOUT) {
-        this.enum = enumType;
-        this.message = message;
-        this.timeout = timeout;
-
-        Feedback.showFeedback(this);
-
+    constructor() {
 
     }
 
-    static showFeedback(feedback){
+    static showFeedback(enumType, message, timeout = enumType.DEFAULT_TIMEOUT){
         let div = document.createElement("div");
-        div.id = feedback.enum.TYPE;
-        div.classList.add(feedback.enum.COLOR);
+        div.id = enumType.TYPE;
+        div.classList.add(enumType.COLOR);
         document.body.appendChild(div);
 
         let text = document.createElement("p");
-        text.innerHTML = feedback.message;
+        text.innerHTML = message;
         div.appendChild(text);
 
         setTimeout(function(){
             document.body.removeChild(div);
-            }, feedback.timeout*1000);
+            }, timeout*1000);
     }
 
 }
