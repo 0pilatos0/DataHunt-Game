@@ -4,6 +4,7 @@ import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
 import AccountMenu from './Menus/AccountMenu.js';
 import CharacterMenu from './menus/CharacterMenu.js';
+import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
@@ -39,19 +40,13 @@ async function start(){
     window.SettingsMenu = new SettingsMenu();
     window.AccountMenu = new AccountMenu();
     window.CharacterMenu = new CharacterMenu();
+    window.GameMenu = new GameMenu();
 
-    window.CharacterMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.MainMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.SettingsMenu.On('ready', () => {
-        runAfterLoad()
-    })
-    window.AccountMenu.On('ready', () => {
-        runAfterLoad()
-    })
+    window.CharacterMenu.On('ready', runAfterLoad)
+    window.MainMenu.On('ready', runAfterLoad)
+    window.SettingsMenu.On('ready', runAfterLoad)
+    window.AccountMenu.On('ready', runAfterLoad)
+    window.GameMenu.On('ready', runAfterLoad)
     
     window.addEventListener('keydown', (e) => {
         if (e.key === 'r' && e.ctrlKey) {
@@ -63,12 +58,20 @@ async function start(){
         if (e.key === 'F5') {
             e.preventDefault();
         }
+        //TODO fix this m key listener to prevent it from being pressable during login or registration or something. Maybe by creating an input class
+        // if(e.key == 'm'){
+        //     window.MainMenu.Show()
+        //     window.GameMenu.Hide()
+        //     window.CharacterMenu.Hide()
+        //     window.SettingsMenu.Hide()
+        //     window.AccountMenu.Hide()
+        // }
     });
 }
 
 function runAfterLoad(){
     amountReady++
-    if(amountReady != 4) return
+    if(amountReady != 5) return
     console.log("Everything loaded")
     //TODO fix bug with account page which requires client
     //TODO load client at this point
@@ -76,47 +79,4 @@ function runAfterLoad(){
     window.LoadingScreen.Hide()
 }
 
-//TODO makes this load after user logged in and pressed play and make it able to unload
-// let canvas = new Canvas();
-
-// window.deltaTime = 1 / 60;
 // window.player = new Player();
-// let startTime = Date.now();
-// window.fps = 60;
-// window.spriteScaleFactor = 4;
-
-// let loop = () => {
-//     Clock.clocks.forEach(clock => {
-//         if(!clock.paused){
-//             clock.passedMiliseconds += window.deltaTime * 1000;
-//             if(clock.passedMiliseconds >= 1000){
-//                 //clock.passedMiliseconds -= 1000
-//                 clock.passedSeconds += 1
-//             }
-//             if(clock.passedSeconds >= 60){
-//                 //clock.passedSeconds -= 60
-//                 clock.passedMinutes += 1
-//             }
-//             if(clock.passedMinutes >= 60){
-//                 //clock.passedMinutes -= 60
-//                 clock.passedHours += 1
-//             }
-//         }
-
-//     });
-
-//     canvas.Update();
-    
-//     canvas.Draw();
-    
-//     window.deltaTime = (Date.now() - startTime) / 1000;
-//     window.fps = 1 / window.deltaTime;
-//     startTime = Date.now();
-
-//     canvas.ctx.fillStyle = '#fff';
-//     canvas.ctx.fillText(window.fps.toFixed(0), 10, 50);
-
-//     window.requestAnimationFrame(loop);
-// };
-
-// window.requestAnimationFrame(loop);
