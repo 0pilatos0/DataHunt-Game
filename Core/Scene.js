@@ -2,15 +2,22 @@ import Map from "../Map/Map.js";
 import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
 import Vector2 from "./Vector2.js";
+import GameObject from "./GameObject.js";
 
 export default class Scene{
+    static activeScene
     camera = new Camera(new Vector2(0, 0), new Vector2(window.innerWidth, window.innerHeight));
     input = []
-    rectangle1 = new Rectangle(new Vector2(100, 100), new Vector2(25, 25))
 
-    rectangle2 = new Rectangle(new Vector2(200, 500), new Vector2(50, 50))
+    rectangle1
+
+    rectangle2
 
     constructor() {
+        Scene.activeScene = this
+        this.rectangle1 = new GameObject(new Rectangle(new Vector2(100, 100), new Vector2(25, 25)))
+        this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+
         Map.Load('../Map/Map.json').then(m => {
             this.map = m
         })
@@ -32,36 +39,64 @@ export default class Scene{
         })
 
         window.addEventListener('mousemove', (e) => {
-            if(this.rectangle1.IsPointColliding(new Vector2(e.clientX, e.clientY))){
-                this.rectangle1.color = '#f0f';
-            }
-            else{
-                this.rectangle1.color = '#f00';
-            }
+            // if(this.rectangle1.IsPointColliding(new Vector2(e.clientX, e.clientY))){
+            //     this.rectangle1.color = '#f0f';
+            // }
+            // else{
+            //     this.rectangle1.color = '#f00';
+            // }
         })
 
         this.rectangle2.color = '#0f0';
+
+        // this.rectangle2.On('sC', () => {
+        //     console.log("?")
+        // })
+
+        // this.rectangle2.On('eC', () => {
+        //     console.log("?")
+        // })
+
+        this.rectangle1.On('sC', (gameObject) => {
+            //this.rectangle1.color = '#00f'
+            gameObject.visible = false
+            // console.log("?")
+        })
+
+        this.rectangle1.On('C', (gameObject) => {
+            //this.rectangle1.color = '#00f'
+            gameObject.visible = false
+            // console.log("?")
+        })
+        this.rectangle1.On('eC', (gameObject) => {
+            //this.rectangle1.color = '#f00'
+            gameObject.visible = true
+            // console.log("?stopped")
+        })
+
+        // GameObject.gameObjects.map(gameObject => {
+            
+        // })
     }
 
     Draw(ctx){
         let offset = new Vector2(-this.camera.position.X, -this.camera.position.Y)
-        
-        if(this.map != null){
-            this.map.forEach(tile => {
-                if(this.IsInRange(tile)){
-                    tile.Draw(ctx, offset)
-                }
-            });
-        }
 
-        this.rectangle2.Draw(ctx, offset)
-        this.rectangle1.Draw(ctx, offset)
+        GameObject.gameObjects.map(gameObject => {
+            if(!this.IsInRange(gameObject)) return
+            gameObject.Draw(ctx, offset)
+        })
 
         //ctx.fillStyle = '#fff';
         //ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
     }
 
     Update(){
+        GameObject.gameObjects.map(gameObject => {
+            if(!this.IsInRange(gameObject)) return
+            gameObject.Update()
+        })
+        //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
         let speed = 500
         if(this.input.indexOf('w') > -1){
             //this.camera.position.Y -= speed * window.deltaTime;
@@ -88,23 +123,6 @@ export default class Scene{
         //     this.rectangle1.rotation -= speed * window.deltaTime;
         // }
 
-        this.rectangle1.color = '#f00'
-
-        if(this.rectangle1.IsColliding(this.rectangle2)){
-            this.rectangle1.color = '#00f'
-        }
-        
-        if(this.map){
-            this.map.forEach(tile => {
-                if(this.IsInRange(tile)){
-                    tile.Update()
-                    if(this.rectangle1.IsColliding(tile)){
-                        this.rectangle1.color = '#00f'
-                    }
-                }
-            })
-        }
-
         if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
             this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
         }
@@ -127,5 +145,12 @@ export default class Scene{
             return true;
         }
         return false;
+    }
+
+    #Colliding (a, b) {
+        return a.position.X < b.position.X + b.size.X * b.scale.X &&
+        a.position.X + a.size.X * a.scale.X > b.position.X &&
+        a.position.Y < b.position.Y + b.size.Y * b.scale.Y &&
+        a.position.Y + a.size.Y * a.scale.Y > b.position.Y
     }
 }

@@ -2,17 +2,31 @@ import Canvas from './Core/Canvas.js';
 import Clock from './Core/Clock.js';
 import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
+
 import AccountMenu from './Menus/AccountMenu.js';
 import CharacterMenu from './menus/CharacterMenu.js';
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
+
 import Player from './Player/Player.js';
 
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'r' && e.ctrlKey) {
+        e.preventDefault();
+    }
+    if (e.key === 'R' && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+    }
+    if (e.key === 'F5') {
+        e.preventDefault();
+    }
+});
 
 window.LoadingScreen.On('ready', start)
 
