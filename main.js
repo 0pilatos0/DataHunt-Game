@@ -90,7 +90,7 @@ function runAfterLoad(){
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
-    window.LoadingScreen.Hide()
+    // window.LoadingScreen.Hide()
 }
 
 // window.player = new Player();
