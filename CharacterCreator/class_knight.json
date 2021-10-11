@@ -1,0 +1,25 @@
+{
+  "Knight": {
+    "attack": 8,
+    "defense": 5,
+    "healthPoints": 30,
+    "magicka": 10,
+    "activeSkills": [],
+    "skillLimit": "4",
+    "magickSkills": [
+      {
+        "name": "Barrier Field",
+        "damage": "0",
+        "cost": 5,
+        "special": "Increases your defense for one turn by 10"
+      }
+    ],
+    "weapon": [
+      {
+        "name": "Rusted Sword",
+        "damage": 3,
+        "special": null
+      }
+    ]
+  }
+}

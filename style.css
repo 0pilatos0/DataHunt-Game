@@ -5,6 +5,10 @@
     overflow: hidden;
 }
 
+body{
+    background-color: #242f3f;
+}
+
 
 canvas{
     image-rendering: pixelated;
@@ -124,7 +128,7 @@ canvas{
 }
 
 /*login*/
-#login{
+#accountMenu{
     background-color: #232930;
     height: 100vh;
     width: 100vw;
@@ -149,7 +153,7 @@ canvas{
 .login-register label{
     font-size: 2.5rem;
 }
-.login-register input{
+.login-register input:not(.checkbox input){
     width: 100%;
     padding: 10px 0px;
     font-size: 1.5rem;
@@ -283,4 +287,31 @@ canvas{
     100%{
         height: 100%;
     }
+}
+
+.eyeButtons {
+    padding-bottom: 4px;
+    margin-left: -52px;
+    height: 35px;
+    width: 50px;
+    background: white;
+    color: black;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    align-content: center;
+    position: absolute;
+    bottom: 4px;
+}
+
+.eyeButtons i {
+    font-size: 22px;
+}
+
+#password {
+    width: 99.6%;
+}
+
+.form-group {
+    position: relative;
 }
