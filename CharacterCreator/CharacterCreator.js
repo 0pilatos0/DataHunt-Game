@@ -155,8 +155,7 @@ async function createPlayerPicker(){
     let lockAll = document.createElement('button')
     lockAll.innerHTML = unlockIcon
     lockAll.style.position = "absolute"
-    lockAll.style.right = "-55px"
-    lockAll.style.top = "24px"
+    lockAll.style.right = "0px"
     lockAll.title = "Lock all"
     lockAll.classList.add("characterPickButton")
     lockAll.setAttribute("locked", false)
@@ -259,6 +258,8 @@ async function createPlayerPicker(){
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
         console.log(parsedCharacterData)
+        window.CharacterMenu.Hide()
+        window.GameMenu.Show()
     }
 
     let randomButton = createButton("Randomize character")
@@ -358,13 +359,3 @@ function firstCharUpperCase(string){
     chars[0] = chars[0].toUpperCase()
     return chars.join("")
 }
-
-// window.addEventListener('keydown', (e) =>{
-//     if(e.key == 'm'){
-//         if(menuState){
-//             this.menu.style.display = 'none';
-//         }else{
-//             this.menu.style.display = 'block';
-//         }
-//     }
-// });

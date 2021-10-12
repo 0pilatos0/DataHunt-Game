@@ -153,7 +153,7 @@ canvas{
 .login-register label{
     font-size: 2.5rem;
 }
-.login-register input{
+.login-register input:not(.checkbox input){
     width: 100%;
     padding: 10px 0px;
     font-size: 1.5rem;

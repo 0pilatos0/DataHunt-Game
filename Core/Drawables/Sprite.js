@@ -5,6 +5,7 @@ export default class Sprite extends Drawable {
     image = document.createElement('img');
     offset = Vector2.Zero();
     animation = null;
+    color = 'red'
 
     /**
      * 
@@ -22,7 +23,15 @@ export default class Sprite extends Drawable {
     Draw(ctx, offset = Vector2.Zero()){
         super.Draw(ctx)
         this.offset = offset
-        ctx.drawImage(this.image, this.position.X + offset.X, this.position.Y + offset.Y, this.size.X * this.scale.X, this.size.Y * this.scale.Y);
+        ctx.save()
+        //TODO add the functionality to color sprites
+        // ctx.fillStyle = '#f00';
+        // ctx.globalAlpha = 0.5;
+        // ctx.fillRect(0, 0, this.size.X * this.scale.X, this.size.Y * this.scale.Y);
+        // ctx.globalCompositeOperation = "destination-atop";
+        // ctx.globalAlpha = 1;
+        ctx.drawImage(this.image, this.position.X + offset.X, this.position.Y + offset.Y, this.size.X * this.scale.X, this.size.Y * this.scale.Y)
+        ctx.restore()
     }
 
     Update(){
