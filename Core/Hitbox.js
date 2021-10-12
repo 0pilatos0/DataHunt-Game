@@ -69,9 +69,10 @@ export default class Hitbox extends Event {
         // }
         // if(this.#oldState !== this.#state)
         //     this.#oldState = this.#state
-        
+        if(this.type != "Collidable") return
         let colliders = []
         GameObject.gameObjects.map(gameObject => {
+            if(gameObject.type != "Collidable") return
             if(gameObject == this) return
             if(!this.#InCameraRange(gameObject)){
                 if(this.#oldColliders.indexOf(gameObject) > -1)

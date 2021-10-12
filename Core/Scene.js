@@ -15,8 +15,10 @@ export default class Scene{
 
     constructor() {
         Scene.activeScene = this
-        this.rectangle1 = new GameObject(new Rectangle(new Vector2(100, 100), new Vector2(25, 25)))
+        this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
         this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+        this.rectangle1.type = "Collidable"
+        this.rectangle2.type = "Collidable"
 
         Map.Load('../Map/Map.json').then(m => {
             this.map = m
