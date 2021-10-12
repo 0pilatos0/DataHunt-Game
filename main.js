@@ -12,6 +12,9 @@ import SettingsMenu from './Menus/SettingsMenu.js';
 
 import Player from './Player/Player.js';
 
+import Feedback from "./Core/Feedback/Feedback.js";
+import FeedbackTypes from "./Core/Feedback/FeedbackTypes.js";
+
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
@@ -61,32 +64,14 @@ async function start(){
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
-    
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'r' && e.ctrlKey) {
-            e.preventDefault();
-        }
-        if (e.key === 'R' && e.ctrlKey && e.shiftKey) {
-            e.preventDefault();
-        }
-        if (e.key === 'F5') {
-            e.preventDefault();
-        }
-        //TODO fix this m key listener to prevent it from being pressable during login or registration or something. Maybe by creating an input class
-        // if(e.key == 'm'){
-        //     window.MainMenu.Show()
-        //     window.GameMenu.Hide()
-        //     window.CharacterMenu.Hide()
-        //     window.SettingsMenu.Hide()
-        //     window.AccountMenu.Hide()
-        // }
-    });
 }
 
 function runAfterLoad(){
     amountReady++
     if(amountReady != 5) return
     console.log("Everything loaded")
+    // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, "test message");
+    // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()

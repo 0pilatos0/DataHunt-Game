@@ -230,24 +230,49 @@ canvas{
 /*feedback*/
 
 #feedback{
+     position: fixed;
+     z-index: 10000;
+
+     left: 50%;
+     transform: translateX(-50%);
+     font-family: 'Odibee Sans', cursive;
+     font-size: 3.5rem;
+     padding: 20px 50px;
+
+     min-width: 60vw;
+     text-align: center;
+     border-radius: 10px;
+
+     animation: apear-and-disapear 5s linear ;
+     top: -200px;
+
+ }
+
+#game-feedback{
     position: fixed;
-    z-index: 10000; 
+    z-index: 10000;
 
-    left: 50%;
-    transform: translateX(-50%);
+    right: 5%;
+    transform: translateX(10%);
     font-family: 'Odibee Sans', cursive;
-    font-size: 3.5rem;
-
+    font-size: 1.25rem;
     padding: 20px 50px;
-    background-color: rgb(201, 63, 63);
-    min-width: 60vw;
+
+    min-width: 15vw;
     text-align: center;
     border-radius: 10px;
 
-    animation: apear-and-disapear 10s linear ;
-    top: -200px;
+    animation: game-apear-and-disapear 5s linear ;
+    bottom: -200px;
 
 
+}
+.feedback-error{
+    background-color: rgb(201, 63, 63);
+}
+
+.feedback-success{
+    background-color: rgb(27, 201, 41);
 }
 
 @keyframes apear-and-disapear{
@@ -257,13 +282,31 @@ canvas{
     }
     5%{
         
-        top: -0px;
+        top: 10px;
     }
     95%{
-        top: -0px;
+        top: 10px;
     }
     100%{
         top: -200px;
+    }
+
+
+}
+@keyframes game-apear-and-disapear{
+
+    0%{
+        bottom: -200px;
+    }
+    5%{
+
+        bottom: 10px;
+    }
+    95%{
+        bottom: 10px;
+    }
+    100%{
+        bottom: -200px;
     }
 
 
