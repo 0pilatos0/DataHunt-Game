@@ -4,7 +4,7 @@ import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
 
 import AccountMenu from './Menus/AccountMenu.js';
-import CharacterMenu from './menus/CharacterMenu.js';
+import CharacterMenu from './Menus/CharacterMenu.js';
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
