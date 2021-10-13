@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+* {
+    margin: 0;
+    overflow: hidden;
+}
+
+body{
+    background-color: #242f3f;
+}
+
+
+canvas{
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+}
+
+/* Menu */
+#menu{
+    background-color: #232930;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+.menu{
+    color: rgb(194, 194, 194);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Odibee Sans', cursive;
+    padding-top: 20vh;
+    
+}
+.menu h1{
+    font-size: 10.5rem;
+}
+.menu h2{
+    font-size: 3.5rem;  
+}
+.menu h1:hover{
+    color: rgb(255, 255, 255);
+}
+.menu h2:hover{
+    color: rgb(255, 255, 255);
+}
+.menu #title{ 
+    font-size: 7rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: -10vh;
+    position: fixed;
+    top: 20vh;
+
+    left: 50%;
+    transform: translatex(-50%);
+
+    animation: tilt 2.5s ease-in-out infinite;
+}
+@keyframes tilt{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(10deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+/* Settings */
+#settingsM{
+    background-color: #232930;
+    height: 100vh;
+    width: 100vw;
+}
+.settings{
+    color: rgb(194, 194, 194);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Odibee Sans', cursive;
+    padding-top: 10vh;
+}
+.settings h1{
+    font-size: 10.5rem;
+}
+.settings h2{
+    font-size: 4.5rem;
+}
+.settings h1:hover{
+    color: rgb(255, 255, 255);
+}
+.settings h2:hover{
+    color: rgb(255, 255, 255);
+}
+.settings p{
+    font-size: 2.5rem;  
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+/*login*/
+#accountMenu{
+    background-color: #232930;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    font-family: 'Odibee Sans', cursive;
+}
+
+.loginbox{
+    background: #39434e;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #39434e73;
+    
+}
+
+.login-register{
+    margin: 0 auto;
+    width: 600px;
+    padding: 30px 10px;
+    color: rgba(255, 255, 255, 0.815);
+}
+.login-register label{
+    font-size: 2.5rem;
+}
+.login-register input:not(.checkbox input){
+    width: 100%;
+    padding: 10px 0px;
+    font-size: 1.5rem;
+    border: none;
+    border-bottom: 1px solid #39434e;
+    background: rgba(255, 255, 255, 0.336);
+    color: inherit;
+}
+.login-register h2{
+    font-size: 3.5rem;
+}
+
+.switch-login-register a{
+    margin-left: 10px;
+    text-decoration: none;
+    color: rgb(194, 194, 194);
+    font-size: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.336);
+    padding: 10px 10px;
+    border-radius: 8px;
+    color: white;
+}
+.switch-login-register{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.submitlogin{
+    background-color: rgba(255, 255, 255, 0.123);
+    color: white;
+    font-size: 2rem;
+    padding: 10px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+#guard{
+    position: absolute;
+    width: 30vw;
+    /* position to the right */
+    left: 70%;
+    /* position to the bottom */
+    top: 70%;
+    animation: guardanimation 10s infinite;
+
+}
+
+@keyframes guardanimation{ 
+    0%{
+        top: 90%;
+    }
+    30%{
+        top: 70%;
+        rotate: 10deg;
+    }
+    40%{
+        top: 50%;
+        rotate: -10deg;
+        transform: skewY(2deg);
+
+    }
+    50%{
+        top: 45%;
+    }
+    100%{
+        top: 90%;
+    }
+
+
+}
+
+
+
+/*feedback*/
+
+#feedback{
+     position: fixed;
+     z-index: 10000;
+
+     left: 50%;
+     transform: translateX(-50%);
+     font-family: 'Odibee Sans', cursive;
+     font-size: 3.5rem;
+     padding: 20px 50px;
+
+     min-width: 60vw;
+     text-align: center;
+     border-radius: 10px;
+
+     animation: apear-and-disapear 5s linear ;
+     top: -200px;
+
+ }
+
+#game-feedback{
+    position: fixed;
+    z-index: 10000;
+
+    right: 5%;
+    transform: translateX(10%);
+    font-family: 'Odibee Sans', cursive;
+    font-size: 1.25rem;
+    padding: 20px 50px;
+
+    min-width: 15vw;
+    text-align: center;
+    border-radius: 10px;
+
+    animation: game-apear-and-disapear 5s linear ;
+    bottom: -200px;
+
+
+}
+.feedback-error{
+    background-color: rgb(201, 63, 63);
+}
+
+.feedback-success{
+    background-color: rgb(27, 201, 41);
+}
+
+@keyframes apear-and-disapear{
+
+    0%{
+        top: -200px;
+    }
+    5%{
+        
+        top: 10px;
+    }
+    95%{
+        top: 10px;
+    }
+    100%{
+        top: -200px;
+    }
+
+
+}
+@keyframes game-apear-and-disapear{
+
+    0%{
+        bottom: -200px;
+    }
+    5%{
+
+        bottom: 10px;
+    }
+    95%{
+        bottom: 10px;
+    }
+    100%{
+        bottom: -200px;
+    }
+
+
+}
+
+.loginfeedback{
+    max-width: 580px;
+    background-color: rgb(201, 63, 63) ;
+    text-align: center;
+    padding: 20px 20px;
+    font-size: 2rem;
+    animation: apear 1s linear;
+}
+
+@keyframes apear{
+    0%{
+        height: 0px;
+        padding: 0;
+
+    }
+    100%{
+        height: 100%;
+    }
+}
+
+.eyeButtons {
+    padding-bottom: 4px;
+    margin-left: -52px;
+    height: 35px;
+    width: 50px;
+    background: white;
+    color: black;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    align-content: center;
+    position: absolute;
+    bottom: 4px;
+}
+
+.eyeButtons i {
+    font-size: 22px;
+}
+
+#password {
+    width: 99.6%;
+}
+
+.form-group {
+    position: relative;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #guard{
+        display: none;
+    }
+}

@@ -1,0 +1,228 @@
+<img src="./assets/images/clipart-sword-soldier-3.png" alt="" id="guard">
+
+<div class="login-register">
+
+    <div class="switch-login-register">
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="loginBut">Login</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-block" id="RegisterButs">Register</a>
+    </div>
+    <div class="login loginbox">
+        <div class="login-body">
+            <h2>DataHunt Gate</h2>
+            <div class="login-form">
+                <form data-toggle="validator" method="post" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label><br>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                    </div>
+                    <label>remember me</label>
+                    <div class="checkbox">
+                        <input type="checkbox">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Sign in</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="register loginbox" style="display: none;">
+        <div class="register-body">
+            <h2>DataHunt Gate</h2>  
+            <div class="register-form">
+                <form data-toggle="validator" method="post" id="registerForm">
+                    <div class="form-group">
+                        <label for="username">Name</label><br>
+                        <input id="username" class="form-control" type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label><br>
+                        <input id="username" class="form-control" type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label><br>
+                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label><br>
+                        <input id="password" class="form-control inputs" type="password" name="confirmPassword" required>
+                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                    </div><br>
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Sign up</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="" class="submitlogin submitResetPassword">Forgot password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="forgetpass loginbox" style="display: none;">
+        <div class="register-body">
+            <h2>DataHunt Gate</h2>  
+            <div class="register-form">
+                <form data-toggle="validator" method="post" id="forgetpassform">
+                    <div class="form-group">
+                        <label for="email">Email</label><br>
+                        <input id="email" class="form-control" type="email" name="email" required>
+                    </div><br>
+                    <div class="form-group">
+                        <button type="submit" class="submitlogin">Reset password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const inputs = document.getElementsByClassName('inputs');
+    const buttons = document.getElementsByClassName('eyeButtons');
+    const eyes = document.getElementsByClassName('toggleEyes');
+    for(let i=0; i<buttons.length; i++){
+        buttons[i].onclick = ()=>{
+            if(inputs[i].type === "password") {
+                inputs[i].type = 'text';
+                eyes[i].classList.remove('fa-eye');
+                eyes[i].classList.add('fa-eye-slash');
+            }else {
+                inputs[i].type = 'password';
+                eyes[i].classList.add('fa-eye');
+                eyes[i].classList.remove('fa-eye-slash');
+            }
+        }
+    }
+
+    let loginBut = document.getElementById('loginBut');
+    let registerBut = document.getElementById('RegisterButs');
+
+    let login = document.getElementsByClassName('login')[0];
+    let register = document.getElementsByClassName('register')[0];
+    let passwordforget = document.getElementsByClassName('forgetpass')[0];
+
+    loginBut.onclick = function() {
+        login.style.display = 'block';
+        passwordforget.style.display = 'none';
+        register.style.display = 'none';
+    }
+
+    registerBut.onclick = function() {
+        login.style.display = 'none';
+        passwordforget.style.display = 'none';
+        register.style.display = 'block';
+    }
+
+    loginForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries()) 
+        console.log(data)
+        window.client.emit('login', data)
+        loading.style.display = "block"
+        loading.classList.remove('loaderdisabled')
+    }
+    forgetpassform.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries()) 
+        console.log(data)
+        window.client.emit('forgotPass', data)
+    }
+
+    window.client.on('login', (data) => {
+        loading.style.display = "none"
+        loading.classList.add('loaderdisabled')
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("login-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            feedback.style.display = "block"
+            feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
+            feedback.style.backgroundColor = "rgb(116 201 63)"
+        })
+        if(data.success.length > 0){
+            window.AccountMenu.Hide()
+            window.MainMenu.Show()
+        }
+    })
+
+    registerForm.onsubmit = (e) => {
+        e.preventDefault()
+        let data = Object.fromEntries(new FormData(e.target).entries())
+        console.log(data)
+        window.client.emit('register', data)
+        loading.style.display = "block"
+        loading.classList.remove('loaderdisabled')
+    }
+
+    window.client.on('register', (data) => {
+        loading.style.display = "none"
+        loading.classList.add('loaderdisabled')
+        console.log(data)
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+            })
+        })
+    })
+    window.client.on('forgotPass', (data) => {
+        console.log(data)
+        removeAllFeedback()
+        data.errors.map(e => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+            })
+        })
+        data.success.map(s => {
+            let elements = document.getElementsByClassName("register-form")
+            Array.from(elements).forEach(element => {
+                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+            })
+        })
+    })
+
+    function removeAllFeedback(){
+        let elements = document.getElementsByClassName("loginfeedback")
+        Array.from(elements).forEach(element => {
+            element.remove()
+        })
+    }
+
+    let forgotPasswordButtons = document.getElementsByClassName('submitResetPassword')
+    for (let i = 0; i < forgotPasswordButtons.length; i++) {
+        let button = forgotPasswordButtons[i]
+        button.onclick = (e) => {
+            e.preventDefault()
+            login.style.display = 'none';
+            register.style.display = 'none';
+            passwordforget.style.display = 'block';
+        }
+    }
+</script>
