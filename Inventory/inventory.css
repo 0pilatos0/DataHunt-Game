@@ -1,0 +1,38 @@
+/* #inventoryWindow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.inventoryImages {
+    width: 60%;
+    height: 500px;
+} */
+
+/* #inventoryGearItems {
+    width: 400px;
+} */
+
+.inventoryImages p { 
+    display: inline-block;
+    font-size: 36px;
+    vertical-align: top;
+    line-height: 102px;
+}
+
+.inventoryImages img {
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+    height: 96px;
+    border: black 2px solid;
+    background-color: rgb(255, 255, 255);
+    padding: 1px;
+    margin-left: 2px;
+    display: inline-block;
+}
+
+#inventoryName {
+    font-size: 1.3em;
+    margin-left: 7vw;
+}
