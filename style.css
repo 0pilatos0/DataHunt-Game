@@ -358,3 +358,10 @@ canvas{
 .form-group {
     position: relative;
 }
+
+
+@media only screen and (max-width: 1000px) {
+    #guard{
+        display: none;
+    }
+}
