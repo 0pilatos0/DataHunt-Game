@@ -9,7 +9,9 @@ body{
     background-color: #242f3f;
 }
 
-
+.hidden{
+    display: none;
+}
 canvas{
     image-rendering: pixelated;
     image-rendering: crisp-edges;
@@ -401,4 +403,31 @@ kbd {
     width: calc(100% - 20px);
     text-align: center;
 
+}
+.tutorial-show{
+    animation: flyin 1s linear;
+}
+.tutorial-hide{
+    animation: flyout 1s linear;
+}
+@keyframes flyin{
+    0%{
+        opacity: 0;
+        top: -100%;
+    }
+    100%{
+        opacity: 1;
+        top: 0;
+    }
+}
+@keyframes flyout{
+    0%{
+        opacity: 1;
+        right: 0;
+    }
+    100%{
+        opacity: 0;
+        right: -100%;
+        
+    }
 }
