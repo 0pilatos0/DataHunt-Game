@@ -39,8 +39,6 @@ export default class Tutorial extends Menu{
                 this.keys = this.keys.filter(key => key !== e.key);
 
             } 
-            console.log(this.correctPressed);
-            console.log(this.keys.length);
             if(this.keys.length === 0){
                 if(this.currentStep == 0){
                     this.steps[0].style.display = 'none';
