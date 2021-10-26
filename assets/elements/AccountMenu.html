@@ -96,7 +96,8 @@
     const buttons = document.getElementsByClassName('eyeButtons');
     const eyes = document.getElementsByClassName('toggleEyes');
     for(let i=0; i<buttons.length; i++){
-        buttons[i].onclick = ()=>{
+        buttons[i].onclick = (e)=>{
+            e.preventDefault();
             if(inputs[i].type === "password") {
                 inputs[i].type = 'text';
                 eyes[i].classList.remove('fa-eye');
