@@ -150,13 +150,11 @@
         data.errors.map(e => {
             let elements = document.getElementsByClassName("login-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
-            feedback.style.display = "block"
-            feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
-            feedback.style.backgroundColor = "rgb(116 201 63)"
+            window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
         })
         if(data.success.length > 0){
             window.AccountMenu.Hide()
@@ -181,13 +179,13 @@
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
             })
         })
     })
@@ -197,13 +195,13 @@
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
             })
         })
     })

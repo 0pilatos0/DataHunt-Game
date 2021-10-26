@@ -19,6 +19,9 @@ import Tutorial from './Tutorial/Tutorial.js';
 
 import Storage from './Core/Storage.js';
 
+window.Feedback = Feedback
+window.FeedbackTypes = FeedbackTypes
+
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
