@@ -248,6 +248,8 @@ async function createPlayerPicker(){
         });
     }
 
+
+
     let confirmButton = createButton("Submit character")
 
     confirmButton.button.onclick = () => {
