@@ -1,5 +1,6 @@
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
 import Menu from "../Core/Menu.js";
+import Storage from "../Core/Storage.js";
 
 export default class Tutorial extends Menu{
 
@@ -67,7 +68,14 @@ export default class Tutorial extends Menu{
         this.menu.style.display = 'none';
         this.currentStep = 0;
 
-        localStorage.setItem('tutorialcompleted', true);
+        Storage.Set('tutorialcompleted', true);
+        
+    }
+
+    Reset(){
+        this.currentStep = 0;
+        
+        Storage.Set('tutorialcompleted', false);
     }
 
 }
