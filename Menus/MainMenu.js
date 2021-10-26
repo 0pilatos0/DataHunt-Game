@@ -30,12 +30,6 @@ export default class MainMenu extends Menu{
                 window.close();
             });
 
-            window.addEventListener('keydown', (e) =>{
-                if(e.key == 'm'){
-                    this.Show()
-                }
-            });
-
             this.Trigger('ready')
         });
     }

@@ -27,7 +27,7 @@ export default class Event {
     Trigger(event, callbackData, keepFiringTillReceived = false){
         if(!this.events[event] && keepFiringTillReceived){
             setTimeout(() => {
-                this.trigger(event, callbackData);
+                this.Trigger(event, callbackData);
             }, 10);
         }
         else{

@@ -26,9 +26,32 @@ export default class CharacterMenu extends Menu{
 
             let back = document.querySelector('#characterBackButton')
             back.onclick = () => {
-                window.CharacterMenu.Hide()
+                this.Hide()
                 window.MainMenu.Show()
             }
+
+            window.addEventListener('keydown', this.#keydownCallback)
         });
+    }
+
+    Show(){
+        super.Show()
+        window.addEventListener('keydown', this.#keydownCallback)
+    }
+
+    Hide(){
+        super.Hide()
+        window.removeEventListener('keydown', this.#keydownCallback)
+    }
+
+    #keydownCallback = (e) => {
+        switch (e.key) {
+            case "m":
+                window.MainMenu.Show()
+                this.Hide()
+                break;
+            default:
+                break;
+        }
     }
 }
