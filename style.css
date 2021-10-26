@@ -365,3 +365,8 @@ canvas{
         display: none;
     }
 }
+
+/*Other stuff*/
+#characterBackButton > i{
+    overflow: initial;
+}
