@@ -44,8 +44,8 @@ window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnec
 window.client.on('connect', () => {
     console.log("connected to server")
     //TODO dont forget to comment this out
-    // window.LoadingScreen.Hide()
-    // window.AccountMenu.Show()
+    window.LoadingScreen.Hide()
+    window.AccountMenu.Show()
 })
 
 window.client.on('disconnect', () => {
