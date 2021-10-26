@@ -378,8 +378,12 @@ canvas{
     right: 0;
     padding: 20px;
     box-sizing: border-box;
-    align-items: center;
     border-radius: 0px 0px 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
     
 }
 kbd {
@@ -394,15 +398,6 @@ kbd {
     line-height: 1;
     padding: 2px 4px;
     white-space: nowrap;
-}
-.step{
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: calc(100% - 20px);
-    text-align: center;
-
 }
 .tutorial-show{
     animation: flyin 1s linear;
@@ -428,6 +423,31 @@ kbd {
     100%{
         opacity: 0;
         right: -100%;
-        
     }
 }
+
+.tutorial-complete{
+    width: 200px;
+    position: absolute;
+    animation: tutorial-complete 5s ease 0s 1 normal forwards;
+
+}
+@keyframes tutorial-complete {
+    0% {
+        opacity: 0;
+        transform: rotate(-540deg) scale(2);
+    }
+    30% {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(0);
+
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100vw);
+
+    }}

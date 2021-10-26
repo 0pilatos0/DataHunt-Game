@@ -24,7 +24,7 @@ export default class Tutorial extends Menu{
     }
     
     Start(){
-        this.menu.style.display = 'block';
+        this.menu.style.display = 'flex';
         this.menu.classList.add('tutorial-show');
         this.currentStep = 0;
         this.correctPressed = [];
@@ -47,37 +47,49 @@ export default class Tutorial extends Menu{
         this.keys = this.data[this.currentStep].keys;
 
         this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-        this.menu.innerHTML = `<h5>` + this.data[this.currentStep].title+`</h5> <br> <kbd> `+ this.keysString+`</kbd>`;
+        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
 
         document.addEventListener('keydown', (e) => {
 
-            if(this.keys.includes(e.key)){
-                this.correctPressed.push(e.key);
-                this.keys = this.keys.filter(key => key !== e.key);
-            } 
-            if(this.keys.length === 0){
-                this.currentStep++;
-                
-                if(this.currentStep < this.data.length){
-                    this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-                    this.menu.innerHTML = `<h5>` + this.data[this.currentStep].title+`</h5> <br> <kbd> `+ this.keysString+`</kbd>`;
-                    this.keys = this.data[this.currentStep].keys;
-                } else{
-                    this.Complete();
+            if(Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false){
+
+                if(this.keys.includes(e.key)){
+                    this.correctPressed.push(e.key);
+                    this.keys = this.keys.filter(key => key !== e.key);
+                } 
+                if(this.keys.length === 0){
+                    this.currentStep++;
+                    
+                    if(this.currentStep < this.data.length){
+                        this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
+                        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
+                        this.keys = this.data[this.currentStep].keys;
+                    } else{
+                        this.Complete();
+                    }
+                    
                 }
-                
+                console.log(this.keys);
             }
-            console.log(this.keys);
         })   
     }
     
     Complete(){
+        
+        let img = document.createElement('img');
+        img.src = './assets/images/clipart-sword-soldier-3.png';
+        img.classList.add('tutorial-complete');
+        document.body.appendChild(img);
+
         this.menu.classList.add('tutorial-hide');
         setTimeout(() => {
             this.Hide();
+            
         }, 1000);
+        setTimeout(() => {
+            document.body.removeChild(img);
+        }, 5000);
 
-        
         Storage.Set('tutorialcompleted', true);
     }
 
