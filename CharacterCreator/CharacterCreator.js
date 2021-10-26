@@ -47,7 +47,7 @@ const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
 
 // function acceptCharacter(ClassName) {
 //     if(ClassName !== null) {
-//         JsonLoader.Load("./class_" + ClassName + ".json").then(e => {
+//         JsonLoader.Load("./class_" + ClassName + "messages.json").then(e => {
 //             CharacterData.push({"class": e});
 //             console.log(CharacterData + "\r\n");
 //             spritePicker();

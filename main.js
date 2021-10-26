@@ -9,6 +9,7 @@ import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
+import JsonLoader from "./Core/Loaders/JsonLoader.js";
 
 import Player from './Player/Player.js';
 
@@ -64,14 +65,16 @@ async function start(){
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
+
+    window.Messages = await JsonLoader.Load("messages.json");
 }
 
 function runAfterLoad(){
     amountReady++
     if(amountReady != 5) return
     console.log("Everything loaded")
-    // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, "test message");
-    // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
+    // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, window.Messages.test);
+    // Feedback.showFeedback(FeedbackTypes.SUCCESS, window.Messages.test);
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
