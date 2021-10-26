@@ -365,3 +365,40 @@ canvas{
         display: none;
     }
 }
+
+/* Tutorial */
+
+#tutorial{
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.158);
+    right: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: 0px 0px 0px 20px;
+    
+}
+kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+.step{
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: calc(100% - 20px);
+    text-align: center;
+
+}
