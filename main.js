@@ -80,7 +80,7 @@ function runAfterLoad(){
     console.log("Everything loaded")
 
     //TODO remove this line for production branch
-    Storage.Remove('tutorialcompleted')
+    // Storage.Remove('tutorialcompleted')
 
     if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
         window.Tutorial.Start()
