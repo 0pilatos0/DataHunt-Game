@@ -1,0 +1,23 @@
+[
+	{
+		"keys": [
+			"w",
+			"a",
+			"s",
+			"d"
+		],
+		"title": "Use the following keys to move around"
+	},
+	{
+		"keys": [
+			"i"
+		],
+		"title": "Use the following key to open your inventory"
+	},
+	{
+		"keys": [
+			"c"
+		],
+		"title": "Use the following key to open your crafting menu"
+	}
+]

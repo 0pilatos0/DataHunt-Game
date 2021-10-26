@@ -1,4 +1,5 @@
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
+import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Menu from "../Core/Menu.js";
 import Storage from "../Core/Storage.js";
 
@@ -23,26 +24,13 @@ export default class Tutorial extends Menu{
         })
     }
     
-    Start(){
+    async Start(){
         this.menu.style.display = 'flex';
         this.menu.classList.add('tutorial-show');
         this.currentStep = 0;
         this.correctPressed = [];
 
-        this.data =  [
-            {
-                keys: ['w', 'a', 's', 'd'],
-                title: "Use the following keys to move around"
-            },
-            {
-                keys: ['i'],
-                title: "Use the following key to open your inventory"
-            },
-            {
-                keys: ['c'],
-                title: "Use the following key to open your crafting menu"
-            }
-        ]
+        this.data = await JsonLoader.Load('./Tutorial/TutorialSteps.json')
 
         this.keys = this.data[this.currentStep].keys;
 
