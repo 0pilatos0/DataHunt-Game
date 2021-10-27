@@ -33,9 +33,19 @@ export default class Tutorial extends Menu{
         this.data = await JsonLoader.Load('./Tutorial/TutorialSteps.json')
 
         this.keys = this.data[this.currentStep].keys;
+        this.keyscopy = this.keys;
 
-        this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
+        this.keysString = "";
+
+        this.keys.map(key => {
+            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
+            if(this.keys.indexOf(key) != this.keys.length - 1){
+                this.keysString += ' + ';
+            }
+        })
+
+
+        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
 
         document.addEventListener('keydown', (e) => {
 
@@ -44,16 +54,36 @@ export default class Tutorial extends Menu{
                 if(this.keys.includes(e.key)){
                     this.correctPressed.push(e.key);
                     this.keys = this.keys.filter(key => key !== e.key);
+
+                    let keybind = document.querySelector(`#tutorialKeybind-${e.key}`);
+                    console.log(keybind);
+                    keybind.style.backgroundColor = '#00ff00';
+                    keybind.style.color = '#000000';
+
                 } 
                 if(this.keys.length === 0){
                     this.currentStep++;
                     
                     if(this.currentStep < this.data.length){
-                        this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-                        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
+
                         this.keys = this.data[this.currentStep].keys;
+                        this.keysString = "";
+                        this.keys.map(key => {
+                            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
+                            if(this.keys.indexOf(key) != this.keys.length - 1){
+                                this.keysString += ' + ';
+                            }
+                        })
+
+                        setTimeout(() => {
+                            this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
+                        }, 500);
+
                     } else{
-                        this.Complete();
+                        setTimeout(() => {
+                            this.Complete();
+                        }, 500);
+                        
                     }
                     
                 }

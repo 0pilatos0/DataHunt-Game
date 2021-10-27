@@ -19,5 +19,11 @@
 			"c"
 		],
 		"title": "Use the following key to open your crafting menu"
+	},
+	{
+		"keys": [
+			"e"
+		],
+		"title": "Use the following key to interact with objects"
 	}
 ]

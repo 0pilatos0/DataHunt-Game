@@ -387,17 +387,16 @@ canvas{
     
 }
 kbd {
-    background-color: #eee;
-    border-radius: 3px;
-    border: 1px solid #b4b4b4;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    background-color: white;
     color: #333;
     display: inline-block;
-    font-size: .85em;
+    font-size: 1em;
     font-weight: 700;
     line-height: 1;
-    padding: 2px 4px;
+    padding: 5px 10px;
     white-space: nowrap;
+    border-radius: 4px;
+
 }
 .tutorial-show{
     animation: flyin 1s linear;
