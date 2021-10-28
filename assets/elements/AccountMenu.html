@@ -95,6 +95,11 @@
     const inputs = document.getElementsByClassName('inputs');
     const buttons = document.getElementsByClassName('eyeButtons');
     const eyes = document.getElementsByClassName('toggleEyes');
+    eyes.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+        }
+    });
     for(let i=0; i<buttons.length; i++){
         buttons[i].onclick = (e)=>{
             e.preventDefault();
