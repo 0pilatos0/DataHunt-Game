@@ -16,9 +16,13 @@ import Player from './Player/Player.js';
 import Feedback from "./Core/Feedback/Feedback.js";
 import FeedbackTypes from "./Core/Feedback/FeedbackTypes.js";
 
+import Inventory from "./Inventory/inventory.js";
+
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+
+window.inventory = new Inventory();
 
 window.addEventListener('keydown', (e) => {
     if (e.key === 'r' && e.ctrlKey) {
