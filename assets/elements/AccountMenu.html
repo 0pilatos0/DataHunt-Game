@@ -13,11 +13,11 @@
                 <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password">
                         <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <label>remember me</label>
@@ -43,24 +43,24 @@
                 <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
                         <label for="username">Name</label><br>
-                        <input id="username" class="form-control" type="text" name="name" required>
+                        <input id="username" class="form-control" type="text" name="name">
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label><br>
-                        <input id="username" class="form-control" type="text" name="username" required>
+                        <input id="username" class="form-control" type="text" name="username">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="password" required>
+                        <input id="password" class="form-control inputs" type="password" name="password">
                         <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="confirmPassword" required>
+                        <input id="password" class="form-control inputs" type="password" name="confirmPassword">
                         <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div><br>
                     <div class="form-group">
@@ -80,7 +80,7 @@
                 <form data-toggle="validator" method="post" id="forgetpassform">
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Reset password</button>
@@ -95,11 +95,9 @@
     const inputs = document.getElementsByClassName('inputs');
     const buttons = document.getElementsByClassName('eyeButtons');
     const eyes = document.getElementsByClassName('toggleEyes');
-    eyes.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-        }
-    });
+    const allInputs = document.querySelectorAll('input')
+    const allPasswordResetMenuButtons = document.getElementsByClassName('submitResetPassword')
+
     for(let i=0; i<buttons.length; i++){
         buttons[i].onclick = (e)=>{
             e.preventDefault();
@@ -114,6 +112,19 @@
             }
         }
     }
+
+    allInputs.forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if(e.key == "Enter"){
+                e.preventDefault()
+                input.form.querySelector('button[type="submit"]').click()
+            }
+        })
+    })
+
+    Array.from(allPasswordResetMenuButtons).forEach(button => {
+        button.addEventListener('click', removeAllFeedback)
+    })
 
     let loginBut = document.getElementById('loginBut');
     let registerBut = document.getElementById('RegisterButs');
@@ -137,7 +148,6 @@
     loginForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
-        console.log(data)
         window.client.emit('login', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
@@ -145,7 +155,6 @@
     forgetpassform.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
-        console.log(data)
         window.client.emit('forgotPass', data)
     }
 
@@ -173,7 +182,6 @@
     registerForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries())
-        console.log(data)
         window.client.emit('register', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
@@ -182,7 +190,6 @@
     window.client.on('register', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
-        console.log(data)
         removeAllFeedback()
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
@@ -198,7 +205,6 @@
         })
     })
     window.client.on('forgotPass', (data) => {
-        console.log(data)
         removeAllFeedback()
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
