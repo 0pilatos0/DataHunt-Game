@@ -56,7 +56,6 @@ export default class Tutorial extends Menu{
                     this.keys = this.keys.filter(key => key !== e.key);
 
                     let keybind = document.querySelector(`#tutorialKeybind-${e.key}`);
-                    console.log(keybind);
                     keybind.style.backgroundColor = '#00ff00';
                     keybind.style.color = '#000000';
 
@@ -84,10 +83,8 @@ export default class Tutorial extends Menu{
                             this.Complete();
                         }, 500);
                         
-                    }
-                    
+                    } 
                 }
-                console.log(this.keys);
             }
         })   
     }
