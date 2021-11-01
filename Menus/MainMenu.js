@@ -10,9 +10,9 @@ export default class MainMenu extends Menu{
 
         this.menucontext.then(data =>{
             this.menu.innerHTML = data;
-            this.play = document.querySelector('#play');
-            this.settings = document.querySelector('#settings');
-            this.quit = document.querySelector('#quit');
+            this.play = document.querySelector('div#play > h1');
+            this.settings = document.querySelector('#settings > h2');
+            this.quit = document.querySelector('#quit > h2');
 
             this.Hide()
 

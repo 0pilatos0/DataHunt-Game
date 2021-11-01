@@ -9,11 +9,19 @@ import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
+import JsonLoader from "./Core/Loaders/JsonLoader.js";
 
 import Player from './Player/Player.js';
 
 import Feedback from "./Core/Feedback/Feedback.js";
 import FeedbackTypes from "./Core/Feedback/FeedbackTypes.js";
+
+import Tutorial from './Tutorial/Tutorial.js';
+
+import Storage from './Core/Storage.js';
+
+window.Feedback = Feedback
+window.FeedbackTypes = FeedbackTypes
 
 window.spriteSize = new Vector2(16, 16);
 
@@ -39,6 +47,7 @@ window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnec
 
 window.client.on('connect', () => {
     console.log("connected to server")
+    //TODO dont forget to comment this out
     window.LoadingScreen.Hide()
     window.AccountMenu.Show()
 })
@@ -58,18 +67,32 @@ async function start(){
     window.AccountMenu = new AccountMenu();
     window.CharacterMenu = new CharacterMenu();
     window.GameMenu = new GameMenu();
+    window.Tutorial = new Tutorial();
 
     window.CharacterMenu.On('ready', runAfterLoad)
     window.MainMenu.On('ready', runAfterLoad)
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
+    window.Messages = await JsonLoader.Load("messages.json");
+    window.Tutorial.On('ready', runAfterLoad)
 }
 
 function runAfterLoad(){
     amountReady++
     if(amountReady != 5) return
     console.log("Everything loaded")
+
+    //TODO remove this line for production branch
+    // Storage.Remove('tutorialcompleted')
+
+    if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
+        window.Tutorial.Start()
+    }
+
+   
+    window.LoadingScreen.Hide()
+
     // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, "test message");
     // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
