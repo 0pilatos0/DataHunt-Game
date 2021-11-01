@@ -373,6 +373,11 @@ canvas{
     }
 }
 
+/*Other stuff*/
+#characterBackButton > i{
+    overflow: initial;
+}
+
 /* Tutorial */
 
 #tutorial{
