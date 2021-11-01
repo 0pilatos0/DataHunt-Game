@@ -9,6 +9,7 @@ import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
+import JsonLoader from "./Core/Loaders/JsonLoader.js";
 
 import Player from './Player/Player.js';
 
@@ -73,8 +74,8 @@ async function start(){
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
+    window.Messages = await JsonLoader.Load("messages.json");
     window.Tutorial.On('ready', runAfterLoad)
-
 }
 
 function runAfterLoad(){
