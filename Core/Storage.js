@@ -2,7 +2,11 @@ export default class Storage {
     constructor() {}
 
     static Get(key) {
-        return window.localStorage.getItem(`DataHunt:${key}`);
+        if (window.localStorage.getItem(`DataHunt:${key}`)) {
+            return window.localStorage.getItem(`DataHunt:${key}`);
+        } else {
+            return null;
+        }
     }
 
     static Set(key, value) {
@@ -10,6 +14,10 @@ export default class Storage {
     }
 
     static Remove(key) {
-        return window.localStorage.removeItem(`DataHunt:${key}`);
+        if (window.localStorage.getItem(`DataHunt:${key}`)) {
+            return window.localStorage.removeItem(`DataHunt:${key}`);
+        } else {
+            return null;
+        }
     }
 }
