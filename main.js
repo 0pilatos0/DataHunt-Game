@@ -4,6 +4,7 @@ import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
 
 import AccountMenu from './Menus/AccountMenu.js';
+import InventoryMenu from './Menus/InventoryMenu.js';
 import CharacterMenu from './Menus/CharacterMenu.js';
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
@@ -25,9 +26,13 @@ import KeybindsManager from './Core/KeybindsManager.js';
 window.Feedback = Feedback
 window.FeedbackTypes = FeedbackTypes
 
+import Inventory from "./Inventory/inventory.js";
+
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+
+window.inventory = new Inventory();
 
 window.addEventListener('keydown', (e) => {
     if (e.key === 'r' && e.ctrlKey) {
@@ -54,11 +59,17 @@ window.client.on('connect', () => {
     window.AccountMenu.Show()
 })
 
-window.client.on('disconnect', () => {
-    console.log('disconnected from server')
-    window.LoadingScreen.Show()
-    window.AccountMenu.Hide()
-})
+// window.client.on('connect', () => {
+//     console.log("connected to server")
+//     window.LoadingScreen.Hide()
+//     window.AccountMenu.Show()
+// })
+
+// window.client.on('disconnect', () => {
+//     console.log('disconnected from server')
+//     window.LoadingScreen.Show()
+//     window.AccountMenu.Hide()
+// })
 
 async function start(){
     //TODO add feedback to loader
@@ -68,6 +79,7 @@ async function start(){
     window.SettingsMenu = new SettingsMenu();
     window.AccountMenu = new AccountMenu();
     window.CharacterMenu = new CharacterMenu();
+    window.InventoryMenu = new InventoryMenu();
     window.GameMenu = new GameMenu();
     window.Tutorial = new Tutorial();
     window.KeybindsManager = new KeybindsManager();
@@ -76,6 +88,7 @@ async function start(){
     window.MainMenu.On('ready', runAfterLoad)
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
+    window.InventoryMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
     window.Messages = await JsonLoader.Load("messages.json");
     window.Tutorial.On('ready', runAfterLoad)
@@ -112,7 +125,8 @@ function runAfterLoad(){
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
-    // window.LoadingScreen.Hide()
+    window.InventoryMenu.Show()
+    window.LoadingScreen.Hide()
 }
 
 // window.player = new Player();

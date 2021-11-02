@@ -20,7 +20,7 @@ export default class CharacterMenu extends Menu{
                 this.Trigger('ready')
             }
             script.src = "./CharacterCreator/CharacterCreator.js";
-            script.type="module"
+            script.type = "module"
 
             document.head.appendChild(script);
 
