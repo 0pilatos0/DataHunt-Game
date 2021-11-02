@@ -1,0 +1,51 @@
+[
+    {
+        "action" : "foward",
+        "key" : "g",
+        "description" : "Move forward",
+        "originalKey" : "w",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "right",
+        "key" : "d",
+        "description" : "Move right",
+        "originalKey" : "d",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "backward",
+        "key" : "s",
+        "description" : "Move backward",
+        "originalKey" : "s",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "left",
+        "key" : "a",
+        "description" : "Move left",
+        "originalKey" : "a",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "inventory",
+        "key" : "i",
+        "description" : "Open inventory",
+        "originalKey" : "i",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "crafting",
+        "key" : "c",
+        "description" : "Open crafting",
+        "originalKey" : "c",
+        "type" : "keyboard"
+    },
+    {
+        "action" : "interact",
+        "key" : "e",
+        "description" : "Interact with object",
+        "originalKey" : "e",
+        "type" : "keyboard"
+    }
+]

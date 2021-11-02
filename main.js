@@ -20,6 +20,8 @@ import Tutorial from './Tutorial/Tutorial.js';
 
 import Storage from './Core/Storage.js';
 
+import KeybindsManager from './Core/KeybindsManager.js';
+
 window.Feedback = Feedback
 window.FeedbackTypes = FeedbackTypes
 
@@ -68,6 +70,7 @@ async function start(){
     window.CharacterMenu = new CharacterMenu();
     window.GameMenu = new GameMenu();
     window.Tutorial = new Tutorial();
+    window.KeybindsManager = new KeybindsManager();
 
     window.CharacterMenu.On('ready', runAfterLoad)
     window.MainMenu.On('ready', runAfterLoad)
@@ -76,6 +79,7 @@ async function start(){
     window.GameMenu.On('ready', runAfterLoad)
     window.Messages = await JsonLoader.Load("messages.json");
     window.Tutorial.On('ready', runAfterLoad)
+    window.KeybindsManager.On('ready', runAfterLoad)
 }
 
 function runAfterLoad(){
@@ -84,12 +88,22 @@ function runAfterLoad(){
     console.log("Everything loaded")
 
     //TODO remove this line for production branch
-    // Storage.Remove('tutorialcompleted')
+    Storage.Remove('tutorialcompleted')
 
     if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
         window.Tutorial.Start()
     }
 
+    // Test KeybindsManager
+    // console.log("Testing KeybindsManager...")
+    // console.log("Current keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Updating Keybind...")
+    // window.KeybindsManager.UpdateKeybind("inventory", "a")
+    // console.log("New keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Resetting keybinds...")
+    // window.KeybindsManager.ResetKeybinds()
+    // console.log("New keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Testing KeybindsManager... Done")
    
     window.LoadingScreen.Hide()
 
