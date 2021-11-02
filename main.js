@@ -52,12 +52,12 @@ let amountReady = 0
 
 window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
-window.client.on('connect', () => {
-    console.log("connected to server")
-    //TODO dont forget to comment this out
-    window.LoadingScreen.Hide()
-    window.AccountMenu.Show()
-})
+// window.client.on('connect', () => {
+//     console.log("connected to server")
+//     //TODO dont forget to comment this out
+//     window.LoadingScreen.Hide()
+//     window.AccountMenu.Show()
+// })
 
 // window.client.on('connect', () => {
 //     console.log("connected to server")
@@ -126,7 +126,6 @@ function runAfterLoad(){
     //TODO load client at this point
     // window.MainMenu.Show()
     window.InventoryMenu.Show()
-    window.LoadingScreen.Hide()
 }
 
 // window.player = new Player();
