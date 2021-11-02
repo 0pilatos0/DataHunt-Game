@@ -30,6 +30,8 @@ export default class SettingsMenu extends Menu{
     
     
     get Volume(){
-        return this.menu.querySelector('#volumeS').value;
+        if(localStorage.getItem('volume') != null){
+            return localStorage.getItem('volume');
+        }
     }
 }

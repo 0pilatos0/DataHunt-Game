@@ -9,7 +9,9 @@ body{
     background-color: #242f3f;
 }
 
-
+.hidden{
+    display: none;
+}
 canvas{
     image-rendering: pixelated;
     image-rendering: crisp-edges;
@@ -31,6 +33,11 @@ canvas{
     padding-top: 20vh;
     
 }
+
+.menu > #play > h1, #settings > h2, #quit > h2 {
+    display: inline-block;
+}
+
 .menu h1{
     font-size: 10.5rem;
 }
@@ -365,3 +372,92 @@ canvas{
         display: none;
     }
 }
+
+/*Other stuff*/
+#characterBackButton > i{
+    overflow: initial;
+}
+
+/* Tutorial */
+
+#tutorial{
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.158);
+    right: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    
+}
+kbd {
+    background-color: white;
+    color: #333;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 10px;
+    white-space: nowrap;
+    border-radius: 4px;
+
+}
+.tutorial-show{
+    animation: flyin 1s linear;
+}
+.tutorial-hide{
+    animation: flyout 1s linear;
+}
+@keyframes flyin{
+    0%{
+        opacity: 0;
+        top: -100%;
+    }
+    100%{
+        opacity: 1;
+        top: 0;
+    }
+}
+@keyframes flyout{
+    0%{
+        opacity: 1;
+        right: 0;
+    }
+    100%{
+        opacity: 0;
+        right: -100%;
+    }
+}
+
+.tutorial-complete{
+    width: 200px;
+    right: 0;
+    bottom: -10px;
+    position: absolute;
+    animation: tutorial-complete 5s ease 0s 1 normal forwards;
+
+}
+@keyframes tutorial-complete {
+    0% {
+        opacity: 0;
+        transform: rotate(-540deg) scale(3) translateY(-100%);
+    }
+    30% {
+        opacity: 1;
+        transform: rotate(0) scale(1) translateY(0);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(0);
+
+    }
+    100% {
+        transform: translateX(-100vw);
+
+    }}
