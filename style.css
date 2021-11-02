@@ -460,4 +460,11 @@ kbd {
     100% {
         transform: translateX(-100vw);
 
-    }}
+    }
+}
+
+#usernameDisplay{
+    right: 100px;
+    top: 100px;
+    position: absolute;
+}

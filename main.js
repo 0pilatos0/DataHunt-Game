@@ -43,8 +43,8 @@ window.LoadingScreen.On('ready', start)
 
 let amountReady = 0
 
-window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
-
+window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+//datahunt.duckdns.org:3000
 window.client.on('connect', () => {
     console.log("connected to server")
     //TODO dont forget to comment this out
