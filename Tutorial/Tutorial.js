@@ -1,4 +1,5 @@
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
+import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Menu from "../Core/Menu.js";
 import Storage from "../Core/Storage.js";
 
@@ -23,31 +24,28 @@ export default class Tutorial extends Menu{
         })
     }
     
-    Start(){
+    async Start(){
         this.menu.style.display = 'flex';
         this.menu.classList.add('tutorial-show');
         this.currentStep = 0;
         this.correctPressed = [];
 
-        this.data =  [
-            {
-                keys: ['w', 'a', 's', 'd'],
-                title: "Use the following keys to move around"
-            },
-            {
-                keys: ['i'],
-                title: "Use the following key to open your inventory"
-            },
-            {
-                keys: ['c'],
-                title: "Use the following key to open your crafting menu"
-            }
-        ]
+        this.data = await JsonLoader.Load('./Tutorial/TutorialSteps.json')
 
         this.keys = this.data[this.currentStep].keys;
+        this.keyscopy = this.keys;
 
-        this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
+        this.keysString = "";
+
+        this.keys.map(key => {
+            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
+            if(this.keys.indexOf(key) != this.keys.length - 1){
+                this.keysString += ' + ';
+            }
+        })
+
+
+        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
 
         document.addEventListener('keydown', (e) => {
 
@@ -56,20 +54,37 @@ export default class Tutorial extends Menu{
                 if(this.keys.includes(e.key)){
                     this.correctPressed.push(e.key);
                     this.keys = this.keys.filter(key => key !== e.key);
+
+                    let keybind = document.querySelector(`#tutorialKeybind-${e.key}`);
+                    keybind.style.backgroundColor = '#00ff00';
+                    keybind.style.color = '#000000';
+
                 } 
                 if(this.keys.length === 0){
                     this.currentStep++;
                     
                     if(this.currentStep < this.data.length){
-                        this.keysString = this.data[this.currentStep].keys.join('</kbd> + <kbd>');
-                        this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span> <kbd> ${this.keysString} </kbd> </span>`;
+
                         this.keys = this.data[this.currentStep].keys;
+                        this.keysString = "";
+                        this.keys.map(key => {
+                            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
+                            if(this.keys.indexOf(key) != this.keys.length - 1){
+                                this.keysString += ' + ';
+                            }
+                        })
+
+                        setTimeout(() => {
+                            this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
+                        }, 500);
+
                     } else{
-                        this.Complete();
-                    }
-                    
+                        setTimeout(() => {
+                            this.Complete();
+                        }, 500);
+                        
+                    } 
                 }
-                console.log(this.keys);
             }
         })   
     }
