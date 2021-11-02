@@ -82,4 +82,8 @@ export default class KeybindsManager extends Event {
         Storage.Set("keybinds", JSON.stringify(this.keybinds));
         return;
     }
+
+    GetAllKeybinds() {
+        return this.keybinds;
+    }
 }
