@@ -56,8 +56,11 @@ export default class Tutorial extends Menu{
                     this.keys = this.keys.filter(key => key !== window.KeybindsManager.GetKeybindByKey(e.key).originalKey);
 
                     let keybind = document.querySelector(`#tutorialKeybind-${window.KeybindsManager.GetKeybindByKey(e.key).originalKey}`);
-                    keybind.style.backgroundColor = '#00ff00';
-                    keybind.style.color = '#000000';
+                    if(keybind != null){
+                        keybind.style.backgroundColor = '#00ff00';
+                        keybind.style.color = '#000000';
+                    }
+
 
                 } 
                 if(this.keys.length === 0){
