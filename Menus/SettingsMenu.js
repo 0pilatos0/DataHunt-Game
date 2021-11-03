@@ -32,6 +32,10 @@ export default class SettingsMenu extends Menu {
         super.Show();
         this.GenerateList();
     }
+    Hide() {
+        super.Hide();
+        this.menu.querySelector('#keybinds').innerHTML = '';
+    }
 
     GenerateList() {
         let keybinds = window.KeybindsManager.GetAllKeybinds()
