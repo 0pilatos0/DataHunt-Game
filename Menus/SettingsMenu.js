@@ -53,11 +53,17 @@ export default class SettingsMenu extends Menu {
                 this.menu.querySelector('#keyinput').style.display = 'block';
                 this.menu.querySelector('#keyinput p:last-child').innerHTML = `Changing the key: ${keybind.description  }`;
                 this.menu.addEventListener('keydown', (e) => {
-                    console.log(e.key);
-                    window.KeybindsManager.UpdateKeybind(keybind.action, e.key);
-                    this.menu.querySelector('#keyinput').style.display = 'none';
-                    this.menu.querySelector('#keybinds').innerHTML = '';
-                    this.GenerateList();
+                    if(window.KeybindsManager.GetKeybindByKey(e.key) === null) {
+                        window.KeybindsManager.UpdateKeybind(keybind.action, e.key);
+                        this.menu.querySelector('#keyinput').style.display = 'none';
+                        this.menu.querySelector('#keybinds').innerHTML = '';
+                        this.GenerateList();
+                    } else{
+                        this.menu.querySelector('#keyinput').style.display = 'none';
+                        this.menu.querySelector('#keybinds').innerHTML = '';
+                        window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, `Keybind already in use`);
+                        this.GenerateList();
+                    }
 
                 }, { once: true });
 
