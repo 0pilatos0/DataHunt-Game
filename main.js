@@ -94,7 +94,7 @@ function runAfterLoad(){
     console.log("Everything loaded")
 
     //TODO remove this line for production branch
-    Storage.Remove('tutorialcompleted')
+    // Storage.Remove('tutorialcompleted')
 
 
 
