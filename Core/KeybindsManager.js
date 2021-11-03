@@ -91,7 +91,21 @@ export default class KeybindsManager extends Event {
         return;
     }
 
+    //get all keybinds
     GetAllKeybinds() {
         return this.keybinds;
+    }
+
+    //reset specific keybind to default
+    ResetKeybind(action) {
+        for (let i = 0; i < this.keybinds.length; i++) {
+            if (this.keybinds[i].action == action) {
+                this.keybinds[i].key = this.keybinds[i].originalKey;
+                Storage.Set("keybinds", JSON.stringify(this.keybinds));
+                return;
+            } else if (i == this.keybinds.length - 1) {
+                return null;
+            }
+        }
     }
 }
