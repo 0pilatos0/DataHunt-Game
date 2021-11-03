@@ -6,7 +6,7 @@ export default class KeybindsManager extends Event {
     constructor() {
         super()
         //TODO Debugging line, remove on production branch. This line Clears user keybinds from local storage
-        Storage.Remove("keybinds");
+        // Storage.Remove("keybinds");
 
         JsonLoader.Load('../Settings/Keybinds.json').then(data => {
             this.keybinds = Storage.Get("keybinds")

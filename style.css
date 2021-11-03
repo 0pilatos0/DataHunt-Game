@@ -384,7 +384,7 @@ canvas{
     width: 500px;
     height: 300px;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.158);
+    background-color: rgba(0, 0, 0, 0.87);
     right: 0;
     padding: 20px;
     box-sizing: border-box;
