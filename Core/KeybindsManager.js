@@ -42,6 +42,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].action == action) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -51,6 +53,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].key == key) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -60,6 +64,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].originalKey == key) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -72,6 +78,8 @@ export default class KeybindsManager extends Event {
                 this.keybinds[i].key = key;
                 Storage.Set("keybinds", JSON.stringify(this.keybinds));
                 return;
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
