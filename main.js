@@ -4,6 +4,7 @@ import HtmlLoader from './Core/Loaders/HtmlLoader.js';
 import Vector2 from './Core/Vector2.js';
 
 import AccountMenu from './Menus/AccountMenu.js';
+import InventoryMenu from './Menus/InventoryMenu.js';
 import CharacterMenu from './Menus/CharacterMenu.js';
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
@@ -20,12 +21,18 @@ import Tutorial from './Tutorial/Tutorial.js';
 
 import Storage from './Core/Storage.js';
 
+import KeybindsManager from './Core/KeybindsManager.js';
+
 window.Feedback = Feedback
 window.FeedbackTypes = FeedbackTypes
+
+import Inventory from "./Inventory/inventory.js";
 
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+
+window.inventory = new Inventory();
 
 window.addEventListener('keydown', (e) => {
     if (e.key === 'r' && e.ctrlKey) {
@@ -47,7 +54,6 @@ window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnec
 
 window.client.on('connect', () => {
     console.log("connected to server")
-    //TODO dont forget to comment this out
     window.LoadingScreen.Hide()
     window.AccountMenu.Show()
 })
@@ -66,16 +72,20 @@ async function start(){
     window.SettingsMenu = new SettingsMenu();
     window.AccountMenu = new AccountMenu();
     window.CharacterMenu = new CharacterMenu();
+    window.InventoryMenu = new InventoryMenu();
     window.GameMenu = new GameMenu();
     window.Tutorial = new Tutorial();
+    window.KeybindsManager = new KeybindsManager();
 
     window.CharacterMenu.On('ready', runAfterLoad)
     window.MainMenu.On('ready', runAfterLoad)
     window.SettingsMenu.On('ready', runAfterLoad)
     window.AccountMenu.On('ready', runAfterLoad)
+    window.InventoryMenu.On('ready', runAfterLoad)
     window.GameMenu.On('ready', runAfterLoad)
     window.Messages = await JsonLoader.Load("messages.json");
     window.Tutorial.On('ready', runAfterLoad)
+    window.KeybindsManager.On('ready', runAfterLoad)
 }
 
 function runAfterLoad(){
@@ -86,18 +96,26 @@ function runAfterLoad(){
     //TODO remove this line for production branch
     // Storage.Remove('tutorialcompleted')
 
-    if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
-        window.Tutorial.Start()
-    }
 
+
+    // Test KeybindsManager
+    // console.log("Testing KeybindsManager...")
+    // console.log("Current keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Updating Keybind...")
+    // window.KeybindsManager.UpdateKeybind("inventory", "a")
+    // console.log("New keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Resetting keybinds...")
+    // window.KeybindsManager.ResetKeybinds()
+    // console.log("New keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
+    // console.log("Testing KeybindsManager... Done")
    
-    window.LoadingScreen.Hide()
 
     // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, "test message");
     // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
+    // window.InventoryMenu.Show()
     // window.LoadingScreen.Hide()
 }
 

@@ -38,7 +38,7 @@ export default class Tutorial extends Menu{
         this.keysString = "";
 
         this.keys.map(key => {
-            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
+            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${window.KeybindsManager.GetKeyBindByOriginalKey(key).key} </kbd>`;
             if(this.keys.indexOf(key) != this.keys.length - 1){
                 this.keysString += ' + ';
             }
@@ -50,40 +50,46 @@ export default class Tutorial extends Menu{
         document.addEventListener('keydown', (e) => {
 
             if(Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false){
+                
+                if(window.KeybindsManager.GetKeybindByKey(e.key)?.originalKey != null){
 
-                if(this.keys.includes(e.key)){
-                    this.correctPressed.push(e.key);
-                    this.keys = this.keys.filter(key => key !== e.key);
+                    if(this.keys.includes(window.KeybindsManager.GetKeybindByKey(e.key).originalKey)){
+                        this.correctPressed.push(window.KeybindsManager.GetKeybindByKey(e.key).originalKey);
+                        this.keys = this.keys.filter(key => key !== window.KeybindsManager.GetKeybindByKey(e.key).originalKey);
 
-                    let keybind = document.querySelector(`#tutorialKeybind-${e.key}`);
-                    keybind.style.backgroundColor = '#00ff00';
-                    keybind.style.color = '#000000';
+                        let keybind = document.querySelector(`#tutorialKeybind-${window.KeybindsManager.GetKeybindByKey(e.key).originalKey}`);
+                        if(keybind != null){
+                            keybind.style.backgroundColor = '#00ff00';
+                            keybind.style.color = '#000000';
+                        }
 
-                } 
-                if(this.keys.length === 0){
-                    this.currentStep++;
-                    
-                    if(this.currentStep < this.data.length){
 
-                        this.keys = this.data[this.currentStep].keys;
-                        this.keysString = "";
-                        this.keys.map(key => {
-                            this.keysString += `<kbd id='tutorialKeybind-${key}'> ${key} </kbd>`;
-                            if(this.keys.indexOf(key) != this.keys.length - 1){
-                                this.keysString += ' + ';
-                            }
-                        })
-
-                        setTimeout(() => {
-                            this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
-                        }, 500);
-
-                    } else{
-                        setTimeout(() => {
-                            this.Complete();
-                        }, 500);
-                        
                     } 
+                    if(this.keys.length === 0){
+                        this.currentStep++;
+                        
+                        if(this.currentStep < this.data.length){
+
+                            this.keys = this.data[this.currentStep].keys;
+                            this.keysString = "";
+                            this.keys.map(key => {
+                                this.keysString += `<kbd id='tutorialKeybind-${key}'> ${window.KeybindsManager.GetKeyBindByOriginalKey(key).key} </kbd>`;
+                                if(this.keys.indexOf(key) != this.keys.length - 1){
+                                    this.keysString += ' + ';
+                                }
+                            })
+
+                            setTimeout(() => {
+                                this.menu.innerHTML = `<h5>${this.data[this.currentStep].title}</h5> <br> <span>${this.keysString}</span>`;
+                            }, 500);
+
+                        } else{
+                            setTimeout(() => {
+                                this.Complete();
+                            }, 500);
+                            
+                        } 
+                    }
                 }
             }
         })   

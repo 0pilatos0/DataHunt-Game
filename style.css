@@ -384,7 +384,7 @@ canvas{
     width: 500px;
     height: 300px;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.158);
+    background-color: rgba(0, 0, 0, 0.87);
     right: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -460,4 +460,63 @@ kbd {
     100% {
         transform: translateX(-100vw);
 
-    }}
+    }
+}
+
+/* keybinds */
+.keybind{
+    display: flex;
+}
+.keybind div{
+    width: 33%;
+}
+.keybind div:last-child{
+    text-align: right;
+}
+#keyinput p:last-child{
+    font-size: 1.5rem;
+}
+
+#keyinput{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10rem;
+    height: 200px;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.404);
+    text-align: center;
+    animation: apear 1s linear;
+}
+#keyinput p{
+    color: rgb(206, 205, 205);
+    font-size: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    
+}
+.keybind-edit, .keybind-reset{
+    padding: 10px 20px;
+    border-radius: 0px;
+    background-color: rgb(173, 172, 172);
+    border: none;
+    margin: 0;
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+.keybind-edit:hover, .keybind-reset:hover{
+    background-color: rgb(206, 205, 205);
+}
+@keyframes apear {
+    0% {
+        opacity: 0;
+        top: -100%;
+    }
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+    
+}
