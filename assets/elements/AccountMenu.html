@@ -172,6 +172,7 @@
             window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
         })
         if(data.success.length > 0){
+            usernameDisplay.innerText = `Logged in as: ${data.returnData.username}`
             window.AccountMenu.Hide()
             window.MainMenu.Show()
         }

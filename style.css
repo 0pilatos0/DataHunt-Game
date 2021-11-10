@@ -463,6 +463,11 @@ kbd {
     }
 }
 
+#usernameDisplay{
+    right: 100px;
+    top: 100px;
+    position: absolute;
+  
 /* keybinds */
 .keybind{
     display: flex;
@@ -518,5 +523,4 @@ kbd {
         opacity: 1;
         top: 0;
     }
-    
 }
