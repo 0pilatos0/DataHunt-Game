@@ -1,0 +1,70 @@
+#inventoryOverlay {
+    background-color: rgba(0, 0, 0, 0.836);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: none;
+}
+
+#inventoryOverlayImage {
+    height: 90vh;
+    border: blanchedalmond solid 10px;
+    align-self: center;
+    margin-left: 3vw;
+    background-color: rgb(4, 6, 12);
+}
+
+#inventoryOverlayRight {
+    align-self: center;
+}
+
+#inventoryOverlayStatsOld, #inventoryOverlayStatsNew {
+    width: 40vw;
+    border: blanchedalmond solid 10px;
+    margin-left: 3vw;
+    background-color: rgb(4, 6, 12);
+}
+
+#inventoryOverlayStatsNew {
+    margin-top: 3vw;
+}
+
+#inventoryOverlayStats li {
+    margin-left: 3vw;
+}
+
+#inventoryOverlayButtons i{
+    font-size: 40px;
+}
+
+#inventoryOverlayButtons {
+    margin-left: 3vw;
+    margin-top: 3vw;
+}
+
+#inventoryOverlayButtonsLeft, #inventoryOverlayButtonsRight {
+    width: 100%;
+    border: 0;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+#inventoryOverlayButtonsLeft {
+    border-bottom: rgb(255, 255, 255) solid 3px !important;
+}
+
+#inventoryOverlayButtonsControl {
+    width: 20%;
+    border: blanchedalmond solid 10px;
+}
+
+#inventoryOverlayButtonsBack, #inventoryOverlayButtonsSubmit {
+    width: 50%;
+    border: blanchedalmond solid 10px;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}

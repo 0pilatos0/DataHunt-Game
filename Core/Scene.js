@@ -100,19 +100,19 @@ export default class Scene{
         })
         //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
         let speed = 500
-        if(this.input.indexOf('w') > -1){
+        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
             //this.camera.position.Y -= speed * window.deltaTime;
             this.rectangle1.position.Y -= speed * window.deltaTime;
         }
-        if(this.input.indexOf('a') > -1){
+        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
             //this.camera.position.X -= speed * window.deltaTime;
             this.rectangle1.position.X -= speed * window.deltaTime;
         }
-        if(this.input.indexOf('s') > -1){
+        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
             //this.camera.position.Y += speed * window.deltaTime;
             this.rectangle1.position.Y += speed * window.deltaTime;
         }
-        if(this.input.indexOf('d') > -1){
+        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
             //this.camera.position.X += speed * window.deltaTime;
             this.rectangle1.position.X += speed * window.deltaTime;
         }

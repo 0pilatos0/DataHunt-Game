@@ -4,6 +4,7 @@ let classes = ['wizard', 'knight']; //, null, null, null, null
 let menuState = false;
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Vector2 from "../Core/Vector2.js"
+import Storage from "../Core/Storage.js";
 
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
@@ -47,7 +48,7 @@ const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
 
 // function acceptCharacter(ClassName) {
 //     if(ClassName !== null) {
-//         JsonLoader.Load("./class_" + ClassName + ".json").then(e => {
+//         JsonLoader.Load("./class_" + ClassName + "messages.json").then(e => {
 //             CharacterData.push({"class": e});
 //             console.log(CharacterData + "\r\n");
 //             spritePicker();
@@ -248,6 +249,8 @@ async function createPlayerPicker(){
         });
     }
 
+
+
     let confirmButton = createButton("Submit character")
 
     confirmButton.button.onclick = () => {
@@ -260,6 +263,9 @@ async function createPlayerPicker(){
         console.log(parsedCharacterData)
         window.CharacterMenu.Hide()
         window.GameMenu.Show()
+        if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
+            window.Tutorial.Start()
+        }
     }
 
     let randomButton = createButton("Randomize character")

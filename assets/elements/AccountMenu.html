@@ -13,12 +13,12 @@
                 <form data-toggle="validator" method="post" id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="password" required>
-                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                        <input id="password" class="form-control inputs" type="password" name="password">
+                        <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <label>remember me</label>
                     <div class="checkbox">
@@ -43,25 +43,25 @@
                 <form data-toggle="validator" method="post" id="registerForm">
                     <div class="form-group">
                         <label for="username">Name</label><br>
-                        <input id="username" class="form-control" type="text" name="name" required>
+                        <input id="username" class="form-control" type="text" name="name">
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label><br>
-                        <input id="username" class="form-control" type="text" name="username" required>
+                        <input id="username" class="form-control" type="text" name="username">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="password" required>
-                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                        <input id="password" class="form-control inputs" type="password" name="password">
+                        <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password</label><br>
-                        <input id="password" class="form-control inputs" type="password" name="confirmPassword" required>
-                        <button class="eyeButtons"><i class="toggleEyes far fa-eye"></i></button>
+                        <input id="password" class="form-control inputs" type="password" name="confirmPassword">
+                        <button class="eyeButtons" tabindex="-1" ><i class="toggleEyes far fa-eye"></i></button>
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Sign up</button>
@@ -80,7 +80,7 @@
                 <form data-toggle="validator" method="post" id="forgetpassform">
                     <div class="form-group">
                         <label for="email">Email</label><br>
-                        <input id="email" class="form-control" type="email" name="email" required>
+                        <input id="email" class="form-control" type="email" name="email">
                     </div><br>
                     <div class="form-group">
                         <button type="submit" class="submitlogin">Reset password</button>
@@ -95,8 +95,12 @@
     const inputs = document.getElementsByClassName('inputs');
     const buttons = document.getElementsByClassName('eyeButtons');
     const eyes = document.getElementsByClassName('toggleEyes');
+    const allInputs = document.querySelectorAll('input')
+    const allPasswordResetMenuButtons = document.getElementsByClassName('submitResetPassword')
+
     for(let i=0; i<buttons.length; i++){
-        buttons[i].onclick = ()=>{
+        buttons[i].onclick = (e)=>{
+            e.preventDefault();
             if(inputs[i].type === "password") {
                 inputs[i].type = 'text';
                 eyes[i].classList.remove('fa-eye');
@@ -108,6 +112,19 @@
             }
         }
     }
+
+    allInputs.forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if(e.key == "Enter"){
+                e.preventDefault()
+                input.form.querySelector('button[type="submit"]').click()
+            }
+        })
+    })
+
+    Array.from(allPasswordResetMenuButtons).forEach(button => {
+        button.addEventListener('click', removeAllFeedback)
+    })
 
     let loginBut = document.getElementById('loginBut');
     let registerBut = document.getElementById('RegisterButs');
@@ -131,7 +148,6 @@
     loginForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
-        console.log(data)
         window.client.emit('login', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
@@ -139,7 +155,6 @@
     forgetpassform.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries()) 
-        console.log(data)
         window.client.emit('forgotPass', data)
     }
 
@@ -150,15 +165,14 @@
         data.errors.map(e => {
             let elements = document.getElementsByClassName("login-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
-            feedback.style.display = "block"
-            feedback.insertAdjacentHTML('afterbegin', `<p>${s}</p>`)
-            feedback.style.backgroundColor = "rgb(116 201 63)"
+            window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
         })
         if(data.success.length > 0){
+            usernameDisplay.innerText = `Logged in as: ${data.returnData.username}`
             window.AccountMenu.Hide()
             window.MainMenu.Show()
         }
@@ -167,7 +181,6 @@
     registerForm.onsubmit = (e) => {
         e.preventDefault()
         let data = Object.fromEntries(new FormData(e.target).entries())
-        console.log(data)
         window.client.emit('register', data)
         loading.style.display = "block"
         loading.classList.remove('loaderdisabled')
@@ -176,34 +189,32 @@
     window.client.on('register', (data) => {
         loading.style.display = "none"
         loading.classList.add('loaderdisabled')
-        console.log(data)
         removeAllFeedback()
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
             })
         })
     })
     window.client.on('forgotPass', (data) => {
-        console.log(data)
         removeAllFeedback()
         data.errors.map(e => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback">${e}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.ERROR, e)
             })
         })
         data.success.map(s => {
             let elements = document.getElementsByClassName("register-form")
             Array.from(elements).forEach(element => {
-                element.insertAdjacentHTML('afterbegin', `<p class="loginfeedback" style="background-color:rgb(116 201 63)">${s}</p>`)
+                window.Feedback.ShowFeedback(window.FeedbackTypes.SUCCESS, s)
             })
         })
     })

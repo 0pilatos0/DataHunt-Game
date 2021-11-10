@@ -115,11 +115,11 @@ body {
     padding: 10px 20px;
     border: 2px solid black;
     border-radius: 3px;
-    margin: 0 auto;
+    margin: 10px auto;
     display: block;
     font-family: "Baloo 2", sans-serif;
     font-size: 0.8em;
-    width: 100%;
+    width: 40%;
 }
 
 #characterDisplay{
