@@ -6,7 +6,7 @@ export default class KeybindsManager extends Event {
     constructor() {
         super()
         //TODO Debugging line, remove on production branch. This line Clears user keybinds from local storage
-        Storage.Remove("keybinds");
+        // Storage.Remove("keybinds");
 
         JsonLoader.Load('../Settings/Keybinds.json').then(data => {
             this.keybinds = Storage.Get("keybinds")
@@ -42,6 +42,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].action == action) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -51,6 +53,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].key == key) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -60,6 +64,8 @@ export default class KeybindsManager extends Event {
         for (let i = 0; i < this.keybinds.length; i++) {
             if (this.keybinds[i].originalKey == key) {
                 return this.keybinds[i];
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -72,6 +78,8 @@ export default class KeybindsManager extends Event {
                 this.keybinds[i].key = key;
                 Storage.Set("keybinds", JSON.stringify(this.keybinds));
                 return;
+            } else if (i == this.keybinds.length - 1) {
+                return null;
             }
         }
     }
@@ -83,7 +91,21 @@ export default class KeybindsManager extends Event {
         return;
     }
 
+    //get all keybinds
     GetAllKeybinds() {
         return this.keybinds;
+    }
+
+    //reset specific keybind to default
+    ResetKeybind(action) {
+        for (let i = 0; i < this.keybinds.length; i++) {
+            if (this.keybinds[i].action == action) {
+                this.keybinds[i].key = this.keybinds[i].originalKey;
+                Storage.Set("keybinds", JSON.stringify(this.keybinds));
+                return;
+            } else if (i == this.keybinds.length - 1) {
+                return null;
+            }
+        }
     }
 }

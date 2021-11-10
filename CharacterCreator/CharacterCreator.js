@@ -4,6 +4,7 @@ let classes = ['wizard', 'knight']; //, null, null, null, null
 let menuState = false;
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Vector2 from "../Core/Vector2.js"
+import Storage from "../Core/Storage.js";
 
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
@@ -262,6 +263,9 @@ async function createPlayerPicker(){
         console.log(parsedCharacterData)
         window.CharacterMenu.Hide()
         window.GameMenu.Show()
+        if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
+            window.Tutorial.Start()
+        }
     }
 
     let randomButton = createButton("Randomize character")

@@ -52,24 +52,17 @@ let amountReady = 0
 
 window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
-// window.client.on('connect', () => {
-//     console.log("connected to server")
-//     //TODO dont forget to comment this out
-//     window.LoadingScreen.Hide()
-//     window.AccountMenu.Show()
-// })
+window.client.on('connect', () => {
+    console.log("connected to server")
+    window.LoadingScreen.Hide()
+    window.AccountMenu.Show()
+})
 
-// window.client.on('connect', () => {
-//     console.log("connected to server")
-//     window.LoadingScreen.Hide()
-//     window.AccountMenu.Show()
-// })
-
-// window.client.on('disconnect', () => {
-//     console.log('disconnected from server')
-//     window.LoadingScreen.Show()
-//     window.AccountMenu.Hide()
-// })
+window.client.on('disconnect', () => {
+    console.log('disconnected from server')
+    window.LoadingScreen.Show()
+    window.AccountMenu.Hide()
+})
 
 async function start(){
     //TODO add feedback to loader
@@ -101,11 +94,9 @@ function runAfterLoad(){
     console.log("Everything loaded")
 
     //TODO remove this line for production branch
-    Storage.Remove('tutorialcompleted')
+    // Storage.Remove('tutorialcompleted')
 
-    if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
-        window.Tutorial.Start()
-    }
+
 
     // Test KeybindsManager
     // console.log("Testing KeybindsManager...")
@@ -118,14 +109,15 @@ function runAfterLoad(){
     // console.log("New keybind: '"+ window.KeybindsManager.GetKeybindByAction("inventory").key +"'")
     // console.log("Testing KeybindsManager... Done")
    
-    window.LoadingScreen.Hide()
 
     // Feedback.showFeedback(FeedbackTypes.GAMESUCCESS, "test message");
     // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
     // window.MainMenu.Show()
-    window.InventoryMenu.Show()
+  
+    // window.InventoryMenu.Show()
+    // window.LoadingScreen.Hide()
 }
 
 // window.player = new Player();
