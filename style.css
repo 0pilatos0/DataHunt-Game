@@ -467,7 +467,7 @@ kbd {
     right: 100px;
     top: 100px;
     position: absolute;
-  
+}
 /* keybinds */
 .keybind{
     display: flex;
