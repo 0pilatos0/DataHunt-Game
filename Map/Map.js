@@ -25,6 +25,7 @@ export default class Map {
             jsonData.tilesets.map(async t => {
                 let tilesetData = await JsonLoader.Load(`./Map/${t.source}`)
                 tilesetData.offset = t.firstgid
+                tilesetData.image = `${t.source.substr(0, t.source.lastIndexOf("/"))}/${tilesetData.image}`
                 let tiles = await Tileset.Load(tilesetData)
                 allTiles = tiles.concat(allTiles)
                 //Check required, so it continues when all the tiles are loaded
