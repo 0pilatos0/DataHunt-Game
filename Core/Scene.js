@@ -20,7 +20,7 @@ export default class Scene{
         this.rectangle1.type = "Collidable"
         this.rectangle2.type = "Collidable"
 
-        Map.Load('../Map/Map.json').then(m => {
+        Map.Load('../Map/Graybox.json').then(m => {
             this.map = m
         })
 
