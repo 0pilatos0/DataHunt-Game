@@ -15,28 +15,29 @@ export default class Map {
         return new Promise(async (resolve, reject) => {
             let event = new Event()
             let jsonData = await JsonLoader.Load(pathToMainJsonFile)
-            let allTiles = new Array()
-            let totalTiles = 0
+            let allTiles = []
             //Safety check, sets the amount of tiles
-            jsonData.tilesets.map(async t => {
-                let tilesetData = await JsonLoader.Load(`./Map/${t.source}`)
-                totalTiles += tilesetData.tilecount
-            })
+            let tilesetCount = 0
+            let order = new Array(jsonData.tilesets.length)
             jsonData.tilesets.map(async t => {
                 let tilesetData = await JsonLoader.Load(`./Map/${t.source}`)
                 tilesetData.offset = t.firstgid
                 tilesetData.image = `${t.source.substr(0, t.source.lastIndexOf("/"))}/${tilesetData.image}`
                 let tiles = await Tileset.Load(tilesetData)
-                allTiles = tiles.concat(allTiles)
+                order[jsonData.tilesets.indexOf(t)] = tiles
                 //Check required, so it continues when all the tiles are loaded
-                if(totalTiles == allTiles.length){
+                tilesetCount++
+                if(tilesetCount == jsonData.tilesets.length){
+                    order.map(tiles => {
+                        allTiles = allTiles.concat(tiles)
+                    })
                     event.Trigger('loaded tilesets')
                 }
             });
             event.On('loaded tilesets', () => {
                 let map = []
                 let gameObjects = []
-                jsonData.layers.map(async l => {
+                jsonData.layers.map(l => {
                     switch (l.type) {
                         case "objectgroup":
                             l.objects.forEach(object => {
@@ -48,9 +49,9 @@ export default class Map {
                             //TODO add gameobjects to return data
                             break;
                         case "tilelayer":
-                            for (let y = 0; y < l.height; y++) {
-                                for (let x = 0; x < l.width; x++) {
-                                    let tileIndex = l.data[y * l.height + x]
+                            for (let y = 0; y < l.height - 1; y++) {
+                                for (let x = 0; x < l.width - 1; x++) {
+                                    let tileIndex = l.data[y * l.width + x]
                                     if(tileIndex - 1 > -1){
                                         let tile = allTiles.find(t => {
                                             return t.index == tileIndex - 1
