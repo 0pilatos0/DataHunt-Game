@@ -49,8 +49,8 @@ export default class Map {
                             //TODO add gameobjects to return data
                             break;
                         case "tilelayer":
-                            for (let y = 0; y < l.height - 1; y++) {
-                                for (let x = 0; x < l.width - 1; x++) {
+                            for (let y = 0; y < l.height; y++) {
+                                for (let x = 0; x < l.width; x++) {
                                     let tileIndex = l.data[y * l.width + x]
                                     if(tileIndex - 1 > -1){
                                         let tile = allTiles.find(t => {
