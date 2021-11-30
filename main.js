@@ -93,6 +93,9 @@ function runAfterLoad(){
     if(amountReady != 5) return
     console.log("Everything loaded")
 
+    // window.LoadingScreen.Hide()
+    // window.GameMenu.Show()
+
     //TODO remove this line for production branch
     // Storage.Remove('tutorialcompleted')
 
