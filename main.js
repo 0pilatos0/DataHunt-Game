@@ -117,10 +117,10 @@ function runAfterLoad(){
     // Feedback.showFeedback(FeedbackTypes.SUCCESS, "test message");
     //TODO fix bug with account page which requires client
     //TODO load client at this point
-    // window.MainMenu.Show()
+    window.MainMenu.Show()
   
     // window.InventoryMenu.Show()
-    // window.LoadingScreen.Hide()
+    window.LoadingScreen.Hide()
 }
 
 // window.player = new Player();
