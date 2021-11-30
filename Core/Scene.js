@@ -11,19 +11,39 @@ export default class Scene{
 
     rectangle1
 
-    rectangle2
+    // rectangle2
 
     constructor() {
         Scene.activeScene = this
-        this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
-        this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
-        this.rectangle1.type = "Collidable"
-        this.rectangle2.type = "Collidable"
 
         Map.Load('../Map/Graybox.json').then(m => {
             this.map = m
+            this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
+            this.rectangle1.type = "Collidable"
+            this.rectangle1.On('sC', (gameObject) => {
+                //this.rectangle1.color = '#00f'
+                gameObject.visible = false
+                // console.log("?")
+            })
+    
+            this.rectangle1.On('C', (gameObject) => {
+                //this.rectangle1.color = '#00f'
+                gameObject.visible = false
+                // console.log("?")
+            })
+            this.rectangle1.On('eC', (gameObject) => {
+                //this.rectangle1.color = '#f00'
+                gameObject.visible = true
+                // console.log("?stopped")
+            })
         })
 
+       
+        // this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+        
+        // this.rectangle2.type = "Collidable"
+
+        
         window.addEventListener('resize', () => {
             this.camera.size = new Vector2(window.innerWidth, window.innerHeight)
         })
@@ -49,7 +69,7 @@ export default class Scene{
             // }
         })
 
-        this.rectangle2.color = '#0f0';
+        // this.rectangle2.color = '#0f0';
 
         // this.rectangle2.On('sC', () => {
         //     console.log("?")
@@ -58,23 +78,6 @@ export default class Scene{
         // this.rectangle2.On('eC', () => {
         //     console.log("?")
         // })
-
-        this.rectangle1.On('sC', (gameObject) => {
-            //this.rectangle1.color = '#00f'
-            gameObject.visible = false
-            // console.log("?")
-        })
-
-        this.rectangle1.On('C', (gameObject) => {
-            //this.rectangle1.color = '#00f'
-            gameObject.visible = false
-            // console.log("?")
-        })
-        this.rectangle1.On('eC', (gameObject) => {
-            //this.rectangle1.color = '#f00'
-            gameObject.visible = true
-            // console.log("?stopped")
-        })
 
         // GameObject.gameObjects.map(gameObject => {
             
@@ -94,6 +97,9 @@ export default class Scene{
     }
 
     Update(){
+        if(this.rectangle1 == null){
+            return
+        }
         GameObject.gameObjects.map(gameObject => {
             if(!this.IsInRange(gameObject)) return
             gameObject.Update()
