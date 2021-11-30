@@ -190,13 +190,13 @@ body {
 .characterPickButtonHolder{
     display: inline-block;
     width: 30%;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .characterPickButtonHolder2{
     display: inline-block;
     width: 70%;
-    line-height: 60px;
+    line-height: 50px;
 }
 
 .characterPickButtonHolder2 p{
