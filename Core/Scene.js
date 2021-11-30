@@ -36,6 +36,11 @@ export default class Scene{
                 gameObject.visible = true
                 // console.log("?stopped")
             })
+            let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
+
+            let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
+
+            this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
         })
 
        
