@@ -16,7 +16,7 @@ export default class Scene{
     constructor() {
         Scene.activeScene = this
 
-        Map.Load('../Map/Graybox.json').then(m => {
+        Map.Load('../Map/graybox.json').then(m => {
             this.map = m
             this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
             this.rectangle1.type = "Collidable"
