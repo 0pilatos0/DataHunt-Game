@@ -12,6 +12,7 @@ export default class Map {
     }
 
     static async Load(pathToMainJsonFile){
+        let counter = 0
         return new Promise(async (resolve, reject) => {
             let event = new Event()
             let jsonData = await JsonLoader.Load(pathToMainJsonFile)
@@ -44,13 +45,14 @@ export default class Map {
                                 let gameObject = new GameObject(new Rectangle(new Vector2(object.x * window.spriteScaleFactor, object.y * window.spriteScaleFactor), new Vector2(object.width * window.spriteScaleFactor, object.height * window.spriteScaleFactor)));
                                 gameObject.rotation = object.rotation
                                 gameObject.type = object.type
-                                gameObjects.push(gameObject)
+                                // gameObjects.push(gameObject)
                             });
                             //TODO add gameobjects to return data
                             break;
                         case "tilelayer":
                             for (let y = 0; y < l.height; y++) {
                                 for (let x = 0; x < l.width; x++) {
+                                    counter++
                                     let tileIndex = l.data[y * l.width + x]
                                     if(tileIndex - 1 > -1){
                                         let tile = allTiles.find(t => {
@@ -63,7 +65,7 @@ export default class Map {
                                         sprite.animation = tile.animation
                                         let gameObject = new GameObject(sprite)
                                         gameObject.type = tile.type
-                                        map.push(gameObject)
+                                        // map.push(gameObject)
                                     }
                                 }
                             }
@@ -72,7 +74,8 @@ export default class Map {
                             break;
                     }
                 })
-                return resolve(map)
+                console.log(counter)
+                return resolve(true)
             })
         })
     }

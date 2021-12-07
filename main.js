@@ -52,17 +52,17 @@ let amountReady = 0
 
 window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
-window.client.on('connect', () => {
-    console.log("connected to server")
-    window.LoadingScreen.Hide()
-    window.AccountMenu.Show()
-})
+// window.client.on('connect', () => {
+//     console.log("connected to server")
+//     window.LoadingScreen.Hide()
+//     window.AccountMenu.Show()
+// })
 
-window.client.on('disconnect', () => {
-    console.log('disconnected from server')
-    window.LoadingScreen.Show()
-    window.AccountMenu.Hide()
-})
+// window.client.on('disconnect', () => {
+//     console.log('disconnected from server')
+//     window.LoadingScreen.Show()
+//     window.AccountMenu.Hide()
+// })
 
 async function start(){
     //TODO add feedback to loader
@@ -120,7 +120,8 @@ function runAfterLoad(){
     // window.MainMenu.Show()
   
     // window.InventoryMenu.Show()
-    // window.LoadingScreen.Hide()
+    window.LoadingScreen.Hide()
+    window.GameMenu.Show()
 }
 
 // window.player = new Player();
