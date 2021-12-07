@@ -16,32 +16,34 @@ export default class Scene{
     constructor() {
         Scene.activeScene = this
 
-        Map.Load('../Map/graybox.json').then(m => {
-            this.map = m
-            this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
-            this.rectangle1.type = "Collidable"
-            this.rectangle1.On('sC', (gameObject) => {
-                //this.rectangle1.color = '#00f'
-                gameObject.visible = false
-                // console.log("?")
-            })
+        // Map.Load('../Map/graybox.json').then(m => {
+        //     this.map = m
+        //     this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
+        //     this.rectangle1.type = "Collidable"
+        //     this.rectangle1.On('sC', (gameObject) => {
+        //         //this.rectangle1.color = '#00f'
+        //         gameObject.visible = false
+        //         // console.log("?")
+        //     })
     
-            this.rectangle1.On('C', (gameObject) => {
-                //this.rectangle1.color = '#00f'
-                gameObject.visible = false
-                // console.log("?")
-            })
-            this.rectangle1.On('eC', (gameObject) => {
-                //this.rectangle1.color = '#f00'
-                gameObject.visible = true
-                // console.log("?stopped")
-            })
-            let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
+        //     this.rectangle1.On('C', (gameObject) => {
+        //         //this.rectangle1.color = '#00f'
+        //         gameObject.visible = false
+        //         // console.log("?")
+        //     })
+        //     this.rectangle1.On('eC', (gameObject) => {
+        //         //this.rectangle1.color = '#f00'
+        //         gameObject.visible = true
+        //         // console.log("?stopped")
+        //     })
+        //     let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
 
-            let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
+        //     let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
 
-            this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
-        })
+        //     this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
+
+        //     console.log(spawnpoint.position)
+        // })
 
        
         // this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
@@ -97,57 +99,57 @@ export default class Scene{
             gameObject.Draw(ctx, offset)
         })
 
-        //ctx.fillStyle = '#fff';
-        //ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
+        // ctx.fillStyle = '#fff';
+        // ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
     }
 
     Update(){
-        if(this.rectangle1 == null){
-            return
-        }
+        // if(this.rectangle1 == null){
+        //     return
+        // }
         GameObject.gameObjects.map(gameObject => {
             if(!this.IsInRange(gameObject)) return
             gameObject.Update()
         })
-        //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
-        let speed = 500
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
-            //this.camera.position.Y -= speed * window.deltaTime;
-            this.rectangle1.position.Y -= speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
-            //this.camera.position.X -= speed * window.deltaTime;
-            this.rectangle1.position.X -= speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
-            //this.camera.position.Y += speed * window.deltaTime;
-            this.rectangle1.position.Y += speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
-            //this.camera.position.X += speed * window.deltaTime;
-            this.rectangle1.position.X += speed * window.deltaTime;
-        }
-        // if(this.input.indexOf('e') > -1){
+        // //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
+        // let speed = 500
+        // if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
+        //     //this.camera.position.Y -= speed * window.deltaTime;
+        //     this.rectangle1.position.Y -= speed * window.deltaTime;
+        // }
+        // if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
+        //     //this.camera.position.X -= speed * window.deltaTime;
+        //     this.rectangle1.position.X -= speed * window.deltaTime;
+        // }
+        // if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
         //     //this.camera.position.Y += speed * window.deltaTime;
-        //     this.rectangle1.rotation += speed * window.deltaTime;
+        //     this.rectangle1.position.Y += speed * window.deltaTime;
         // }
-        // if(this.input.indexOf('q') > -1){
+        // if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
         //     //this.camera.position.X += speed * window.deltaTime;
-        //     this.rectangle1.rotation -= speed * window.deltaTime;
+        //     this.rectangle1.position.X += speed * window.deltaTime;
         // }
+        // // if(this.input.indexOf('e') > -1){
+        // //     //this.camera.position.Y += speed * window.deltaTime;
+        // //     this.rectangle1.rotation += speed * window.deltaTime;
+        // // }
+        // // if(this.input.indexOf('q') > -1){
+        // //     //this.camera.position.X += speed * window.deltaTime;
+        // //     this.rectangle1.rotation -= speed * window.deltaTime;
+        // // }
 
-        if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
-            this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
-        }
-        else{
-            this.camera.position.X = 0
-        }
-        if(this.rectangle1.position.Y + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2 >= this.camera.size.Y * this.camera.scale.Y / 2){
-            this.camera.position.Y = this.rectangle1.position.Y - this.camera.size.Y * this.camera.scale.Y / 2 + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2
-        }
-        else{
-            this.camera.position.Y = 0
-        }
+        // if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
+        //     this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
+        // }
+        // else{
+        //     this.camera.position.X = 0
+        // }
+        // if(this.rectangle1.position.Y + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2 >= this.camera.size.Y * this.camera.scale.Y / 2){
+        //     this.camera.position.Y = this.rectangle1.position.Y - this.camera.size.Y * this.camera.scale.Y / 2 + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2
+        // }
+        // else{
+        //     this.camera.position.Y = 0
+        // }
     }
 
     IsInRange(transformable){

@@ -27,6 +27,8 @@ window.Feedback = Feedback
 window.FeedbackTypes = FeedbackTypes
 
 import Inventory from "./Inventory/inventory.js";
+import GameObject from './Core/GameObject.js';
+import Sprite from './Core/Drawables/Sprite.js';
 
 window.spriteSize = new Vector2(16, 16);
 
@@ -50,7 +52,53 @@ window.LoadingScreen.On('ready', start)
 
 let amountReady = 0
 
-window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+
+window.client.on('connect', () => {
+    window.client.emit('map')
+})
+
+window.client.on('map', (data) => {
+    GameObject.gameObjects = []
+    data.map(gameObject => {
+        let tile = window.tiles.find(tile => tile.index == gameObject.tileIndex)?.tile
+        gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile.src))
+    })
+})
+
+window.client.on('tilesets', (data) => {
+    console.log("Started loading tiles")
+    window.tiles = []
+    data.tilesets.map(tileset => {
+        let img = new Image()
+        img.onload = () => {
+            for (let y = 0; y < tileset.height / tileset.tileHeight; y++) {
+                for (let x = 0; x < tileset.width / tileset.tileWidth; x++) {
+                    let imgSize = new Vector2(tileset.tileWidth, tileset.tileHeight)
+                    let imgPos = new Vector2(x * imgSize.X, y * imgSize.Y)
+                    let canvas = document.createElement('canvas')
+                    let ctx = canvas.getContext('2d')
+                    canvas.width = imgSize.X
+                    canvas.height = imgSize.Y
+                    ctx.drawImage(img, imgPos.X, imgPos.Y, imgSize.X, imgSize.Y, 0, 0, imgSize.X, imgSize.Y)
+                    let tile = document.createElement('img')
+                    tile.src = canvas.toDataURL('base64')
+                    window.tiles.push({tile, index: tiles.length})
+                }
+            }
+            if(window.tiles.length == data.count){
+                console.log("Done with loading tiles")
+                console.log(window.tiles)
+            }
+        }
+        img.src = tileset.image
+    })
+})
+
+window.client.on('render', (data) => {
+    // console.log(data)
+    
+})
 
 // window.client.on('connect', () => {
 //     console.log("connected to server")
