@@ -1,10 +1,15 @@
+import Sprite from "../Core/Drawables/Sprite.js";
+import GameObject from "../Core/GameObject.js";
+import JsonLoader from "../Core/Loaders/JsonLoader.js";
+import Vector2 from "../Core/Vector2.js"
+import Storage from "../Core/Storage.js";
+import Player from "../Core/Player.js";
+
 let CharacterData = [];
 // let images = document.getElementById("class").children;
 let classes = ['wizard', 'knight']; //, null, null, null, null
 let menuState = false;
-import JsonLoader from "../Core/Loaders/JsonLoader.js";
-import Vector2 from "../Core/Vector2.js"
-import Storage from "../Core/Storage.js";
+
 
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
@@ -255,12 +260,16 @@ async function createPlayerPicker(){
 
     confirmButton.button.onclick = () => {
         let parsedCharacterData = {}
+        let sprites = []
         options.map(option => {
             parsedCharacterData[option.displayName] = option.spriteIndex
+            sprites.push(new GameObject(new Sprite(new Vector2(0, 0), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), option.sprites[option.spriteIndex][0])))
         })
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
+        console.log(sprites)
         console.log(parsedCharacterData)
+        window.player = new Player(sprites)
         window.CharacterMenu.Hide()
         window.GameMenu.Show()
         if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {

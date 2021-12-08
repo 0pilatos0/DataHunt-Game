@@ -7,14 +7,13 @@ import GameObject from "./GameObject.js";
 export default class Scene{
     static activeScene
     camera = new Camera(new Vector2(0, 0), new Vector2(window.innerWidth, window.innerHeight));
-    input = []
 
-    rectangle1
 
     // rectangle2
 
     constructor() {
         Scene.activeScene = this
+        window.input = []
 
         Map.Load('../Map/graybox.json').then(m => {
             this.map = m
@@ -25,7 +24,7 @@ export default class Scene{
                 gameObject.visible = false
                 // console.log("?")
             })
-    
+
             this.rectangle1.On('C', (gameObject) => {
                 //this.rectangle1.color = '#00f'
                 gameObject.visible = false
@@ -54,14 +53,14 @@ export default class Scene{
         })
 
         window.addEventListener('keydown', (e) => {
-            if(this.input.indexOf(e.key) == -1){
-                this.input.push(e.key);
+            if(window.input.indexOf(e.key) == -1){
+                window.input.push(e.key);
             }
         })
 
         window.addEventListener('keyup', (e) => {
-            if(this.input.indexOf(e.key) > -1){
-                this.input.splice(this.input.indexOf(e.key), 1);
+            if(window.input.indexOf(e.key) > -1){
+                window.input.splice(window.input.indexOf(e.key), 1);
             }
         })
 
@@ -102,31 +101,16 @@ export default class Scene{
     }
 
     Update(){
-        if(this.rectangle1 == null){
-            return
-        }
+        if(window.player) window.player.Update()
+        // if(this.rectangle1 == null){
+        //     return
+        // }
         GameObject.gameObjects.map(gameObject => {
             if(!this.IsInRange(gameObject)) return
             gameObject.Update()
         })
         //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
-        let speed = 500
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
-            //this.camera.position.Y -= speed * window.deltaTime;
-            this.rectangle1.position.Y -= speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
-            //this.camera.position.X -= speed * window.deltaTime;
-            this.rectangle1.position.X -= speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
-            //this.camera.position.Y += speed * window.deltaTime;
-            this.rectangle1.position.Y += speed * window.deltaTime;
-        }
-        if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
-            //this.camera.position.X += speed * window.deltaTime;
-            this.rectangle1.position.X += speed * window.deltaTime;
-        }
+
         // if(this.input.indexOf('e') > -1){
         //     //this.camera.position.Y += speed * window.deltaTime;
         //     this.rectangle1.rotation += speed * window.deltaTime;
@@ -135,19 +119,6 @@ export default class Scene{
         //     //this.camera.position.X += speed * window.deltaTime;
         //     this.rectangle1.rotation -= speed * window.deltaTime;
         // }
-
-        if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
-            this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
-        }
-        else{
-            this.camera.position.X = 0
-        }
-        if(this.rectangle1.position.Y + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2 >= this.camera.size.Y * this.camera.scale.Y / 2){
-            this.camera.position.Y = this.rectangle1.position.Y - this.camera.size.Y * this.camera.scale.Y / 2 + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2
-        }
-        else{
-            this.camera.position.Y = 0
-        }
     }
 
     IsInRange(transformable){
