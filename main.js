@@ -55,23 +55,24 @@ let amountReady = 0
 window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
-    window.client.emit('map')
+    window.client.emit('tilesets')
 })
 
 window.client.on('map', (data) => {
     GameObject.gameObjects = []
     data.map(gameObject => {
-        let tile = window.tiles.find(tile => tile.index == gameObject.tileIndex)?.tile
+        let tile = Object.values(window.tiles)[Object.keys(window.tiles).find(tile => tile == gameObject.tileIndex - 1)].tile
         gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile.src))
     })
 })
 
 window.client.on('tilesets', (data) => {
     console.log("Started loading tiles")
-    window.tiles = []
+    window.tiles = {}
     data.tilesets.map(tileset => {
         let img = new Image()
         img.onload = () => {
+            let counter = 0
             for (let y = 0; y < tileset.height / tileset.tileHeight; y++) {
                 for (let x = 0; x < tileset.width / tileset.tileWidth; x++) {
                     let imgSize = new Vector2(tileset.tileWidth, tileset.tileHeight)
@@ -83,21 +84,18 @@ window.client.on('tilesets', (data) => {
                     ctx.drawImage(img, imgPos.X, imgPos.Y, imgSize.X, imgSize.Y, 0, 0, imgSize.X, imgSize.Y)
                     let tile = document.createElement('img')
                     tile.src = canvas.toDataURL('base64')
-                    window.tiles.push({tile, index: tiles.length})
+                    window.tiles[tileset.index - 1 + counter] = {tile}
+                    counter++
                 }
             }
-            if(window.tiles.length == data.count){
+            if(Object.keys(window.tiles).length == data.count){
                 console.log("Done with loading tiles")
                 console.log(window.tiles)
+                window.client.emit('map')
             }
         }
         img.src = tileset.image
     })
-})
-
-window.client.on('render', (data) => {
-    // console.log(data)
-    
 })
 
 // window.client.on('connect', () => {
