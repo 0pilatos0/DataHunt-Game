@@ -29,6 +29,7 @@ window.FeedbackTypes = FeedbackTypes
 import Inventory from "./Inventory/inventory.js";
 import GameObject from './Core/GameObject.js';
 import Sprite from './Core/Drawables/Sprite.js';
+import Scene from './Core/Scene.js';
 
 window.spriteSize = new Vector2(16, 16);
 
@@ -55,7 +56,7 @@ let amountReady = 0
 window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
-    window.client.emit('tilesets')
+    window.client.emit('tilesets', Scene.activeScene.camera)
 })
 
 window.client.on('map', (data) => {

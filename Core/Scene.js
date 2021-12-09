@@ -53,6 +53,7 @@ export default class Scene{
         
         window.addEventListener('resize', () => {
             this.camera.size = new Vector2(window.innerWidth, window.innerHeight)
+            window.client.emit('resize', this.camera)
         })
 
         window.addEventListener('keydown', (e) => {
