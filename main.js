@@ -8,6 +8,7 @@ import InventoryMenu from './Menus/InventoryMenu.js';
 import CharacterMenu from './Menus/CharacterMenu.js';
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
+import LoaderScreen from './Menus/LoaderMenu.js';
 import MainMenu from './Menus/MainMenu.js';
 import SettingsMenu from './Menus/SettingsMenu.js';
 import JsonLoader from "./Core/Loaders/JsonLoader.js";
@@ -31,6 +32,7 @@ import Inventory from "./Inventory/inventory.js";
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+window.LoaderScreen = new LoaderScreen();
 
 window.inventory = new Inventory();
 
@@ -46,7 +48,7 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-window.LoadingScreen.On('ready', start)
+window.LoaderScreen.On('ready', start)
 
 let amountReady = 0
 
@@ -66,7 +68,7 @@ window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnec
 
 async function start(){
     //TODO add feedback to loader
-    window.LoadingScreen.Show()
+    // window.LoadingScreen.Show()
 
     window.MainMenu = new MainMenu();
     window.SettingsMenu = new SettingsMenu();
