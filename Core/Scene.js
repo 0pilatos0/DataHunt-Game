@@ -95,11 +95,11 @@ export default class Scene{
     }
 
     Draw(ctx){
-        // let offset = new Vector2(-this.camera.position.X, -this.camera.position.Y)
+        let offset = new Vector2(-this.camera.position.X, -this.camera.position.Y)
 
         GameObject.gameObjects.map(gameObject => {
             // if(!this.IsInRange(gameObject)) return
-            gameObject.Draw(ctx) //,offset
+            gameObject.Draw(ctx, offset)
         })
 
         // ctx.fillStyle = '#fff';
@@ -114,27 +114,31 @@ export default class Scene{
             // if(!this.IsInRange(gameObject)) return
             gameObject.Update()
         })
+        let movement = {forward: false, backward: false, left: false, right: false}
         // //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
         // let speed = 500
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
             //this.camera.position.Y -= speed * window.deltaTime;
             // this.rectangle1.position.Y -= speed * window.deltaTime;
-            window.client.emit('movement', "forward")
+            movement.forward = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
             //this.camera.position.X -= speed * window.deltaTime;
             // this.rectangle1.position.X -= speed * window.deltaTime;
-            window.client.emit('movement', "left")
+            movement.left = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
             //this.camera.position.Y += speed * window.deltaTime;
             // this.rectangle1.position.Y += speed * window.deltaTime;
-            window.client.emit('movement', "backward")
+            movement.backward = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
             //this.camera.position.X += speed * window.deltaTime;
             // this.rectangle1.position.X += speed * window.deltaTime;
-            window.client.emit('movement', "right")
+            movement.right = true
+        }
+        if(Object.values(movement).some(movement => movement == true)){
+            window.client.emit('movement', movement)
         }
         // // if(this.input.indexOf('e') > -1){
         // //     //this.camera.position.Y += speed * window.deltaTime;
@@ -145,18 +149,7 @@ export default class Scene{
         // //     this.rectangle1.rotation -= speed * window.deltaTime;
         // // }
 
-        // if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
-        //     this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
-        // }
-        // else{
-        //     this.camera.position.X = 0
-        // }
-        // if(this.rectangle1.position.Y + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2 >= this.camera.size.Y * this.camera.scale.Y / 2){
-        //     this.camera.position.Y = this.rectangle1.position.Y - this.camera.size.Y * this.camera.scale.Y / 2 + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2
-        // }
-        // else{
-        //     this.camera.position.Y = 0
-        // }
+        
     }
 
     // IsInRange(transformable){
