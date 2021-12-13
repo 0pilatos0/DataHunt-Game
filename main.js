@@ -63,7 +63,7 @@ window.client.on('map', (data) => {
     GameObject.gameObjects = []
     data.map(gameObject => {
         let tile = Object.values(window.tiles)[Object.keys(window.tiles).find(tile => tile == gameObject.tileIndex - 1)].tile
-        gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile.src))
+        gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile))
     })
 })
 
@@ -91,7 +91,7 @@ window.client.on('tilesets', (data) => {
             }
             if(Object.keys(window.tiles).length == data.count){
                 console.log("Done with loading tiles")
-                console.log(window.tiles)
+                // console.log(window.tiles)
                 window.client.emit('map')
             }
         }
