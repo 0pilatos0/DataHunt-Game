@@ -9,59 +9,6 @@ import Storage from "../Core/Storage.js";
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
 
-// for (let i = 0; i < images.length; i++) {
-//     images[i].onclick = () => {
-//         confirmClass(i);
-//     };
-// }
-
-// document.getElementById("inputName").addEventListener('keypress', (e) => {
-//     if (e.code === "Enter") {
-//         CharacterData.push({"name": document.getElementById("inputName").value})
-
-//         document.getElementsByClassName("input")[0].style.display = "None";
-
-//         pickClass();
-//     }
-// });
-
-// function pickClass() {
-//     document.getElementById("class").style.display = "Block";
-
-// }
-
-// function confirmClass(id) {
-//     document.getElementById("class").style.display = "None";
-//     document.getElementById("classConfirmation").style.display = "Block";
-
-//     document.getElementById("classConfirmationDecline").onclick = ()=>{declineCharacter()};
-//     document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter(classes[id])};
-
-
-//     document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData[0].name;
-// }
-
-// function declineCharacter() {
-//     document.getElementById("classConfirmation").style.display = "None";
-//     document.getElementsByClassName("input")[0].style.display = "Block";
-// }
-
-// function acceptCharacter(ClassName) {
-//     if(ClassName !== null) {
-//         JsonLoader.Load("./class_" + ClassName + "messages.json").then(e => {
-//             CharacterData.push({"class": e});
-//             console.log(CharacterData + "\r\n");
-//             spritePicker();
-//         });
-//     }
-// }
-
-// function spritePicker() {
-//     document.getElementById("classConfirmation").style.display = "none";
-//     document.getElementById("characterPicker").style.display = "Block";
-
-// }
-
 async function translateTilesetToTiles(path){
     return new Promise(async (resolve, reject) => {
         let sprites = []
@@ -172,7 +119,7 @@ async function createPlayerPicker(){
         classButtons.lock.setAttribute("locked", state)
         state ? classButtons.lock.innerHTML = lockIcon : classButtons.lock.innerHTML = unlockIcon
     })
-    
+
     holder.append(nameLabel)
     holder.appendChild(nameInput)
     holder.appendChild(lockAll)
@@ -182,7 +129,7 @@ async function createPlayerPicker(){
         let index = options.indexOf(option)
         options[index].spriteIndex = 0
         let sprites = options[index]["sprites"]
-        
+
         let characterPartHolder = document.createElement('img')
         characterPartHolder.classList.add("characterPart")
         characterPartHolder.src = sprites[options[index].spriteIndex][0]
@@ -324,7 +271,7 @@ function createButtons(text, tooltipText){
     rightArrow.classList.add("characterPickButtonRight")
     rightArrow.insertAdjacentHTML('afterbegin', `<i class="fas fa-arrow-right"></i>`)
     rightArrow.title = `Change ${tooltipText}`
-    
+
     let lock = document.createElement('button')
     lock.innerHTML = unlockIcon
     lock.classList.add("characterPickButton")
