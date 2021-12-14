@@ -6,6 +6,7 @@ import Vector2 from './Core/Vector2.js';
 import AccountMenu from './Menus/AccountMenu.js';
 import InventoryMenu from './Menus/InventoryMenu.js';
 import CharacterMenu from './Menus/CharacterMenu.js';
+
 import GameMenu from './Menus/GameMenu.js';
 import LoadingScreen from './Menus/LoadingScreen.js';
 import MainMenu from './Menus/MainMenu.js';
@@ -52,17 +53,17 @@ let amountReady = 0
 
 window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
-// window.client.on('connect', () => {
-//     console.log("connected to server")
-//     window.LoadingScreen.Hide()
-//     window.AccountMenu.Show()
-// })
-//
-// window.client.on('disconnect', () => {
-//     console.log('disconnected from server')
-//     window.LoadingScreen.Show()
-//     window.AccountMenu.Hide()
-//})
+ window.client.on('connect', () => {
+     console.log("connected to server")
+     window.LoadingScreen.Hide()
+    window.AccountMenu.Show()
+})
+
+window.client.on('disconnect', () => {
+    console.log('disconnected from server')
+    window.LoadingScreen.Show()
+    window.AccountMenu.Hide()
+})
 
 async function start(){
     //TODO add feedback to loader
@@ -93,8 +94,8 @@ function runAfterLoad(){
     if(amountReady != 5) return
     console.log("Everything loaded")
 
-    // window.LoadingScreen.Hide()
-    // window.GameMenu.Show()
+    //window.LoadingScreen.Hide()
+    //window.GameMenu.Show()
 
     //TODO remove this line for production branch
     // Storage.Remove('tutorialcompleted')
@@ -120,8 +121,7 @@ function runAfterLoad(){
     // window.MainMenu.Show()
   
     // window.InventoryMenu.Show()
-    window.LoadingScreen.Hide()
-    window.CharacterMenu.Show()
+    // window.AccountMenu.Show()
 }
 
 // window.player = new Player();

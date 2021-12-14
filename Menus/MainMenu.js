@@ -1,5 +1,6 @@
 import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
 import Menu from "../Core/Menu.js";
+import CharSelectMenu from './CharSelectMenu.js';
 
 
 export default class MainMenu extends Menu{
@@ -17,8 +18,9 @@ export default class MainMenu extends Menu{
             this.Hide()
 
             this.play.addEventListener('click', () =>{
+                window.CharSelectMenu = new CharSelectMenu();
                 this.Hide()
-                window.CharacterMenu.Show()
+                window.CharSelectMenu.Show()
             });
             
             this.settings.addEventListener('click', () =>{

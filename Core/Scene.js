@@ -3,6 +3,7 @@ import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
 import Vector2 from "./Vector2.js";
 import GameObject from "./GameObject.js";
+import Player from "../Core/Player.js";
 
 export default class Scene{
     static activeScene
@@ -16,30 +17,32 @@ export default class Scene{
         window.input = []
 
         Map.Load('../Map/graybox.json').then(m => {
-            this.map = m
-            this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
-            this.rectangle1.type = "Collidable"
-            this.rectangle1.On('sC', (gameObject) => {
-                //this.rectangle1.color = '#00f'
-                gameObject.visible = false
-                // console.log("?")
-            })
+            // this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
+            //             // this.rectangle1.type = "Collidable"
+            //             // this.rectangle1.On('sC', (gameObject) => {
+            //             //     //this.rectangle1.color = '#00f'
+            //             //     gameObject.visible = false
+            //             //     // console.log("?")
+            //             // })
+            //             //
+            //             // this.rectangle1.On('C', (gameObject) => {
+            //             //     //this.rectangle1.color = '#00f'
+            //             //     gameObject.visible = false
+            //             //     // console.log("?")
+            //             // })
+            //             // this.rectangle1.On('eC', (gameObject) => {
+            //             //     //this.rectangle1.color = '#f00'
+            //             //     gameObject.visible = true
+            //             //     // console.log("?stopped")
+            //             // })
 
-            this.rectangle1.On('C', (gameObject) => {
-                //this.rectangle1.color = '#00f'
-                gameObject.visible = false
-                // console.log("?")
-            })
-            this.rectangle1.On('eC', (gameObject) => {
-                //this.rectangle1.color = '#f00'
-                gameObject.visible = true
-                // console.log("?stopped")
-            })
             let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
 
             let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
+            window.player = new Player()
+            window.player.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
 
-            this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
+            // this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
         })
 
        

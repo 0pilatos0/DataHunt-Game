@@ -78,12 +78,14 @@ export default class GameObject extends Hitbox{
     }
 
     Draw(ctx, offset = Vector2.Zero()){
+        if(!this.drawable) return
         if(!this.drawable.visible) return
         this.drawable.Draw(ctx, offset)
     }
 
     Update(){
         super.Update()
+        if(!this.drawable) return
         if(!this.drawable.visible) return
         this.drawable.Update()
     }

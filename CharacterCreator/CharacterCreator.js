@@ -263,13 +263,23 @@ async function createPlayerPicker(){
         let sprites = []
         options.map(option => {
             parsedCharacterData[option.displayName] = option.spriteIndex
-            sprites.push(new GameObject(new Sprite(new Vector2(0, 0), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), option.sprites[option.spriteIndex][0])))
+            sprites.push(new Sprite(new Vector2(0, 0), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), option.sprites[option.spriteIndex][0]))
         })
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
-        console.log(sprites)
-        console.log(parsedCharacterData)
-        window.player = new Player(sprites)
+        // console.log(sprites)
+        // console.log(parsedCharacterData)
+        //window.player.sprites = sprites
+        sprites.map(sprite => {
+            //console.log(sprite)
+            //console.log(sprite.position)
+            sprite.position = window.player.position
+            //console.log(sprite.position)
+            document.body.appendChild(sprite.image)
+            window.player.sprites.push(new GameObject(sprite))
+        })
+        //console.log(window.player)
+        //console.log(GameObject.gameObjects)
         window.CharacterMenu.Hide()
         window.GameMenu.Show()
         if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {

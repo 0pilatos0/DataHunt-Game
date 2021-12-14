@@ -44,7 +44,7 @@ export default class Map {
                                 let gameObject = new GameObject(new Rectangle(new Vector2(object.x * window.spriteScaleFactor, object.y * window.spriteScaleFactor), new Vector2(object.width * window.spriteScaleFactor, object.height * window.spriteScaleFactor)));
                                 gameObject.rotation = object.rotation
                                 gameObject.type = object.type
-                                gameObjects.push(gameObject)
+                                //gameObjects.push(gameObject)
                             });
                             //TODO add gameobjects to return data
                             break;
@@ -63,7 +63,7 @@ export default class Map {
                                         sprite.animation = tile.animation
                                         let gameObject = new GameObject(sprite)
                                         gameObject.type = tile.type
-                                        map.push(gameObject)
+                                        // map.push(gameObject)
                                     }
                                 }
                             }
