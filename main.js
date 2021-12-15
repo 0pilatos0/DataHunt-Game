@@ -56,7 +56,7 @@ let amountReady = 0
 
 //localhost
 //datahunt.duckdns.org
-window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
     window.client.emit('tilesets', Scene.activeScene.camera)
