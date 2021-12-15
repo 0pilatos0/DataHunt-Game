@@ -1,4 +1,3 @@
-import Map from "../Map/Map.js";
 import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
 import Vector2 from "./Vector2.js";
