@@ -30,6 +30,7 @@ import Inventory from "./Inventory/inventory.js";
 import GameObject from './Core/GameObject.js';
 import Sprite from './Core/Drawables/Sprite.js';
 import Scene from './Core/Scene.js';
+import MultiplayerObject from './Core/MultiplayerObject.js';
 
 window.spriteSize = new Vector2(16, 16);
 
@@ -54,10 +55,31 @@ window.LoadingScreen.On('ready', start)
 let amountReady = 0
 
 //localhost
-window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
+//datahunt.duckdns.org
+window.client = io('localhost:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
     window.client.emit('tilesets', Scene.activeScene.camera)
+})
+
+window.client.on('entities', (data) => {
+    MultiplayerObject.multiplayerObjects = []
+    data.entities.map(entity => {
+        new MultiplayerObject(new Sprite(new Vector2(entity.position.x, entity.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), playerTile))
+        // let gameObject = GameObject.gameObjects.find(gameObject => {
+        //     return gameObject.id == entity.id
+        // })
+        // if(typeof gameObject !== "undefined"){
+        //     // if(gameObject.type == "Player"){
+        //         gameObject.position = new Vector2(entity.position.x, entity.position.y)
+        //     // }
+        // }
+        // else{
+        //     gameObject = new GameObject(new Sprite(new Vector2(entity.position.x, entity.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), playerTile))
+        //     gameObject.id = entity.id
+        // }
+    })
+    Scene.activeScene.camera.position = new Vector2(data.camera.position.x, data.camera.position.y)
 })
 
 window.client.on('map', (data) => {
@@ -69,11 +91,13 @@ window.client.on('map', (data) => {
         tile = tile.tile
         gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile))
     })
-    data.map.map(gameObject => {
-        if(gameObject.type == "Player"){
-            new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), playerTile))
-        }
-    })
+
+    // window.startLength = data.map.length
+    // data.map.map(gameObject => {
+    //     if(gameObject.type == "Player"){
+    //         new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), playerTile))
+    //     }
+    // })
 })
 
 let playerTile

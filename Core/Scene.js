@@ -3,6 +3,7 @@ import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
 import Vector2 from "./Vector2.js";
 import GameObject from "./GameObject.js";
+import MultiplayerObject from "./MultiplayerObject.js";
 
 export default class Scene{
     static activeScene
@@ -98,10 +99,13 @@ export default class Scene{
         let offset = new Vector2(-this.camera.position.X, -this.camera.position.Y)
 
         GameObject.gameObjects.map(gameObject => {
-            // if(!this.IsInRange(gameObject)) return
+            if(!this.IsInRange(gameObject)) return
             gameObject.Draw(ctx, offset)
         })
-
+        MultiplayerObject.multiplayerObjects.map(multiplayerObject => {
+            if(!this.IsInRange(multiplayerObject)) return
+            multiplayerObject.Draw(ctx, offset)
+        })
         // ctx.fillStyle = '#fff';
         // ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
     }
@@ -111,8 +115,12 @@ export default class Scene{
         //     return
         // }
         GameObject.gameObjects.map(gameObject => {
-            // if(!this.IsInRange(gameObject)) return
+            if(!this.IsInRange(gameObject)) return
             gameObject.Update()
+        })
+        MultiplayerObject.multiplayerObjects.map(multiplayerObject => {
+            if(!this.IsInRange(multiplayerObject)) return
+            multiplayerObject.Update()
         })
         let movement = {forward: false, backward: false, left: false, right: false}
         // //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
@@ -152,15 +160,15 @@ export default class Scene{
         
     }
 
-    // IsInRange(transformable){
-    //     if(transformable.position.X + transformable.size.X * transformable.scale.X >= this.camera.position.X &&
-    //         transformable.position.X < this.camera.position.X + this.camera.size.X * this.camera.scale.X &&
-    //         transformable.position.Y + transformable.size.Y * transformable.scale.Y >= this.camera.position.Y &&
-    //         transformable.position.Y < this.camera.position.Y + this.camera.size.Y * this.camera.scale.Y){
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    IsInRange(transformable){
+        if(transformable.position.X + transformable.size.X * transformable.scale.X >= this.camera.position.X &&
+            transformable.position.X < this.camera.position.X + this.camera.size.X * this.camera.scale.X &&
+            transformable.position.Y + transformable.size.Y * transformable.scale.Y >= this.camera.position.Y &&
+            transformable.position.Y < this.camera.position.Y + this.camera.size.Y * this.camera.scale.Y){
+            return true;
+        }
+        return false;
+    }
 
     #Colliding (a, b) {
         return a.position.X < b.position.X + b.size.X * b.scale.X &&
