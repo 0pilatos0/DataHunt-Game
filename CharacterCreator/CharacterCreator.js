@@ -5,6 +5,7 @@ let menuState = false;
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Vector2 from "../Core/Vector2.js"
 import Storage from "../Core/Storage.js";
+import Scene from "../Core/Scene.js";
 
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
@@ -207,10 +208,10 @@ async function createPlayerPicker(){
         })
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
-        console.log(parsedCharacterData)
-        window.client.emit("saveNewCharacter", parsedCharacterData)
+        //BUG fix this, because it crashes server
+        // window.client.emit("saveNewCharacter", parsedCharacterData)
         window.CharacterMenu.Hide()
-        window.GameMenu.Show()
+        window.client.emit('tilesets', Scene.activeScene.camera)
         if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
             window.Tutorial.Start()
         }

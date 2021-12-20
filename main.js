@@ -59,6 +59,10 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+window.LoadingScreen.On('ready', () => {
+    window.LoadingScreen.Show()
+})
+
 window.LoaderScreen.On('ready', start)
 
 let amountReady = 0
@@ -68,7 +72,8 @@ let amountReady = 0
 window.client = io('datahunt.duckdns.org:3000', {'reconnection': true, 'reconnectionDelay': 1000, 'reconnectionDelayMax': 2000})
 
 window.client.on('connect', () => {
-    window.client.emit('tilesets', Scene.activeScene.camera)
+    window.LoadingScreen.Hide()
+    window.AccountMenu.Show()
 })
 
 window.client.on('entities', (data) => {
@@ -100,6 +105,8 @@ window.client.on('map', (data) => {
         tile = tile.tile
         gameObject = new GameObject(new Sprite(new Vector2(gameObject.position.x, gameObject.position.y), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), tile))
     })
+    window.LoadingScreen.Hide()
+    window.GameMenu.Show()
 
     // window.startLength = data.map.length
     // data.map.map(gameObject => {
