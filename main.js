@@ -38,6 +38,13 @@ window.spriteSize = new Vector2(16, 16);
 window.LoadingScreen = new LoadingScreen();
 window.LoaderScreen = new LoaderScreen();
 
+
+//TODO update this manualy once changes to map happened
+//to get all new values enable following line
+let getNewProgressStats = false;
+window.LoaderScreen.increaseMaxProgress(781) //client.on('tileset')
+
+
 window.inventory = new Inventory();
 
 window.addEventListener('keydown', (e) => {
@@ -112,7 +119,8 @@ window.client.on('tilesets', (data) => {
     playerTile.onload = () => {
         // document.body.appendChild(playerTile)
         // playerTile = new Sprite(new Vector2(0, 0), new Vector2(16 * window.spriteScaleFactor, 16 * window.spriteScaleFactor), playerTile)
-        
+        let counted = 0
+        window.LoaderScreen.UpdateActivity("Loading tiles")
         data.tilesets.map(tileset => {
             let img = new Image()
             img.onload = () => {
@@ -130,16 +138,23 @@ window.client.on('tilesets', (data) => {
                         tile.src = canvas.toDataURL('base64')
                         window.tiles[tileset.index - 1 + counter] = {tile}
                         counter++
+                        window.LoaderScreen.UpdateProgress()
                     }
                 }
+                counted += counter
                 if(Object.keys(window.tiles).length == data.count){
                     console.log("Done with loading tiles")
                     // console.log(window.tiles)
                     window.client.emit('map')
+                    if(getNewProgressStats){
+                        console.log("New value for window.on('tileset') = " + counted)
+                    }
+                
                 }
             }
             img.src = tileset.image
         })
+        
     }
     
 })
@@ -212,6 +227,8 @@ function runAfterLoad(){
     // window.MainMenu.Show()
   
     // window.InventoryMenu.Show()
+
+    // window.LoaderScreen.Hide()
     window.LoadingScreen.Hide()
     window.GameMenu.Show()
 }
