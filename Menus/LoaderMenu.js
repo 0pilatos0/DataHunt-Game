@@ -2,6 +2,7 @@ import HtmlLoader from "../Core/Loaders/HtmlLoader.js";
 import Menu from "../Core/Menu.js";
 
 export default class LoaderScreen extends Menu {
+    MaxProgress = 0
     constructor() {
         super();
         this.menu = document.getElementById('loaderScreen');
@@ -40,20 +41,21 @@ export default class LoaderScreen extends Menu {
             this.progressActivity = document.getElementById('progress-activity')
             this.progressActivity.innerHTML = 'Searching Activity'
 
+            
+
         })
 
     }
     UpdateProgress(activity = null){
+
         this.progress += (100 / this.MaxProgress)
-        console.log(this.progress)
-        
 
         this.menu.getElementsByClassName('progressbar-fill')[0].style.width = this.progress + '%'
         if (activity) {
             this.progressActivity.innerHTML = activity
         }
         if (this.progress >= 100) {
-            console.log('Loading should be done')
+            // console.log('Loading should be done')
             this.progressText.innerHTML = 'Loading done'
             clearInterval(this.interval)
             this.Hide()
@@ -66,6 +68,10 @@ export default class LoaderScreen extends Menu {
 
     setMaxProgress(max){
         this.MaxProgress = max
+    }
+    increaseMaxProgress(amount){
+        this.MaxProgress += amount
+        console.log("hoi: " + this.MaxProgress)
     }
 
     Hide(){
