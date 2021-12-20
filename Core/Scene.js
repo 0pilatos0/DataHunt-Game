@@ -1,8 +1,8 @@
-import Map from "../Map/Map.js";
 import Camera from "./Camera.js";
 import Rectangle from "./Drawables/Rectangle.js";
 import Vector2 from "./Vector2.js";
 import GameObject from "./GameObject.js";
+import MultiplayerObject from "./MultiplayerObject.js";
 
 export default class Scene{
     static activeScene
@@ -11,21 +11,51 @@ export default class Scene{
 
     rectangle1
 
-    rectangle2
+    // rectangle2
 
     constructor() {
         Scene.activeScene = this
-        this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
-        this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
-        this.rectangle1.type = "Collidable"
-        this.rectangle2.type = "Collidable"
+        // this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
+        //     this.rectangle1.type = "Collidable"
 
-        Map.Load('../Map/Map.json').then(m => {
-            this.map = m
-        })
+        // Map.Load('../Map/graybox.json').then(m => {
+        //     this.map = m
+        //     this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
+        //     this.rectangle1.type = "Collidable"
+        //     this.rectangle1.On('sC', (gameObject) => {
+        //         //this.rectangle1.color = '#00f'
+        //         gameObject.visible = false
+        //         // console.log("?")
+        //     })
+    
+        //     this.rectangle1.On('C', (gameObject) => {
+        //         //this.rectangle1.color = '#00f'
+        //         gameObject.visible = false
+        //         // console.log("?")
+        //     })
+        //     this.rectangle1.On('eC', (gameObject) => {
+        //         //this.rectangle1.color = '#f00'
+        //         gameObject.visible = true
+        //         // console.log("?stopped")
+        //     })
+        //     let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
 
+        //     let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
+
+        //     this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
+
+        //     console.log(spawnpoint.position)
+        // })
+
+       
+        // this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
+        
+        // this.rectangle2.type = "Collidable"
+
+        
         window.addEventListener('resize', () => {
             this.camera.size = new Vector2(window.innerWidth, window.innerHeight)
+            window.client.emit('resize', this.camera)
         })
 
         window.addEventListener('keydown', (e) => {
@@ -49,7 +79,7 @@ export default class Scene{
             // }
         })
 
-        this.rectangle2.color = '#0f0';
+        // this.rectangle2.color = '#0f0';
 
         // this.rectangle2.On('sC', () => {
         //     console.log("?")
@@ -58,23 +88,6 @@ export default class Scene{
         // this.rectangle2.On('eC', () => {
         //     console.log("?")
         // })
-
-        this.rectangle1.On('sC', (gameObject) => {
-            //this.rectangle1.color = '#00f'
-            gameObject.visible = false
-            // console.log("?")
-        })
-
-        this.rectangle1.On('C', (gameObject) => {
-            //this.rectangle1.color = '#00f'
-            gameObject.visible = false
-            // console.log("?")
-        })
-        this.rectangle1.On('eC', (gameObject) => {
-            //this.rectangle1.color = '#f00'
-            gameObject.visible = true
-            // console.log("?stopped")
-        })
 
         // GameObject.gameObjects.map(gameObject => {
             
@@ -88,55 +101,62 @@ export default class Scene{
             if(!this.IsInRange(gameObject)) return
             gameObject.Draw(ctx, offset)
         })
-
-        //ctx.fillStyle = '#fff';
-        //ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
+        MultiplayerObject.multiplayerObjects.map(multiplayerObject => {
+            if(!this.IsInRange(multiplayerObject)) return
+            multiplayerObject.Draw(ctx, offset)
+        })
+        // ctx.fillStyle = '#fff';
+        // ctx.fillText(this.animation.clock.Reset().passedMiliseconds, 100, 100)
     }
 
     Update(){
+        // if(this.rectangle1 == null){
+        //     return
+        // }
         GameObject.gameObjects.map(gameObject => {
             if(!this.IsInRange(gameObject)) return
             gameObject.Update()
         })
-        //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
-        let speed = 500
+        MultiplayerObject.multiplayerObjects.map(multiplayerObject => {
+            if(!this.IsInRange(multiplayerObject)) return
+            multiplayerObject.Update()
+        })
+        let movement = {forward: false, backward: false, left: false, right: false}
+        // //console.log(this.#Colliding(this.rectangle1, this.rectangle2))
+        // let speed = 500
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('foward').key) > -1){
             //this.camera.position.Y -= speed * window.deltaTime;
-            this.rectangle1.position.Y -= speed * window.deltaTime;
+            // this.rectangle1.position.Y -= speed * window.deltaTime;
+            movement.forward = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('left').key) > -1){
             //this.camera.position.X -= speed * window.deltaTime;
-            this.rectangle1.position.X -= speed * window.deltaTime;
+            // this.rectangle1.position.X -= speed * window.deltaTime;
+            movement.left = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('backward').key) > -1){
             //this.camera.position.Y += speed * window.deltaTime;
-            this.rectangle1.position.Y += speed * window.deltaTime;
+            // this.rectangle1.position.Y += speed * window.deltaTime;
+            movement.backward = true
         }
         if(this.input.indexOf(window.KeybindsManager.GetKeybindByAction('right').key) > -1){
             //this.camera.position.X += speed * window.deltaTime;
-            this.rectangle1.position.X += speed * window.deltaTime;
+            // this.rectangle1.position.X += speed * window.deltaTime;
+            movement.right = true
         }
-        // if(this.input.indexOf('e') > -1){
-        //     //this.camera.position.Y += speed * window.deltaTime;
-        //     this.rectangle1.rotation += speed * window.deltaTime;
-        // }
-        // if(this.input.indexOf('q') > -1){
-        //     //this.camera.position.X += speed * window.deltaTime;
-        //     this.rectangle1.rotation -= speed * window.deltaTime;
-        // }
+        if(Object.values(movement).some(movement => movement == true)){
+            window.client.emit('movement', movement)
+        }
+        // // if(this.input.indexOf('e') > -1){
+        // //     //this.camera.position.Y += speed * window.deltaTime;
+        // //     this.rectangle1.rotation += speed * window.deltaTime;
+        // // }
+        // // if(this.input.indexOf('q') > -1){
+        // //     //this.camera.position.X += speed * window.deltaTime;
+        // //     this.rectangle1.rotation -= speed * window.deltaTime;
+        // // }
 
-        if(this.rectangle1.position.X + this.rectangle1.size.X * this.rectangle1.scale.X / 2 >= this.camera.size.X * this.camera.scale.X / 2){
-            this.camera.position.X = this.rectangle1.position.X - this.camera.size.X * this.camera.scale.X / 2 + this.rectangle1.size.X * this.rectangle1.scale.X / 2
-        }
-        else{
-            this.camera.position.X = 0
-        }
-        if(this.rectangle1.position.Y + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2 >= this.camera.size.Y * this.camera.scale.Y / 2){
-            this.camera.position.Y = this.rectangle1.position.Y - this.camera.size.Y * this.camera.scale.Y / 2 + this.rectangle1.size.Y * this.rectangle1.scale.Y / 2
-        }
-        else{
-            this.camera.position.Y = 0
-        }
+        
     }
 
     IsInRange(transformable){

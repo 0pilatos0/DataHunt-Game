@@ -4,9 +4,9 @@ name: Game
 #     ${{ secrets.ENV }}
 on:
   push:
-    branches: [ dev ]
+    branches: [ feature-map-time-reduce ]
   pull_request:
-    branches: [ dev ]
+    branches: [ feature-map-time-reduce ]
   workflow_dispatch:
 
 jobs:
