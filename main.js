@@ -36,9 +36,8 @@ import MultiplayerObject from './Core/MultiplayerObject.js';
 window.spriteSize = new Vector2(16, 16);
 
 window.LoadingScreen = new LoadingScreen();
+
 window.LoaderScreen = new LoaderScreen();
-
-
 //TODO update this manualy once changes to map happened
 //to get all new values enable following line
 let getNewProgressStats = false;
@@ -64,6 +63,7 @@ window.LoadingScreen.On('ready', () => {
 })
 
 window.LoaderScreen.On('ready', start)
+window.LoaderScreen.Hide()
 
 let amountReady = 0
 
@@ -119,6 +119,8 @@ window.client.on('map', (data) => {
 let playerTile
 
 window.client.on('tilesets', (data) => {
+    window.LoaderScreen.Show()
+
     console.log("Started loading tiles")
     window.tiles = {}
     playerTile = new Image()
