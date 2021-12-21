@@ -71,7 +71,6 @@ export default class LoaderScreen extends Menu {
     }
     increaseMaxProgress(amount){
         this.MaxProgress += amount
-        console.log("hoi: " + this.MaxProgress)
     }
 
     Hide(){
