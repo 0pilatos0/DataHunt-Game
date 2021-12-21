@@ -9,6 +9,7 @@ export default class MainMenu extends Menu{
         this.menu = document.querySelector('#menu');
         this.menucontext = HtmlLoader.Load('./assets/elements/MainMenu.html');
 
+
         this.menucontext.then(data =>{
             this.menu.innerHTML = data;
             this.play = document.querySelector('div#play > h1');
@@ -18,9 +19,11 @@ export default class MainMenu extends Menu{
             this.Hide()
 
             this.play.addEventListener('click', () =>{
-                window.CharSelectMenu = new CharSelectMenu();
+                window.CharSelectMenu = new CharSelectMenu()
+                window.CharSelectMenu.On('ready', () =>{
+                    window.CharSelectMenu.Show()
+                })
                 this.Hide()
-                window.CharSelectMenu.Show()
             });
             
             this.settings.addEventListener('click', () =>{

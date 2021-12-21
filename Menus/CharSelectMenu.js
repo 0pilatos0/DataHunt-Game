@@ -8,31 +8,40 @@ export default class CharSelectMenu extends Menu{
         this.menucontext = HtmlLoader.Load('./assets/elements/CharSelect.html');
 
         this.menucontext.then(data =>{
-            this.menu.innerHTML = data;
-            this.newChar = document.querySelector('#newChar');
+            window.client.emit('getCharacters', window.user.id)
+            let charData = "";
+            window.client.on('Characters', (chars) =>{
+                chars.forEach(char =>{
+                    charData += `<div><p>Lv. <span>${char.level}</span> ${char.name}</p></div>`
+                })
+                data = data.replace('{{characters}}', charData)
 
-            this.Hide()
+                this.menu.innerHTML = data;
+                this.newChar = document.querySelector('#newChar');
 
-            let charData = window.client.emit('getCharacters', window.user.id)
-
-            console.log(charData);
-
-            this.newChar.addEventListener('click', () =>{
                 this.Hide()
-                window.CharacterMenu.Show()
-            });
 
-            let back = document.querySelector('#charSelectBackButton')
-            back.onclick = () => {
-                this.Hide()
-                window.MainMenu.Show()
-            }
 
-            this.Trigger('ready')
+                this.newChar.addEventListener('click', () =>{
+                    this.Hide()
+                    window.CharacterMenu.Show()
+                });
+
+                let back = document.querySelector('#charSelectBackButton')
+                back.onclick = () => {
+                    this.Hide()
+                    window.MainMenu.Show()
+                }
+
+                this.Trigger('ready')
+
+                window.addEventListener('keydown', this.#keydownCallback)
+            })
+
         });
 
 
-        window.addEventListener('keydown', this.#keydownCallback)
+
     }
 
 

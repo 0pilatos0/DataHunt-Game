@@ -175,6 +175,8 @@
         })
         if(data.success.length > 0){
             usernameDisplay.innerText = `Logged in as: ${data.returnData.username}`
+            window.user = {};
+            window.user.id = data.returnData.id;
             window.AccountMenu.Hide()
             window.MainMenu.Show()
         }

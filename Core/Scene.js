@@ -16,7 +16,7 @@ export default class Scene{
         Scene.activeScene = this
         window.input = []
 
-        Map.Load('../Map/graybox.json').then(m => {
+        //Map.Load('../Map/graybox.json').then(m => {
             // this.rectangle1 = new GameObject(new Rectangle(new Vector2(250, 100), new Vector2(25, 25)))
             //             // this.rectangle1.type = "Collidable"
             //             // this.rectangle1.On('sC', (gameObject) => {
@@ -36,14 +36,14 @@ export default class Scene{
             //             //     // console.log("?stopped")
             //             // })
 
-            let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
+            //let spawnpoints = GameObject.gameObjects.filter(gameObject => gameObject.type == "SpawnPoint")
 
-            let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
-            window.player = new Player()
-            window.player.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
+            //let spawnpoint = spawnpoints[Math.floor(Math.random() * spawnpoints.length)]
+            //window.player = new Player()
+            //window.player.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
 
             // this.rectangle1.position = new Vector2(spawnpoint.position.X, spawnpoint.position.Y)
-        })
+        //})
 
        
         // this.rectangle2 = new GameObject(new Rectangle(new Vector2(200, 500), new Vector2(50, 50)))
