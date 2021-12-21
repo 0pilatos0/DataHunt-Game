@@ -208,8 +208,7 @@ async function createPlayerPicker(){
         })
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
-        //BUG fix this, because it crashes server
-        // window.client.emit("saveNewCharacter", parsedCharacterData)
+        window.client.emit("saveNewCharacter", parsedCharacterData)
         window.CharacterMenu.Hide()
         window.LoaderScreen.Show()
         window.client.emit('tilesets', Scene.activeScene.camera)
