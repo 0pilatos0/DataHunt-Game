@@ -211,6 +211,7 @@ async function createPlayerPicker(){
         //BUG fix this, because it crashes server
         // window.client.emit("saveNewCharacter", parsedCharacterData)
         window.CharacterMenu.Hide()
+        window.LoaderScreen.Show()
         window.client.emit('tilesets', Scene.activeScene.camera)
         if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
             window.Tutorial.Start()

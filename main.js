@@ -97,6 +97,7 @@ window.client.on('entities', (data) => {
 })
 
 window.client.on('map', (data) => {
+    window.LoaderScreen.Hide()
     Scene.activeScene.camera.position = new Vector2(data.camera.position.x, data.camera.position.y)
     GameObject.gameObjects = []
     data.map.map(gameObject => {
@@ -119,8 +120,6 @@ window.client.on('map', (data) => {
 let playerTile
 
 window.client.on('tilesets', (data) => {
-    window.LoaderScreen.Show()
-
     console.log("Started loading tiles")
     window.tiles = {}
     playerTile = new Image()

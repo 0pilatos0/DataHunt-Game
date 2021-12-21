@@ -58,7 +58,7 @@ export default class LoaderScreen extends Menu {
             // console.log('Loading should be done')
             this.progressText.innerHTML = 'Loading done'
             clearInterval(this.interval)
-            this.Hide()
+            // this.Hide()
         }
         
     }
