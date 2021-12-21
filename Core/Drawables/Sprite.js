@@ -1,8 +1,9 @@
 import Drawable from "../Drawable.js";
+import GameObject from "../GameObject.js";
 import Vector2 from "../Vector2.js";
 
 export default class Sprite extends Drawable {
-    image = document.createElement('img');
+    image = null; //document.createElement('img');
     offset = Vector2.Zero();
     animation = null;
     color = 'red'
@@ -13,11 +14,12 @@ export default class Sprite extends Drawable {
      * @param {Vector2} size 
      * @param {string} imageSrc 
      */
-    constructor(position, size, imageSrc) {
+    constructor(position, size, image) {
         super();
         this.position = position;
         this.size = size;
-        this.image.src = imageSrc;
+        // this.image.src = imageSrc;
+        this.image = image
     }
 
     Draw(ctx, offset = Vector2.Zero()){

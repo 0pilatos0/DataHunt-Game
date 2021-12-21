@@ -5,62 +5,10 @@ let menuState = false;
 import JsonLoader from "../Core/Loaders/JsonLoader.js";
 import Vector2 from "../Core/Vector2.js"
 import Storage from "../Core/Storage.js";
+import Scene from "../Core/Scene.js";
 
 const lockIcon = `<i class="fas fa-lock" style="width:11px"></i>`
 const unlockIcon = `<i class="fas fa-lock-open" style="width:11px"></i>`
-
-// for (let i = 0; i < images.length; i++) {
-//     images[i].onclick = () => {
-//         confirmClass(i);
-//     };
-// }
-
-// document.getElementById("inputName").addEventListener('keypress', (e) => {
-//     if (e.code === "Enter") {
-//         CharacterData.push({"name": document.getElementById("inputName").value})
-
-//         document.getElementsByClassName("input")[0].style.display = "None";
-
-//         pickClass();
-//     }
-// });
-
-// function pickClass() {
-//     document.getElementById("class").style.display = "Block";
-
-// }
-
-// function confirmClass(id) {
-//     document.getElementById("class").style.display = "None";
-//     document.getElementById("classConfirmation").style.display = "Block";
-
-//     document.getElementById("classConfirmationDecline").onclick = ()=>{declineCharacter()};
-//     document.getElementById("classConfirmationAccept").onclick = ()=>{acceptCharacter(classes[id])};
-
-
-//     document.getElementById("classConfirmationName").innerHTML = 'Name: ' + CharacterData[0].name;
-// }
-
-// function declineCharacter() {
-//     document.getElementById("classConfirmation").style.display = "None";
-//     document.getElementsByClassName("input")[0].style.display = "Block";
-// }
-
-// function acceptCharacter(ClassName) {
-//     if(ClassName !== null) {
-//         JsonLoader.Load("./class_" + ClassName + "messages.json").then(e => {
-//             CharacterData.push({"class": e});
-//             console.log(CharacterData + "\r\n");
-//             spritePicker();
-//         });
-//     }
-// }
-
-// function spritePicker() {
-//     document.getElementById("classConfirmation").style.display = "none";
-//     document.getElementById("characterPicker").style.display = "Block";
-
-// }
 
 async function translateTilesetToTiles(path){
     return new Promise(async (resolve, reject) => {
@@ -260,9 +208,10 @@ async function createPlayerPicker(){
         })
         parsedCharacterData["class"] = classIndex
         parsedCharacterData["name"] = nameInput.value
-        console.log(parsedCharacterData)
+        window.client.emit("saveNewCharacter", parsedCharacterData)
         window.CharacterMenu.Hide()
-        window.GameMenu.Show()
+        window.LoaderScreen.Show()
+        window.client.emit('tilesets', Scene.activeScene.camera)
         if (Storage.Get('tutorialcompleted') == null || Storage.Get('tutorialcompleted') == false) {
             window.Tutorial.Start()
         }
